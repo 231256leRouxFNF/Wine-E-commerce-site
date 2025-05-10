@@ -1,11 +1,20 @@
+// ProductPage.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Image, Button } from 'react-bootstrap';
 
+// Add mock data here (same as in Home.js)
+const mockProducts = [
+  { id: 1, title: 'Red Wine', price: 25.99, image: 'https://example.com/red-wine.jpg' },
+  { id: 2, title: 'White Wine', price: 19.99, image: 'https://example.com/white-wine.jpg' },
+];
+
 const ProductPage = () => {
   const { id } = useParams();
-  // TODO: Fetch product data from API using the ID
   const product = mockProducts.find(p => p.id === Number(id));
+
+  // Handle case where product is undefined
+  if (!product) return <div>Product not found</div>;
 
   return (
     <Container className="my-5">
