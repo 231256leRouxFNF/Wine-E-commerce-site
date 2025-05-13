@@ -1,46 +1,91 @@
-// src/components/Navbar.js
-import React from 'react';
+import React, { useState } from 'react';
+import { 
+  AppBar, Toolbar, Typography, IconButton, Badge, 
+  Drawer, List, ListItem, ListItemText, Box
+} from '@mui/material';
+import { ShoppingCart, Menu } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { Navbar, Container, Nav, Badge } from 'react-bootstrap';
-import { Cart3, PersonCircle } from 'react-bootstrap-icons';
-import './Navbar.css'; // Create this CSS file
 
-const CustomNavbar = () => {
-  // Temporary cart items count - replace with state/context later
-  const cartItemsCount = 3;
+const Navbar = ({ cartItems }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { title: 'Home', path: '/' },
+    { title: 'Products', path: '/products' },
+    { title: 'About', path: '/about' },
+  ];
+
+  const drawer = (
+    <Box sx={{ width: 250 }}>
+      <List>
+        {navLinks.map((item) => (
+          <ListItem 
+            button 
+            component={Link} 
+            to={item.path} 
+            key={item.title}
+          >
+            <ListItemText primary={item.title} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
-    <Navbar bg="primary" variant="dark" expand="lg" className="navbar-custom">
-      <Container>
-        <Navbar.Brand as={Link} to="/" className="brand-logo">
+    <AppBar position="sticky" sx={{ mb: 4 }}>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          edge="start"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          sx={{ mr: 2, display: { sm: 'none' } }}
+        >
+          <Menu />
+        </IconButton>
+        
+        <Typography 
+          variant="h6" 
+          component={Link} 
+          to="/" 
+          sx={{ 
+            flexGrow: 1,
+            textDecoration: 'none',
+            color: 'inherit'
+          }}
+        >
           🍷 e-Wine
-        </Navbar.Brand>
-        
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/products" className="nav-link-custom">
-              Wines
-            </Nav.Link>
-            <Nav.Link as={Link} to="/about" className="nav-link-custom">
-              About
-            </Nav.Link>
-            <Nav.Link as={Link} to="/login" className="nav-link-custom">
-              <PersonCircle className="me-1" />
-              Login
-            </Nav.Link>
-            <Nav.Link as={Link} to="/cart" className="nav-link-custom">
-              <Cart3 />
-              <Badge bg="danger" className="ms-1 cart-badge">
-                {cartItemsCount}
-              </Badge>
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Typography>
+
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          {navLinks.map((item) => (
+            <IconButton
+              key={item.title}
+              component={Link}
+              to={item.path}
+              color="inherit"
+            >
+              {item.title}
+            </IconButton>
+          ))}
+        </Box>
+
+        <IconButton component={Link} to="/cart" color="inherit">
+          <Badge badgeContent={cartItems} color="secondary">
+            <ShoppingCart />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+
+      <Drawer
+        anchor="left"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+      >
+        {drawer}
+      </Drawer>
+    </AppBar>
   );
 };
 
-export default CustomNavbar;
+export default Navbar;
