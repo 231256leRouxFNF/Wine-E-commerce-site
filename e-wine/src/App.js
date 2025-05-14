@@ -5,6 +5,7 @@ import { CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import LoginPage from './pages/LoginPage';
 import Cart from './pages/Cart';
 import theme from './theme';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </ThemeProvider>
