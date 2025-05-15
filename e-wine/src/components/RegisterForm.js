@@ -17,7 +17,7 @@ import {
 } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -55,7 +55,7 @@ const LoginForm = () => {
           backgroundColor: 'background.paper'
         }}>
           <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
-            Sign In
+            Sign Up
           </Typography>
 
           {/* Login Form */}
@@ -139,4 +139,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
