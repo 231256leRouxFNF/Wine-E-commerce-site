@@ -13,6 +13,8 @@ const Navbar = ({ cartItems }) => {
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/products' },
     { title: 'About', path: '/about' },
+    { title: 'Contact', path: '/contact' },
+    { title: 'Login', path: '/login' },
   ];
 
   const drawer = (

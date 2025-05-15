@@ -7,7 +7,7 @@ import {
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems = [] }) => {
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (

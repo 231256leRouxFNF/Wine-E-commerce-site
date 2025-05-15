@@ -13,7 +13,8 @@ import {
 } from '@mui/material';
 import { 
   Google,
-  GitHub,
+  Facebook,
+  Twitter,
   Visibility,
   VisibilityOff
 } from '@mui/icons-material';
@@ -82,7 +83,10 @@ const LoginForm = () => {
                 color: 'text.primary'
               }}
             >
-              <GitHub />
+              <Facebook />
+
+              <Twitter />
+
             </IconButton>
           </Box>
 
