@@ -1,13 +1,9 @@
+// src/pages/LoginPage.js
 import React from 'react';
-import { Box } from '@mui/material';
-import LoginForm from '../components/LoginForm';
+import AuthForm from '../components/AuthForm';
 
 const LoginPage = () => {
-  return (
-    <Box>
-      <LoginForm />
-    </Box>
-  );
+  return <AuthForm mode="login" />;
 };
 
 export default LoginPage;

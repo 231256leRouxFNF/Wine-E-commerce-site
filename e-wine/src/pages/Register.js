@@ -1,13 +1,9 @@
+// src/pages/Register.js
 import React from 'react';
-import { Box } from '@mui/material';
-import RegisterForm from '../components/RegisterForm';
+import AuthForm from '../components/AuthForm';
 
 const Register = () => {
-  return (
-    <Box>
-      <RegisterForm />
-    </Box>
-  );
+  return <AuthForm mode="register" />;
 };
 
 export default Register;
