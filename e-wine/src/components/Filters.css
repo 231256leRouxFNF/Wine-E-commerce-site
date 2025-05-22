@@ -1,0 +1,10 @@
+.filters-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
