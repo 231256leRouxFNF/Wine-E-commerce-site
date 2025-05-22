@@ -1,33 +1,35 @@
+// seedProducts.js (in your backend folder)
 const mongoose = require('mongoose');
 require('dotenv').config();
-const Product = require('./models/Product'); // adjust the path as needed
+const Product = require('./models/Product'); // adjust path if needed
 
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
-    console.log('Connected to DB');
-
-    await Product.deleteMany(); // clear existing data (optional)
+    console.log('✅ Connected to MongoDB');
 
     await Product.insertMany([
       {
-        title: 'Red Wine',
-        description: 'A smooth red wine with fruity notes',
-        price: 25.99,
-        image: 'https://your-image-url.com/red.jpg',
-        category: 'Wine',
+        title: "Cabernet Sauvignon",
+        description: "A full-bodied red wine",
+        price: 29.99,
+        image: "https://your-url.com/cab.jpg",
+        category: "Red Wine",
         inStock: true
       },
       {
-        title: 'White Wine',
-        description: 'Crisp and refreshing with citrus flavors',
-        price: 22.50,
-        image: 'https://your-image-url.com/white.jpg',
-        category: 'Wine',
+        title: "Chardonnay",
+        description: "A crisp white wine",
+        price: 22.99,
+        image: "https://your-url.com/chard.jpg",
+        category: "White Wine",
         inStock: true
       }
     ]);
 
-    console.log('Seeded products!');
+    console.log('✅ Products inserted!');
     process.exit();
   })
-  .catch(err => console.error('Failed to connect:', err));
+  .catch(err => {
+    console.error('❌ Error inserting products:', err);
+    process.exit(1);
+  });
