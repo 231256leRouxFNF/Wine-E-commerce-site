@@ -1,0 +1,234 @@
+/* Hero Section */
+.heroSection {
+    width: 100%;
+    min-height: 641px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+    padding: 0;
+    /* ✅ Ensures no unwanted spacing */
+    margin-top: -1px;
+    /* ✅ Aligns hero with navbar */
+    box-sizing: border-box;
+}
+
+/* Background Image */
+.heroBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Content Container */
+.heroContent {
+    position: relative;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color: var(--color-white);
+    text-align: center;
+}
+
+/* Subheading */
+.subtitle {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    color: #FFFFFF;
+    max-width: 90%;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.title {
+    font-family: "Playfair Display", serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 72px;
+    color: #FFFFFF;
+    max-width: 90%;
+}
+
+/* Description */
+.description {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    text-align: center;
+    max-width: 700px;
+    margin-bottom: 30px;
+    color: #FFFFFF;
+    word-wrap: break-word;
+}
+
+/* Button */
+.button {
+    display: inline-block;
+    width: 250px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: #faf9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 51px;
+    font-size: 18px;
+    font-family: "Didact Gothic", sans-serif;
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Hover Effect */
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .heroSection {
+        min-height: 750px;
+    }
+
+    .heroBackground {
+        background-size: 125%;
+        height: 110%;
+        transform: scale(1.15);
+    }
+
+    .heroContent {
+        max-width: 90%;
+    }
+
+    .title {
+        font-size: 48px;
+        line-height: 58px;
+    }
+
+    .subtitle {
+        font-size: 26px;
+        line-height: 36px;
+        margin-bottom: 12px;
+    }
+
+    .description {
+        font-size: 16px;
+        line-height: 26px;
+        max-width: 600px;
+    }
+
+    .button {
+        width: 200px;
+        height: 45px;
+        font-size: 16px;
+        padding: 10px 40px;
+        margin-top: 12px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroSection {
+        min-height: 850px;
+    }
+
+    .heroBackground {
+        background-size: 150%;
+        height: 100%;
+        transform: scale(1.2);
+    }
+
+    .heroContent {
+        max-width: 85%;
+    }
+
+    .title {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .subtitle {
+        font-size: 22px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 14px;
+        line-height: 24px;
+        max-width: 500px;
+    }
+
+    .button {
+        width: 180px;
+        height: 40px;
+        font-size: 14px;
+        padding: 8px 35px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroSection {
+        min-height: 950px;
+        margin-top: 0;
+        /* ✅ Ensures no white space above the hero image */
+    }
+
+    .heroBackground {
+        background-size: 180%;
+        height: 120%;
+        transform: scale(1.3);
+    }
+
+    .heroContent {
+        max-width: 90%;
+    }
+
+    .title {
+        font-size: 32px;
+        line-height: 42px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 8px;
+    }
+
+    .description {
+        font-size: 12px;
+        line-height: 20px;
+        max-width: 400px;
+    }
+
+    .button {
+        width: 160px;
+        height: 35px;
+        font-size: 12px;
+        padding: 6px 30px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+    }
+}
