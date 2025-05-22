@@ -24,40 +24,62 @@ const wineLabels = [
   { id: 6, name: 'Ancient Roots', img: '/labels/label6.jpg' },
 ];
 
+// Hash function using SHA-256
+async function hashSequence(email, sequence) {
+  const data = email + ':' + sequence.join('-');
+  const encoder = new TextEncoder();
+  const hashBuffer = await window.crypto.subtle.digest('SHA-256', encoder.encode(data));
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 const AuthForm = ({ mode = 'login' }) => {
   const [email, setEmail] = useState('');
   const [selectedSequence, setSelectedSequence] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Basic validation
+    setError('');
+    setLoading(true);
+
     if (!validateEmail(email)) {
       setError('Please enter a valid email address');
+      setLoading(false);
       return;
     }
 
-    if (mode === 'register' && selectedSequence.length < 3) {
-      setError('Please select at least 3 labels');
+    if (mode === 'register' && (selectedSequence.length < 3 || selectedSequence.length > 5)) {
+      setError('Please select 3 to 5 labels');
+      setLoading(false);
       return;
     }
 
     if (mode === 'login' && selectedSequence.length < 1) {
       setError('Please select your label sequence');
+      setLoading(false);
       return;
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      if (mode === 'register') {
-        localStorage.setItem('labelAuth', JSON.stringify({
-          email,
-          sequence: selectedSequence
-        }));
+    const hash = await hashSequence(email, selectedSequence);
+
+    if (mode === 'register') {
+      localStorage.setItem('labelAuth', JSON.stringify({
+        email,
+        hash
+      }));
+      setLoading(false);
+      window.location.href = '/login';
+    } else {
+      const stored = JSON.parse(localStorage.getItem('labelAuth'));
+      if (!stored || stored.email !== email || stored.hash !== hash) {
+        setError('Invalid email or label sequence');
+        setLoading(false);
+        return;
       }
-      window.location.href = mode === 'register' ? '/login' : '/';
-    }, 1000);
+      setLoading(false);
+      window.location.href = '/';
+    }
   };
 
   const validateEmail = (email) => {
@@ -95,23 +117,28 @@ const AuthForm = ({ mode = 'login' }) => {
               <Grid item xs={4} key={label.id}>
                 <IconButton
                   onClick={() => {
-                    if (!selectedSequence.includes(label.id)) {
+                    if (
+                      !selectedSequence.includes(label.id) &&
+                      selectedSequence.length < 5
+                    ) {
                       setSelectedSequence([...selectedSequence, label.id]);
                     }
                   }}
+                  disabled={selectedSequence.includes(label.id) || selectedSequence.length >= 5}
                   sx={{
                     p: 1,
-                    border: selectedSequence.includes(label.id) 
-                      ? '3px solid #6d1b1b' 
+                    border: selectedSequence.includes(label.id)
+                      ? '3px solid #6d1b1b'
                       : '1px solid #ddd',
                     borderRadius: 1,
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    opacity: selectedSequence.includes(label.id) ? 0.5 : 1
                   }}
                 >
-                  <Avatar 
-                    src={label.img} 
-                    variant="square" 
+                  <Avatar
+                    src={label.img}
+                    variant="square"
                     sx={{ width: '100%', height: 100 }}
                   />
                 </IconButton>
@@ -131,8 +158,9 @@ const AuthForm = ({ mode = 'login' }) => {
             size="large"
             type="submit"
             sx={{ mb: 2 }}
+            disabled={loading}
           >
-            {mode === 'register' ? 'Create Account' : 'Sign In'}
+            {loading ? 'Please wait...' : (mode === 'register' ? 'Create Account' : 'Sign In')}
           </Button>
 
           <Typography variant="body2" align="center">
