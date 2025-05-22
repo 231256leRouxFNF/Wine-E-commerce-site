@@ -68,3 +68,44 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## 🔧 Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/try/download/community) **or** a [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cloud database
+
+---
+
+## 🛠️ Local MongoDB Installation (Option 1)
+
+### ✅ Step-by-Step for Local Setup
+
+1. Download MongoDB Community Server from  
+   👉 https://www.mongodb.com/try/download/community
+
+2. Install it with **default settings**
+
+3. Start the MongoDB server by opening a terminal and running:
+
+### Running the Backend
+### Step 1: Install dependencies
+
+From the /e-wine backend directory:
+
+### `npm install`
+
+### Step 2: Start the server
+
+For development (with auto-reload using nodemon):
+
+### `npm run dev`
+
+### If you don’t have nodemon yet:
+
+### `npm install --save-dev nodemon`
+
+Or just run:
+
+### `node server.js`
