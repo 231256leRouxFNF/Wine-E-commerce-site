@@ -1,95 +1,142 @@
-// src/components/Navbar.js
 import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Badge,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  Button,
+} from "@mui/material";
+import { ShoppingCart, Menu } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import styles from "./Navbar.module.css";
-import logo from "../../src/assets/Winelogo.png";
-import { ShoppingCart } from "@mui/icons-material";
-import { IconButton, Badge } from "@mui/material";
 
-const Navbar = ({ cartItems = 0 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = ({ cartItems }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { title: "Home", path: "/" },
+    { title: "Products", path: "/products" },
+    { title: "About", path: "/about" },
+    { title: "Contact", path: "/contact" },
+    { title: "Login", path: "/login" },
+  ];
+
+  const drawer = (
+    <Box sx={{ width: 250, backgroundColor: "#FFFEFC", height: "100%" }}>
+      <List>
+        {navLinks.map((item) => (
+          <ListItem
+            button
+            component={Link}
+            to={item.path}
+            key={item.title}
+            sx={{
+              fontFamily: "Montserrat",
+              color: "#1c1c1c",
+              "&:hover": {
+                color: "#900639",
+              },
+            }}
+          >
+            <ListItemText primary={item.title} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
-    <>
-      <nav className={styles.navbar}>
-        {/* Logo */}
-        <img src={logo} alt="Pour Decisions Logo" className={styles.logo} />
-
-        {/* Hamburger Icon */}
-        <div
-          className={`${styles.hamburger} ${isOpen ? styles.open : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
+    <AppBar
+      position="sticky"
+      elevation={1}
+      sx={{
+        backgroundColor: "#FFFEFC",
+        color: "#1c1c1c",
+        px: { xs: 2, sm: 6 },
+      }}
+    >
+      <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+        {/* Mobile Menu Icon */}
+        <IconButton
+          edge="start"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          sx={{ display: { sm: "none" }, color: "#1c1c1c" }}
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+          <Menu />
+        </IconButton>
 
-        {/* Navigation Links */}
-        <div className={`${styles.navLinks} ${isOpen ? styles.show : ""}`}>
-          <Link
-            to="/"
-            className={styles.navItem}
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/products"
-            className={styles.navItem}
-            onClick={() => setIsOpen(false)}
-          >
-            Products
-          </Link>
-          <Link
-            to="/about"
-            className={styles.navItem}
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className={styles.navItem}
-            onClick={() => setIsOpen(false)}
-          >
-            Contact
-          </Link>
-          <Link
-            to="/login"
-            className={styles.navItem}
-            onClick={() => setIsOpen(false)}
-          >
-            Login
-          </Link>
-          <Link
-            to="/cart"
-            className={styles.navItem}
-            onClick={() => setIsOpen(false)}
-          >
-            <IconButton sx={{ color: "#900639" }}>
-              <Badge
-                badgeContent={cartItems}
-                sx={{
-                  "& .MuiBadge-badge": {
-                    backgroundColor: "#900639",
-                    color: "#fff",
-                    fontSize: "0.75rem",
-                    fontWeight: 600,
-                    borderRadius: "50%",
-                  },
-                }}
-              >
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-          </Link>
-        </div>
-      </nav>
+        {/* Logo */}
+        <Typography
+          variant="h5"
+          component={Link}
+          to="/"
+          sx={{
+            fontFamily: "Playfair Display",
+            fontWeight: 700,
+            textDecoration: "none",
+            color: "#1c1c1c",
+            flexGrow: 1,
+          }}
+        >
+          Pour Decisions
+        </Typography>
 
-      {/* Content shift when menu is open */}
-      <div className={isOpen ? styles.contentShift : ""}></div>
-    </>
+        {/* Desktop Nav Links */}
+        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 3 }}>
+          {navLinks.map((item) => (
+            <Button
+              key={item.title}
+              component={Link}
+              to={item.path}
+              sx={{
+                fontFamily: "Montserrat",
+                color: "#1c1c1c",
+                fontWeight: 500,
+                textTransform: "none",
+                "&:hover": {
+                  color: "#900639",
+                },
+              }}
+            >
+              {item.title}
+            </Button>
+          ))}
+        </Box>
+
+        {/* Cart Icon */}
+        <IconButton component={Link} to="/cart" sx={{ color: "#900639" }}>
+          <Badge
+            badgeContent={cartItems}
+            sx={{
+              "& .MuiBadge-badge": {
+                backgroundColor: "#900639",
+                color: "white",
+                fontFamily: "Montserrat",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                borderRadius: "50%",
+              },
+            }}
+          >
+            <ShoppingCart />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="left"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+      >
+        {drawer}
+      </Drawer>
+    </AppBar>
   );
 };
 
