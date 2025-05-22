@@ -1,0 +1,208 @@
+/* Discover Section */
+.discoverSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding: 80px 20px; */
+    background-color: var(--color-white);
+    overflow-x: hidden;
+}
+
+/* Discover Title */
+.discoverTitle {
+    width: 100%;
+    height: 270px;
+    flex-shrink: 0;
+    color: #900639;
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: 200px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 250px;
+    letter-spacing: -1.045px;
+    margin-left: -200px;
+}
+
+/* Discover Subtitle */
+.discoverSubtitle {
+    width: 100%;
+    color: #000;
+    font-family: "Playfair Display", serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 58px;
+    letter-spacing: -0.24px;
+    text-align: right;
+    margin-right: 500px;
+    margin-top: -20px;
+}
+
+/* Chart Wrapper */
+.chartWrapper {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #FFFEFC;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ratings Text */
+.ratingsText {
+    width: 90%;
+    max-width: 585px;
+    color: #000;
+    text-align: center;
+    font-family: "Didact Gothic", sans-serif;
+    font-size: clamp(12px, 2.5vw, 18px);
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Dropdown Styling */
+.dropdownContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dropdownLabel {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.dropdown {
+    width: 180px;
+    height: 50px;
+    padding: 12px 20px;
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #B5B5B5;
+    background: #C5C5C5;
+    color: #FFFFFF;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.dropdown:hover {
+    background: #900639;
+    color: #FFFEFC;
+}
+
+/* Chart Container */
+.chartContainer {
+    width: 100%;
+    max-width: 1100px;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1024px) {
+    .chartContainer {
+        max-width: 900px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chartWrapper {
+        padding: 20px;
+    }
+
+    .chartContainer {
+        max-width: 600px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chartWrapper {
+        padding: 10px;
+    }
+
+    .chartContainer {
+        max-width: 400px;
+        height: 350px;
+    }
+
+    .dropdown {
+        width: 140px;
+        height: 40px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .discoverTitle {
+        font-size: 180px;
+        line-height: 220px;
+        margin-left: -80px;
+    }
+
+    .discoverSubtitle {
+        font-size: 42px;
+        line-height: 52px;
+        margin-right: 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .discoverTitle {
+        font-size: 140px;
+        line-height: 170px;
+        margin-left: -60px;
+    }
+
+    .discoverSubtitle {
+        font-size: 36px;
+        line-height: 46px;
+        margin-right: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .discoverTitle {
+        font-size: 100px;
+        line-height: 120px;
+        margin-left: -30px;
+    }
+
+    .discoverSubtitle {
+        font-size: 28px;
+        line-height: 38px;
+        margin-right: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .discoverTitle {
+        font-size: 72px;
+        line-height: 90px;
+        margin-left: -20px;
+    }
+
+    .discoverSubtitle {
+        font-size: 22px;
+        line-height: 32px;
+        margin-right: 40px;
+        text-align: center;
+    }
+}
