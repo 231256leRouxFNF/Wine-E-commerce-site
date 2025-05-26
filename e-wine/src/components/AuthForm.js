@@ -34,6 +34,9 @@ async function hashSequence(email, sequence) {
 
 const AuthForm = ({ mode = 'login' }) => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [password, setPassword] = useState('');
   const [selectedSequence, setSelectedSequence] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -44,7 +47,7 @@ const AuthForm = ({ mode = 'login' }) => {
     setLoading(true);
 
     if (!validateEmail(email)) {
-      setError('Please enter a valid email address');
+      setError('Please enter a valid email from a supported provider (gmail, outlook, mweb, etc.)');
       setLoading(false);
       return;
     }
@@ -61,18 +64,25 @@ const AuthForm = ({ mode = 'login' }) => {
       return;
     }
 
-    const hash = await hashSequence(email, selectedSequence);
+    const hash = await hashSequence(email.toLowerCase(), selectedSequence);
 
     if (mode === 'register') {
       localStorage.setItem('labelAuth', JSON.stringify({
-        email,
+        email: email.toLowerCase(),
+        name,
+        surname,
+        password,
         hash
       }));
       setLoading(false);
       window.location.href = '/login';
     } else {
       const stored = JSON.parse(localStorage.getItem('labelAuth'));
-      if (!stored || stored.email !== email || stored.hash !== hash) {
+      if (
+        !stored || 
+        stored.email !== email.toLowerCase() || 
+        stored.hash !== hash
+      ) {
         setError('Invalid email or label sequence');
         setLoading(false);
         return;
@@ -83,7 +93,10 @@ const AuthForm = ({ mode = 'login' }) => {
   };
 
   const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const approvedDomains = ['gmail.com', 'outlook.com', 'mweb.co.za', 'yahoo.com', 'icloud.com'];
+    const domain = email.split('@')[1]?.toLowerCase();
+    return pattern.test(email) && approvedDomains.includes(domain);
   };
 
   return (
@@ -106,25 +119,53 @@ const AuthForm = ({ mode = 'login' }) => {
             sx={{ mb: 3 }}
           />
 
+          {mode === 'register' && (
+            <>
+              <TextField
+                fullWidth
+                label="Name"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Surname"
+                variant="outlined"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                variant="outlined"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{ mb: 3 }}
+              />
+            </>
+          )}
+
           <Typography variant="h6" sx={{ mb: 2 }}>
             {mode === 'register' 
               ? 'Create your label sequence (3-5 labels)' 
               : 'Select your label sequence'}
           </Typography>
 
-          <Grid container spacing={2} sx={{ mb: 3 }}>
+          <Grid container spacing={2} sx={{ mb: 2 }}>
             {wineLabels.map((label) => (
               <Grid item xs={4} key={label.id}>
                 <IconButton
                   onClick={() => {
-                    if (
-                      !selectedSequence.includes(label.id) &&
-                      selectedSequence.length < 5
-                    ) {
+                    if (selectedSequence.includes(label.id)) {
+                      setSelectedSequence(selectedSequence.filter(id => id !== label.id));
+                    } else if (selectedSequence.length < 5) {
                       setSelectedSequence([...selectedSequence, label.id]);
                     }
                   }}
-                  disabled={selectedSequence.includes(label.id) || selectedSequence.length >= 5}
                   sx={{
                     p: 1,
                     border: selectedSequence.includes(label.id)
@@ -145,6 +186,15 @@ const AuthForm = ({ mode = 'login' }) => {
               </Grid>
             ))}
           </Grid>
+
+          <Button
+            variant="outlined"
+            fullWidth
+            onClick={() => setSelectedSequence([])}
+            sx={{ mb: 2 }}
+          >
+            Clear Selection
+          </Button>
 
           {error && (
             <Typography color="error" sx={{ mb: 2 }}>
