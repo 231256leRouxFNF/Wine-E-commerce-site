@@ -1,0 +1,222 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+.WineLeaderboard {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.wineOfTheMonth {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.overlapWrapper {
+    background-color: #ffffff;
+    width: 1434px;
+    height: 3224px;
+    overflow: hidden;
+}
+
+.overlap {
+    position: relative;
+    width: 1412px;
+    height: 3034px;
+    top: 40px;
+    overflow: hidden;
+}
+
+.headingWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 70px;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.topPick {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 148px;
+    color: #8f0539;
+    line-height: 90px;
+    padding-left: 200px;
+    padding-top: 70px;
+    padding-bottom: 40px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.beginHere {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 100px;
+    color: #000000;
+    line-height: 90px;
+    text-align: right;
+    padding-bottom: 20px;
+    overflow: hidden;
+    margin-top: -2px;
+    padding-right: 190px;
+}
+
+/* .subheading1,
+.subheading2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 65px;
+    color: #000000;
+    line-height: 72px;
+    text-align: right;
+    padding-top: -400px;
+    margin-right: 40px;
+    overflow: hidden;
+} */
+
+.subheading1 {
+    margin-top: 40px;
+}
+
+.subheading2 {
+    margin-top: -10px;
+}
+
+.wineInfo1,
+.wineInfo2,
+.wineInfo3 {
+    position: absolute;
+    width: 489px;
+    height: 359px;
+    overflow: hidden;
+}
+
+.wineInfo1 {
+    top: 741px;
+    left: 733px;
+    margin-top: -280px;
+}
+
+.wineInfo2 {
+    top: 1487px;
+    left: 230px;
+    margin-top: -120px;
+}
+
+.wineInfo3 {
+    top: 2646px;
+    left: 725px;
+    width: 568px;
+    margin-top: -400px;
+}
+
+.description {
+    position: absolute;
+    width: 481px;
+    top: 223px;
+    left: 6px;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #000000;
+    overflow: hidden;
+}
+
+.group,
+.group2 {
+    position: absolute;
+    width: 493px;
+    height: 192px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.group2 {
+    width: 572px;
+}
+
+.overlapGroup,
+.overlapGroup2 {
+    position: absolute;
+    height: 139px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.country {
+    position: absolute;
+    width: 100%;
+    height: 63px;
+    top: 76px;
+    left: 0;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+    font-size: 45.2px;
+    line-height: 64px;
+    color: #000000;
+    overflow: hidden;
+}
+
+.wineName,
+.wineNameAlt {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    font-size: 60px;
+    color: #8f0539;
+    line-height: 79px;
+    overflow: hidden;
+}
+
+.rating {
+    position: absolute;
+    width: 53px;
+    top: 139px;
+    left: 2px;
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 500;
+    font-size: 33.9px;
+    color: #000000;
+    line-height: 52.7px;
+    overflow: hidden;
+}
+
+.wineImg1,
+.wineImg2,
+.wineImg3 {
+    position: absolute;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.wineImg1 {
+    width: 823px;
+    height: 1055px;
+    top: 191px;
+    left: 0;
+}
+
+.wineImg2 {
+    width: 970px;
+    height: 1055px;
+    top: 1000px;
+    left: 442px;
+}
+
+.wineImg3 {
+    width: 809px;
+    height: 950px;
+    top: 1900px;
+    left: 0;
+}

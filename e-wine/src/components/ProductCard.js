@@ -8,6 +8,7 @@ import {
   Button,
   Chip,
   Box,
+  Stack,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -49,10 +50,23 @@ const ProductCard = ({ product }) => {
             fontFamily: "Playfair Display, serif",
             fontWeight: 700,
             fontSize: "20px",
-            mb: 1,
+            mb: 0.5,
           }}
         >
           {product.title}
+        </Typography>
+
+        <Typography
+          variant="subtitle2"
+          sx={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: 500,
+            fontSize: "13px",
+            color: "#900639",
+            mb: 1,
+          }}
+        >
+          {product.type}
         </Typography>
 
         <Typography
@@ -61,26 +75,82 @@ const ProductCard = ({ product }) => {
             fontFamily: "Montserrat, sans-serif",
             fontSize: "14px",
             color: "#555",
-            mb: 2,
+            mb: 1,
           }}
         >
           {product.description?.substring(0, 100)}...
         </Typography>
 
-        <Chip
-          label={`R${product.price.toFixed(2)}`}
-          variant="outlined"
+        <Typography
+          variant="body2"
           sx={{
-            fontWeight: 600,
-            fontSize: "0.85rem",
             fontFamily: "Montserrat, sans-serif",
-            px: 1.5,
-            py: 0.5,
-            color: "#900639",
-            borderColor: "#900639",
-            backgroundColor: "#ffffff",
+            fontSize: "13px",
+            mb: 0.5,
           }}
-        />
+        >
+          <strong>Varietal:</strong> {product.variety}
+        </Typography>
+
+        <Typography
+          variant="body2"
+          sx={{
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "13px",
+            mb: 0.5,
+          }}
+        >
+          <strong>Region:</strong> {product.region}
+        </Typography>
+
+        {product.style && product.style.length > 0 && (
+          <Typography
+            variant="body2"
+            sx={{
+              fontFamily: "Montserrat, sans-serif",
+              fontSize: "13px",
+              mb: 0.5,
+            }}
+          >
+            <strong>Style:</strong> {product.style.join(", ")}
+          </Typography>
+        )}
+
+        {product.tag && product.tag.length > 0 && (
+          <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
+            {product.tag.map((tag, index) => (
+              <Chip
+                key={index}
+                label={tag}
+                size="small"
+                sx={{
+                  backgroundColor: "#f3f3f3",
+                  color: "#900639",
+                  fontSize: "12px",
+                  fontFamily: "Montserrat, sans-serif",
+                  fontWeight: 500,
+                }}
+              />
+            ))}
+          </Stack>
+        )}
+
+        <Box sx={{ mt: 2 }}>
+          <Chip
+            label={`R${product.price.toFixed(2)}`}
+            variant="outlined"
+            sx={{
+              fontWeight: 600,
+              fontSize: "0.85rem",
+              fontFamily: "Montserrat, sans-serif",
+              px: 1.5,
+              py: 0.5,
+              color: "#900639",
+              borderColor: "#900639",
+              backgroundColor: "#ffffff",
+            }}
+          />
+        </Box>
       </CardContent>
 
       <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
