@@ -1,0 +1,48 @@
+.checkoutForm {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.sectionBox {
+    margin-bottom: 40px;
+}
+
+.sectionHeading {
+    display: flex;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #900639;
+    margin-bottom: 20px;
+}
+
+.sectionIcon {
+    margin-right: 10px;
+}
+
+.orderSummaryCard {
+    background-color: #FFFEFC;
+    border-radius: 16px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.placeOrderBtn {
+    margin-top: 24px;
+    padding: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: none;
+    background-color: #900639;
+    border-radius: 999px;
+}
+
+.placeOrderBtn:hover {
+    background-color: #6d002e;
+}
