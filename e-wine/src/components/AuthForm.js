@@ -1,3 +1,4 @@
+// src/components/AuthForm.js
 import React, { useState } from "react";
 import {
   Container,
@@ -13,6 +14,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import LockResetIcon from "@mui/icons-material/LockReset";
+import "./AuthForm.css";
 
 const wineLabels = [
   { id: 1, name: "Vintage Red", img: "/labels/label1.jpg" },
@@ -118,27 +120,10 @@ const AuthForm = ({ mode = "login" }) => {
 
   return (
     <Container maxWidth="sm">
-      <Paper
-        elevation={4}
-        sx={{
-          p: 4,
-          mt: 6,
-          backgroundColor: "#FFFEFC",
-          borderRadius: 3,
-          boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
-        }}
-      >
-        <Box sx={{ textAlign: "center", mb: 4 }}>
-          <LockResetIcon sx={{ fontSize: 40, color: "#900639" }} />
-          <Typography
-            variant="h4"
-            sx={{
-              mt: 1,
-              fontFamily: "Playfair Display, serif",
-              fontWeight: 700,
-              color: "#1c1c1c",
-            }}
-          >
+      <Paper className="authForm">
+        <Box className="authHeader">
+          <LockResetIcon className="authIcon" />
+          <Typography variant="h4" className="authTitle">
             {mode === "register" ? "Create Account" : "Welcome Back"}
           </Typography>
         </Box>
@@ -150,11 +135,7 @@ const AuthForm = ({ mode = "login" }) => {
             variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            sx={{
-              mb: 3,
-              "& label": { fontFamily: "Montserrat, sans-serif" },
-              "& input": { fontFamily: "Montserrat, sans-serif" },
-            }}
+            className="authInput"
           />
 
           {mode === "register" && (
@@ -165,11 +146,7 @@ const AuthForm = ({ mode = "login" }) => {
                 variant="outlined"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                sx={{
-                  mb: 2,
-                  "& label": { fontFamily: "Montserrat, sans-serif" },
-                  "& input": { fontFamily: "Montserrat, sans-serif" },
-                }}
+                className="authInput"
               />
               <TextField
                 fullWidth
@@ -177,11 +154,7 @@ const AuthForm = ({ mode = "login" }) => {
                 variant="outlined"
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
-                sx={{
-                  mb: 2,
-                  "& label": { fontFamily: "Montserrat, sans-serif" },
-                  "& input": { fontFamily: "Montserrat, sans-serif" },
-                }}
+                className="authInput"
               />
               <TextField
                 fullWidth
@@ -190,31 +163,18 @@ const AuthForm = ({ mode = "login" }) => {
                 variant="outlined"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                sx={{
-                  mb: 3,
-                  "& label": { fontFamily: "Montserrat, sans-serif" },
-                  "& input": { fontFamily: "Montserrat, sans-serif" },
-                }}
+                className="authInput"
               />
             </>
           )}
 
-          <Typography
-            variant="h6"
-            sx={{
-              mb: 2,
-              fontFamily: "Montserrat, sans-serif",
-              fontWeight: 600,
-              color: "#900639",
-              textAlign: "center",
-            }}
-          >
+          <Typography variant="h6" className="authSubheading">
             {mode === "register"
               ? "Create your label sequence (3–5 labels)"
               : "Select your label sequence"}
           </Typography>
 
-          <Grid container spacing={2} sx={{ mb: 2 }}>
+          <Grid container spacing={2} className="authGrid">
             {wineLabels.map((label) => (
               <Grid item xs={4} key={label.id}>
                 <IconButton
@@ -227,22 +187,14 @@ const AuthForm = ({ mode = "login" }) => {
                       setSelectedSequence([...selectedSequence, label.id]);
                     }
                   }}
-                  sx={{
-                    p: 1,
-                    border: selectedSequence.includes(label.id)
-                      ? "2px solid #900639"
-                      : "1px solid #ddd",
-                    borderRadius: 2,
-                    width: "100%",
-                    height: "100%",
-                    opacity: selectedSequence.includes(label.id) ? 0.5 : 1,
-                    transition: "border 0.2s ease-in-out",
-                  }}
+                  className={`authLabelBtn ${
+                    selectedSequence.includes(label.id) ? "active" : ""
+                  }`}
                 >
                   <Avatar
                     src={label.img}
                     variant="square"
-                    sx={{ width: "100%", height: 100 }}
+                    className="authLabelImg"
                   />
                 </IconButton>
               </Grid>
@@ -253,22 +205,13 @@ const AuthForm = ({ mode = "login" }) => {
             variant="outlined"
             fullWidth
             onClick={() => setSelectedSequence([])}
-            sx={{
-              mb: 2,
-              fontFamily: "Montserrat, sans-serif",
-              color: "#900639",
-              borderColor: "#900639",
-              "&:hover": {
-                backgroundColor: "#90063910",
-                borderColor: "#900639",
-              },
-            }}
+            className="clearBtn"
           >
             Clear Selection
           </Button>
 
           {error && (
-            <Typography color="error" sx={{ mb: 2 }}>
+            <Typography color="error" className="errorMsg">
               {error}
             </Typography>
           )}
@@ -279,16 +222,7 @@ const AuthForm = ({ mode = "login" }) => {
             size="large"
             type="submit"
             disabled={loading}
-            sx={{
-              mb: 2,
-              fontFamily: "Montserrat, sans-serif",
-              fontWeight: 600,
-              textTransform: "none",
-              backgroundColor: "#900639",
-              "&:hover": {
-                backgroundColor: "#6d002e",
-              },
-            }}
+            className="submitBtn"
           >
             {loading
               ? "Please wait..."
@@ -297,15 +231,7 @@ const AuthForm = ({ mode = "login" }) => {
                 : "Sign In"}
           </Button>
 
-          <Typography
-            variant="body2"
-            align="center"
-            sx={{
-              fontFamily: "Montserrat, sans-serif",
-              color: "#1c1c1c",
-              mt: 1,
-            }}
-          >
+          <Typography variant="body2" align="center" className="authFooter">
             {mode === "register" ? (
               <>
                 Already have an account?{" "}
