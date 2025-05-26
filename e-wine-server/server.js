@@ -12,6 +12,8 @@ app.use(express.json());
 // ✅ Mount your routes
 const productRoutes = require('./routes/products'); // or './products' depending on location
 app.use('/api/products', productRoutes);
+const authRoutes = require("./routes/auth");
+app.use("/api", authRoutes);
 
 // ✅ MongoDB connection (already configured correctly)
 mongoose.connect(process.env.MONGO_URI)

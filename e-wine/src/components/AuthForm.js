@@ -1,5 +1,7 @@
 // src/components/AuthForm.js
 import React, { useState } from 'react';
+import axios from "axios";
+
 import { 
   Container, 
   TextField, 
@@ -67,13 +69,17 @@ const AuthForm = ({ mode = 'login' }) => {
     const hash = await hashSequence(email.toLowerCase(), selectedSequence);
 
     if (mode === 'register') {
-      localStorage.setItem('labelAuth', JSON.stringify({
-        email: email.toLowerCase(),
-        name,
-        surname,
-        password,
-        hash
-      }));
+try {
+  await axios.post("/api/register", {
+    name,
+    email,
+    password,
+  });
+  console.log("✅ Registered successfully");
+} catch (err) {
+  console.error("❌ Registration failed:", err.response?.data?.message || err.message);
+}
+
       setLoading(false);
       window.location.href = '/login';
     } else {
