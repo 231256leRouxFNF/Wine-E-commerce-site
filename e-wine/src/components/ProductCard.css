@@ -1,0 +1,99 @@
+/* src/components/ProductCard.css */
+
+.productCard {
+    max-width: 320px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 16px;
+    background-color: #FFFEFC;
+    color: #1c1c1c;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.productCard:hover {
+    transform: translateY(-6px);
+}
+
+.productImage {
+    object-fit: cover;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.productContent {
+    flex-grow: 1;
+}
+
+.productTitle {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.productType {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #900639;
+    margin-bottom: 8px;
+}
+
+.productDescription {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.productMeta {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.productTag {
+    background-color: #f3f3f3;
+    color: #900639;
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+
+.productPrice {
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: "Montserrat", sans-serif;
+    padding: 4px 12px;
+    color: #900639;
+    border-color: #900639;
+    background-color: #ffffff;
+}
+
+.productActions {
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.viewDetailsButton {
+    color: #900639;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    text-transform: none;
+}
+
+.addToCartButton {
+    background-color: #900639;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: 999px;
+    padding: 6px 16px;
+}
+
+.addToCartButton:hover {
+    background-color: #600022;
+}
