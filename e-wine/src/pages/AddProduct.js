@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./AddProduct.css"; // Optional: for your custom styles
+import ErrorToast from "../components/ErrorToast";
+import "./AddProduct.css";
 
 const typeOptions = [
   "Red Wine",
@@ -8,19 +9,38 @@ const typeOptions = [
   "Rosé Wine",
   "Sparkling Wine",
   "Dessert Wine",
-  "Fortified Wine (e.g., Port, Sherry)"
+  "Fortified Wine (e.g., Port, Sherry)",
 ];
 
 const regionOptions = [
-  "France", "Italy", "Spain", "South Africa", "USA",
-  "Chile", "Argentina", "Australia", "New Zealand"
+  "France",
+  "Italy",
+  "Spain",
+  "South Africa",
+  "USA",
+  "Chile",
+  "Argentina",
+  "Australia",
+  "New Zealand",
 ];
 
 const varietyOptions = [
-  "Merlot", "Cabernet Sauvignon", "Pinot Noir", "Shiraz / Syrah", "Malbec",
-  "Zinfandel", "Tempranillo", "Sangiovese", "Sauvignon Blanc", "Chardonnay",
-  "Riesling", "Chenin Blanc", "Pinot Grigio / Pinot Gris", "Viognier",
-  "Gewürztraminer", "Semillon"
+  "Merlot",
+  "Cabernet Sauvignon",
+  "Pinot Noir",
+  "Shiraz / Syrah",
+  "Malbec",
+  "Zinfandel",
+  "Tempranillo",
+  "Sangiovese",
+  "Sauvignon Blanc",
+  "Chardonnay",
+  "Riesling",
+  "Chenin Blanc",
+  "Pinot Grigio / Pinot Gris",
+  "Viognier",
+  "Gewürztraminer",
+  "Semillon",
 ];
 
 const AddProduct = () => {
@@ -30,17 +50,19 @@ const AddProduct = () => {
     description: "",
     variety: "",
     region: "",
-    style: [],
-    tag: [],
+    style: "",
+    tag: "",
     price: "",
-    image: ""
+    image: "",
   });
+
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -50,7 +72,7 @@ const AddProduct = () => {
     reader.onloadend = () => {
       setProduct((prev) => ({
         ...prev,
-        image: reader.result
+        image: reader.result,
       }));
     };
     if (file) reader.readAsDataURL(file);
@@ -62,86 +84,138 @@ const AddProduct = () => {
       await axios.post("/api/products", {
         ...product,
         price: parseFloat(product.price),
-style: Array.isArray(product.style)
-  ? product.style
-  : product.style.split(",").map(s => s.trim()),
-tag: Array.isArray(product.tag)
-  ? product.tag
-  : product.tag.split(",").map(t => t.trim()),
+        style: Array.isArray(product.style)
+          ? product.style
+          : product.style.split(",").map((s) => s.trim()),
+        tag: Array.isArray(product.tag)
+          ? product.tag
+          : product.tag.split(",").map((t) => t.trim()),
       });
       alert("✅ Product added successfully!");
-setProduct({
-  title: "",
-  type: "",
-  description: "",
-  variety: "",
-  region: "",
-  style: "",
-  tag: "",
-  price: "",
-  image: ""
-});
+      setProduct({
+        title: "",
+        type: "",
+        description: "",
+        variety: "",
+        region: "",
+        style: "",
+        tag: "",
+        price: "",
+        image: "",
+      });
+      setError(null);
     } catch (err) {
-  console.error("❌ Error adding product:", err.response?.data || err.message);
-  alert("Failed to add product.");
+      console.error(
+        "❌ Error adding product:",
+        err.response?.data || err.message
+      );
+      setError("Could not add wine.");
     }
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "600px", margin: "auto" }}>
-      <h2>Add New Wine Product</h2>
+    <div className="add-product-container">
+      <h2 className="form-title">Add New Wine Product</h2>
       <form onSubmit={handleSubmit} className="add-product-form">
         <label>Title:</label>
-        <input name="title" value={product.title} onChange={handleChange} required />
+        <input
+          type="text"
+          name="title"
+          value={product.title}
+          onChange={handleChange}
+          required
+        />
 
         <label>Type:</label>
-        <select name="type" value={product.type} onChange={handleChange} required>
+        <select
+          name="type"
+          value={product.type}
+          onChange={handleChange}
+          required
+        >
           <option value="">Select a type</option>
           {typeOptions.map((type) => (
-            <option key={type} value={type}>{type}</option>
+            <option key={type} value={type}>
+              {type}
+            </option>
           ))}
         </select>
 
         <label>Description:</label>
-        <textarea name="description" value={product.description} onChange={handleChange} required />
+        <textarea
+          name="description"
+          value={product.description}
+          onChange={handleChange}
+          required
+        />
 
         <label>Varietal:</label>
-        <select name="variety" value={product.variety} onChange={handleChange} required>
+        <select
+          name="variety"
+          value={product.variety}
+          onChange={handleChange}
+          required
+        >
           <option value="">Select a varietal</option>
           {varietyOptions.map((v) => (
-            <option key={v} value={v}>{v}</option>
+            <option key={v} value={v}>
+              {v}
+            </option>
           ))}
         </select>
 
         <label>Region:</label>
-        <select name="region" value={product.region} onChange={handleChange} required>
+        <select
+          name="region"
+          value={product.region}
+          onChange={handleChange}
+          required
+        >
           <option value="">Select a region</option>
           {regionOptions.map((r) => (
-            <option key={r} value={r}>{r}</option>
+            <option key={r} value={r}>
+              {r}
+            </option>
           ))}
         </select>
 
         <label>Style (comma-separated):</label>
-        <input name="style" value={product.style} onChange={handleChange} />
+        <input
+          type="text"
+          name="style"
+          value={product.style}
+          onChange={handleChange}
+        />
 
         <label>Tags (comma-separated):</label>
-        <input name="tag" value={product.tag} onChange={handleChange} />
+        <input
+          type="text"
+          name="tag"
+          value={product.tag}
+          onChange={handleChange}
+        />
 
         <label>Price (R):</label>
-        <input name="price" type="number" value={product.price} onChange={handleChange} required />
+        <input
+          name="price"
+          type="number"
+          value={product.price}
+          onChange={handleChange}
+          required
+        />
 
         <label>Wine Image:</label>
         <input type="file" accept="image/*" onChange={handleImageUpload} />
         {product.image && (
-          <img
-            src={product.image}
-            alt="Preview"
-            style={{ width: "100%", maxHeight: "200px", objectFit: "cover", marginTop: "10px" }}
-          />
+          <img src={product.image} alt="Preview" className="preview-image" />
         )}
 
-        <button type="submit" style={{ marginTop: "1rem" }}>Add Product</button>
+        <button type="submit" className="submit-button">
+          Add Product
+        </button>
       </form>
+
+      {error && <ErrorToast message={error} onClose={() => setError(null)} />}
     </div>
   );
 };
