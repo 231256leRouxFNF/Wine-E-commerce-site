@@ -14,6 +14,14 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
 import "./RegisterForm.css";
 
+import Wine1 from "../assets/WineBottleAuth1.svg";
+import Wine2 from "../assets/WineBottleAuth2.svg";
+import Wine3 from "../assets/WineBottleAuth3.svg";
+import Wine4 from "../assets/WineBottleAuth4.svg";
+import Wine5 from "../assets/WineBottleAuth5.svg";
+
+const wineImages = [Wine1, Wine2, Wine3, Wine4, Wine5];
+
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -52,6 +60,18 @@ const RegisterForm = () => {
           <Typography variant="h4" className="registerTitle">
             Sign Up
           </Typography>
+
+          {/* 🍷 Label Image Grid */}
+          <Box className="wineImageGrid">
+            {wineImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Wine Bottle ${index + 1}`}
+                className="wineAuthImage"
+              />
+            ))}
+          </Box>
 
           <form onSubmit={handleSubmit}>
             <TextField
