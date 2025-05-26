@@ -22,9 +22,11 @@ useEffect(() => {
 
   return (
     <div className="products-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', padding: '2rem' }}>
+
       {products.map((product) => (
         <ProductCard key={product._id} product={product} />
       ))}
+
     </div>
   );
 };
