@@ -1,64 +1,58 @@
-// src/components/LoginForm.js
-import React, { useState } from 'react';
-import { 
+// src/components/RegisterForm.js
+import React, { useState } from "react";
+import {
   Box,
   Grid,
   Typography,
   TextField,
   Button,
   Link,
-  Divider,
   IconButton,
-  InputAdornment
-} from '@mui/material';
-import { 
-  Visibility,
-  VisibilityOff
-} from '@mui/icons-material';
-import { Link as RouterLink } from 'react-router-dom';
+  InputAdornment,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Link as RouterLink } from "react-router-dom";
+import "./RegisterForm.css";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
     let tempErrors = {};
-    tempErrors.email = (/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(formData.email) ? '' : 'Invalid email';
-    tempErrors.password = formData.password.length >= 6 ? '' : 'Password must be at least 6 characters';
+    tempErrors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+      ? ""
+      : "Invalid email";
+    tempErrors.password =
+      formData.password.length >= 6
+        ? ""
+        : "Password must be at least 6 characters";
     setErrors(tempErrors);
-    return Object.values(tempErrors).every(x => x === '');
+    return Object.values(tempErrors).every((x) => x === "");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle login logic here
-      console.log('Form submitted:', formData);
-      // Simulate API call
+      console.log("Form submitted:", formData);
       setTimeout(() => {
-        window.location.href = '/'; // Redirect after login
+        window.location.href = "/";
       }, 1000);
     }
   };
 
   return (
-    <Grid container justifyContent="center" sx={{ minHeight: '80vh', py: 8 }}>
+    <Grid container justifyContent="center" className="registerContainer">
       <Grid item xs={12} sm={8} md={6} lg={4}>
-        <Box sx={{ 
-          p: 4, 
-          boxShadow: 3,
-          borderRadius: 2,
-          backgroundColor: 'background.paper'
-        }}>
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
+        <Box className="registerBox">
+          <Typography variant="h4" className="registerTitle">
             Sign Up
           </Typography>
 
-          {/* Login Form */}
           <form onSubmit={handleSubmit}>
             <TextField
               fullWidth
@@ -66,21 +60,27 @@ const RegisterForm = () => {
               variant="outlined"
               margin="normal"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               error={!!errors.email}
               helperText={errors.email}
+              className="registerField"
             />
 
             <TextField
               fullWidth
               label="Password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               variant="outlined"
               margin="normal"
               value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
               error={!!errors.password}
               helperText={errors.password}
+              className="registerField"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -91,7 +91,7 @@ const RegisterForm = () => {
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
             />
 
@@ -100,35 +100,26 @@ const RegisterForm = () => {
               variant="contained"
               size="large"
               type="submit"
-              sx={{ 
-                mt: 3,
-                py: 1.5,
-                backgroundColor: 'primary.main',
-                '&:hover': { backgroundColor: 'primary.dark' }
-              }}
+              className="registerButton"
             >
-              Sign In
+              Sign Up
             </Button>
 
-            <Box sx={{ mt: 2, textAlign: 'center' }}>
-              <Link 
-                component={RouterLink} 
-                to="/forgot-password" 
-                sx={{ color: 'text.secondary' }}
+            <Box className="forgotBox">
+              <Link
+                component={RouterLink}
+                to="/forgot-password"
+                className="forgotLink"
               >
                 Forgot Password?
               </Link>
             </Box>
 
-            <Box sx={{ mt: 3, textAlign: 'center' }}>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                Don't have an account? {' '}
-                <Link 
-                  component={RouterLink} 
-                  to="/register" 
-                  sx={{ fontWeight: 'bold' }}
-                >
-                  Create Account
+            <Box className="loginBox">
+              <Typography variant="body2" className="loginText">
+                Already have an account?{" "}
+                <Link component={RouterLink} to="/login" className="loginLink">
+                  Sign In
                 </Link>
               </Typography>
             </Box>
