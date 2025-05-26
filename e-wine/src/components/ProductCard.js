@@ -1,89 +1,49 @@
-// src/components/ProductCard.js
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  Chip,
-  Box,
-  Stack,
-} from "@mui/material";
 import { Link } from "react-router-dom";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
   return (
-    <Card className="productCard">
-      <CardMedia
-        component="img"
-        height="200"
-        image={product.image}
-        alt={product.title}
-        className="productImage"
-      />
+    <div className="product-card">
+      <img src={product.image} alt={product.title} />
 
-      <CardContent className="productContent">
-        <Typography variant="h6" className="productTitle">
-          {product.title}
-        </Typography>
-
-        <Typography variant="subtitle2" className="productType">
-          {product.type}
-        </Typography>
-
-        <Typography variant="body2" className="productDescription">
+      <div className="product-content">
+        <h3 className="product-title">{product.title}</h3>
+        <div className="product-type">{product.type}</div>
+        <p className="product-description">
           {product.description?.substring(0, 100)}...
-        </Typography>
+        </p>
 
-        <Typography variant="body2" className="productMeta">
+        <p className="product-meta">
           <strong>Varietal:</strong> {product.variety}
-        </Typography>
-
-        <Typography variant="body2" className="productMeta">
+        </p>
+        <p className="product-meta">
           <strong>Region:</strong> {product.region}
-        </Typography>
-
+        </p>
         {product.style?.length > 0 && (
-          <Typography variant="body2" className="productMeta">
+          <p className="product-meta">
             <strong>Style:</strong> {product.style.join(", ")}
-          </Typography>
+          </p>
         )}
 
         {product.tag?.length > 0 && (
-          <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mt: 1 }}>
+          <div className="product-tags">
             {product.tag.map((tag, index) => (
-              <Chip key={index} label={tag} className="productTag" />
+              <span key={index} className="product-tag">{tag}</span>
             ))}
-          </Stack>
+          </div>
         )}
 
-        <Box sx={{ mt: 2 }}>
-          <Chip
-            label={`R${product.price.toFixed(2)}`}
-            variant="outlined"
-            className="productPrice"
-          />
-        </Box>
-      </CardContent>
+        <div className="product-price">R{product.price?.toFixed(2)}</div>
+      </div>
 
-      <CardActions className="productActions">
-        <Button
-          size="small"
-          component={Link}
-          to={`/products/${product.id}`}
-          className="viewDetailsButton"
-        >
+      <div className="product-actions">
+        <Link to={`/products/${product.id || product._id}`} className="product-link">
           View Details
-        </Button>
-
-        <Button size="small" variant="contained" className="addToCartButton">
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+        </Link>
+        <button className="product-button">Add to Cart</button>
+      </div>
+    </div>
   );
 };
 
