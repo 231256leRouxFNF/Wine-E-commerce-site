@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
+  const [liked, setLiked] = useState(false);
+
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.title} />
+      <div className="product-image-container">
+        <img src={product.image} alt={product.title} className="product-img" />
+
+        {/* Tags */}
+        {product.tag?.length > 0 && (
+          <div className="product-badges">
+            {product.tag.slice(0, 2).map((tag, index) => (
+              <span key={index} className="product-badge">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Heart icon */}
+        <button
+          className="wishlist-button-top"
+          aria-label="Add to Wishlist"
+          onClick={() => setLiked(!liked)}
+        >
+          {liked ? <AiFillHeart /> : <AiOutlineHeart />}
+        </button>
+      </div>
 
       <div className="product-content">
         <h3 className="product-title">{product.title}</h3>
+
+        <div className="product-price">R{product.price?.toFixed(2)}</div>
+
         <div className="product-type">{product.type}</div>
+
         <p className="product-description">
           {product.description?.substring(0, 100)}...
         </p>
@@ -25,20 +54,13 @@ const ProductCard = ({ product }) => {
             <strong>Style:</strong> {product.style.join(", ")}
           </p>
         )}
-
-        {product.tag?.length > 0 && (
-          <div className="product-tags">
-            {product.tag.map((tag, index) => (
-              <span key={index} className="product-tag">{tag}</span>
-            ))}
-          </div>
-        )}
-
-        <div className="product-price">R{product.price?.toFixed(2)}</div>
       </div>
 
       <div className="product-actions">
-        <Link to={`/products/${product.id || product._id}`} className="product-link">
+        <Link
+          to={`/products/${product.id || product._id}`}
+          className="product-link"
+        >
           View Details
         </Link>
         <button className="product-button">Add to Cart</button>
