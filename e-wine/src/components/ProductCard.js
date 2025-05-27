@@ -12,15 +12,19 @@ const ProductCard = ({ product }) => {
         <img src={product.image} alt={product.title} className="product-img" />
 
         {/* Tags */}
-        {product.tag?.length > 0 && (
-          <div className="product-badges">
-            {product.tag.slice(0, 2).map((tag, index) => (
-              <span key={index} className="product-badge">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
+        {Array.isArray(product.tag) &&
+          product.tag.filter((tag) => tag && tag.trim() !== "").length > 0 && (
+            <div className="product-badges">
+              {product.tag
+                .filter((tag) => tag && tag.trim() !== "")
+                .slice(0, 2)
+                .map((tag, index) => (
+                  <span key={index} className="product-badge">
+                    {tag}
+                  </span>
+                ))}
+            </div>
+          )}
 
         {/* Heart icon */}
         <button
