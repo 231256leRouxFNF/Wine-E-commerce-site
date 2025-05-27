@@ -12,7 +12,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { ShoppingCart, Menu } from "@mui/icons-material";
+import { ShoppingCart, Menu, Add as AddIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ cartItems }) => {
@@ -23,7 +23,6 @@ const Navbar = ({ cartItems }) => {
     { title: "Products", path: "/products" },
     { title: "About", path: "/about" },
     { title: "Contact", path: "/contact" },
-    { title: "Login", path: "/login" },
   ];
 
   const drawer = (
@@ -46,6 +45,27 @@ const Navbar = ({ cartItems }) => {
             <ListItemText primary={item.title} />
           </ListItem>
         ))}
+        <ListItem
+          button
+          component={Link}
+          to="/login"
+          sx={{
+            fontFamily: "Montserrat",
+            color: "#900639",
+            fontWeight: 600,
+            border: "2px solid #900639",
+            borderRadius: "999px",
+            mt: 2,
+            mx: 2,
+            justifyContent: "center",
+            height: 36,
+            "&:hover": {
+              backgroundColor: "#90063910",
+            },
+          }}
+        >
+          Login
+        </ListItem>
       </List>
     </Box>
   );
@@ -60,16 +80,10 @@ const Navbar = ({ cartItems }) => {
         px: { xs: 2, sm: 6 },
       }}
     >
-      <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-        {/* Mobile Menu Icon */}
-        <IconButton
-          edge="start"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          sx={{ display: { sm: "none" }, color: "#1c1c1c" }}
-        >
-          <Menu />
-        </IconButton>
-
+      <Toolbar
+        disableGutters
+        sx={{ width: "100%", justifyContent: "space-between" }}
+      >
         {/* Logo */}
         <Typography
           variant="h5"
@@ -80,14 +94,21 @@ const Navbar = ({ cartItems }) => {
             fontWeight: 700,
             textDecoration: "none",
             color: "#1c1c1c",
-            flexGrow: 1,
+            pl: 3,
           }}
         >
           Pour Decisions
         </Typography>
 
-        {/* Desktop Nav Links */}
-        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 3 }}>
+        {/* Center Nav Links */}
+        <Box
+          sx={{
+            display: { xs: "none", sm: "flex" },
+            gap: 2,
+            justifyContent: "center",
+            flexGrow: 1,
+          }}
+        >
           {navLinks.map((item) => (
             <Button
               key={item.title}
@@ -95,11 +116,19 @@ const Navbar = ({ cartItems }) => {
               to={item.path}
               sx={{
                 fontFamily: "Montserrat",
-                color: "#1c1c1c",
+                color: "#900639",
                 fontWeight: 500,
+                fontSize: "0.875rem",
                 textTransform: "none",
+                border: "2px solid transparent",
+                borderRadius: "999px",
+                px: 2.5,
+                py: 0.25,
+                height: 36,
+                minWidth: "auto",
                 "&:hover": {
-                  color: "#900639",
+                  border: "2px solid #900639",
+                  backgroundColor: "#ffffff",
                 },
               }}
             >
@@ -108,27 +137,70 @@ const Navbar = ({ cartItems }) => {
           ))}
         </Box>
 
-        {/* Cart Icon */}
-        <IconButton component={Link} to="/cart" sx={{ color: "#900639" }}>
-          <Badge
-            badgeContent={cartItems}
+        {/* Action Icons */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, pr: 3 }}>
+          {/* Add Product Icon */}
+          <IconButton
+            component={Link}
+            to="/add-product"
+            sx={{ color: "#900639" }}
+          >
+            <AddIcon />
+          </IconButton>
+
+          {/* Cart Icon */}
+          <IconButton component={Link} to="/cart" sx={{ color: "#900639" }}>
+            <Badge
+              badgeContent={cartItems}
+              sx={{
+                "& .MuiBadge-badge": {
+                  backgroundColor: "#900639",
+                  color: "#fff",
+                  fontFamily: "Montserrat",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  borderRadius: "50%",
+                },
+              }}
+            >
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
+
+          {/* Login Button */}
+          <Button
+            component={Link}
+            to="/login"
+            variant="contained"
             sx={{
-              "& .MuiBadge-badge": {
-                backgroundColor: "#900639",
-                color: "white",
-                fontFamily: "Montserrat",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                borderRadius: "50%",
+              fontFamily: "Montserrat",
+              fontWeight: 600,
+              textTransform: "none",
+              backgroundColor: "#900639",
+              borderRadius: "999px",
+              px: 2.5,
+              py: 0.25,
+              height: 36,
+              fontSize: "0.875rem",
+              "&:hover": {
+                backgroundColor: "#6d002e",
               },
             }}
           >
-            <ShoppingCart />
-          </Badge>
+            Login
+          </Button>
+        </Box>
+
+        {/* Mobile Menu */}
+        <IconButton
+          edge="start"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          sx={{ display: { sm: "none" }, color: "#1c1c1c", ml: 2 }}
+        >
+          <Menu />
         </IconButton>
       </Toolbar>
 
-      {/* Mobile Drawer */}
       <Drawer
         anchor="left"
         open={mobileOpen}

@@ -16,7 +16,7 @@ const Hero = () => {
         <h3 className="subtitle">Compare, Sip & Discover</h3>
         <h1 className="title">The Perfect Wine</h1>
         <p className="description">
-          Powered by the Vinou API, it’s time to explore top-rated wines,
+          It’s time to explore top-rated wines,
           compare flavors, and track price trends—all in one place.
         </p>
 

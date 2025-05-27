@@ -1,122 +1,49 @@
 import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  Chip,
-  Box,
-} from "@mui/material";
 import { Link } from "react-router-dom";
+import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
   return (
-    <Card
-      sx={{
-        maxWidth: 320,
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        borderRadius: "16px",
-        backgroundColor: "#FFFEFC",
-        color: "#1c1c1c",
-        boxShadow: "0 6px 20px rgba(0,0,0,0.05)",
-        transition: "transform 0.3s ease-in-out",
-        "&:hover": {
-          transform: "translateY(-6px)",
-        },
-      }}
-    >
-      <CardMedia
-        component="img"
-        height="200"
-        image={product.image}
-        alt={product.title}
-        sx={{
-          objectFit: "cover",
-          borderTopLeftRadius: "16px",
-          borderTopRightRadius: "16px",
-        }}
-      />
+    <div className="product-card">
+      <img src={product.image} alt={product.title} />
 
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "Playfair Display, serif",
-            fontWeight: 700,
-            fontSize: "20px",
-            mb: 1,
-          }}
-        >
-          {product.title}
-        </Typography>
-
-        <Typography
-          variant="body2"
-          sx={{
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: "14px",
-            color: "#555",
-            mb: 2,
-          }}
-        >
+      <div className="product-content">
+        <h3 className="product-title">{product.title}</h3>
+        <div className="product-type">{product.type}</div>
+        <p className="product-description">
           {product.description?.substring(0, 100)}...
-        </Typography>
+        </p>
 
-        <Chip
-          label={`R${product.price.toFixed(2)}`}
-          variant="outlined"
-          sx={{
-            fontWeight: 600,
-            fontSize: "0.85rem",
-            fontFamily: "Montserrat, sans-serif",
-            px: 1.5,
-            py: 0.5,
-            color: "#900639",
-            borderColor: "#900639",
-            backgroundColor: "#ffffff",
-          }}
-        />
-      </CardContent>
+        <p className="product-meta">
+          <strong>Varietal:</strong> {product.variety}
+        </p>
+        <p className="product-meta">
+          <strong>Region:</strong> {product.region}
+        </p>
+        {product.style?.length > 0 && (
+          <p className="product-meta">
+            <strong>Style:</strong> {product.style.join(", ")}
+          </p>
+        )}
 
-      <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
-        <Button
-          size="small"
-          component={Link}
-          to={`/products/${product.id}`}
-          sx={{
-            color: "#900639",
-            fontWeight: 500,
-            fontFamily: "Montserrat, sans-serif",
-            textTransform: "none",
-          }}
-        >
+        {product.tag?.length > 0 && (
+          <div className="product-tags">
+            {product.tag.map((tag, index) => (
+              <span key={index} className="product-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+
+        <div className="product-price">R{product.price?.toFixed(2)}</div>
+      </div>
+
+      <div className="product-actions">
+        <Link to={`/products/${product.id || product._id}`} className="product-link">
           View Details
-        </Button>
-
-        <Button
-          size="small"
-          variant="contained"
-          sx={{
-            backgroundColor: "#900639",
-            fontFamily: "Montserrat, sans-serif",
-            fontWeight: 600,
-            textTransform: "none",
-            borderRadius: "999px",
-            px: 3,
-            "&:hover": {
-              backgroundColor: "#600022",
-            },
-          }}
-        >
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+        </Link>
+        <button className="product-button">Add to Cart</button>
+      </div>
+    </div>
   );
 };
 

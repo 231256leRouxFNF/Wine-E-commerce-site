@@ -1,5 +1,5 @@
 // src/components/CheckoutForm.js
-import React from 'react';
+import React from "react";
 import {
   Grid,
   TextField,
@@ -10,60 +10,62 @@ import {
   Card,
   CardContent,
   Button,
-  Box
-} from '@mui/material';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import { CreditCard, LocalShipping, Person } from '@mui/icons-material';
+  Box,
+} from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { CreditCard, LocalShipping, Person } from "@mui/icons-material";
+import "./CheckoutForm.css";
 
 const validationSchema = yup.object({
-  firstName: yup.string().required('Required'),
-  lastName: yup.string().required('Required'),
-  email: yup.string().email('Invalid email').required('Required'),
-  address: yup.string().required('Required'),
-  city: yup.string().required('Required'),
-  country: yup.string().required('Required'),
-  cardNumber: yup.string()
-    .required('Required')
-    .matches(/^\d{16}$/, 'Must be 16 digits'),
-  expDate: yup.string()
-    .required('Required')
-    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, 'MM/YY format'),
-  cvc: yup.string()
-    .required('Required')
-    .matches(/^\d{3}$/, 'Must be 3 digits')
+  firstName: yup.string().required("Required"),
+  lastName: yup.string().required("Required"),
+  email: yup.string().email("Invalid email").required("Required"),
+  address: yup.string().required("Required"),
+  city: yup.string().required("Required"),
+  country: yup.string().required("Required"),
+  cardNumber: yup
+    .string()
+    .required("Required")
+    .matches(/^\d{16}$/, "Must be 16 digits"),
+  expDate: yup
+    .string()
+    .required("Required")
+    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "MM/YY format"),
+  cvc: yup
+    .string()
+    .required("Required")
+    .matches(/^\d{3}$/, "Must be 3 digits"),
 });
 
 const CheckoutForm = ({ cartItems, total }) => {
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      address: '',
-      city: '',
-      country: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      city: "",
+      country: "",
       saveInfo: false,
-      cardNumber: '',
-      expDate: '',
-      cvc: ''
+      cardNumber: "",
+      expDate: "",
+      cvc: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // Handle payment processing here
-      console.log('Submitting:', values);
-      alert('Order placed successfully!');
-    }
+      console.log("Submitting:", values);
+      alert("Order placed successfully!");
+    },
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} className="checkoutForm">
       <Grid container spacing={4}>
-        {/* Shipping Information */}
         <Grid item xs={12} md={7}>
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <LocalShipping sx={{ mr: 1 }} /> Shipping Information
+          <Box className="sectionBox">
+            <Typography variant="h5" className="sectionHeading">
+              <LocalShipping className="sectionIcon" /> Shipping Information
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -73,8 +75,12 @@ const CheckoutForm = ({ cartItems, total }) => {
                   name="firstName"
                   value={formik.values.firstName}
                   onChange={formik.handleChange}
-                  error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-                  helperText={formik.touched.firstName && formik.errors.firstName}
+                  error={
+                    formik.touched.firstName && Boolean(formik.errors.firstName)
+                  }
+                  helperText={
+                    formik.touched.firstName && formik.errors.firstName
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -84,7 +90,9 @@ const CheckoutForm = ({ cartItems, total }) => {
                   name="lastName"
                   value={formik.values.lastName}
                   onChange={formik.handleChange}
-                  error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+                  error={
+                    formik.touched.lastName && Boolean(formik.errors.lastName)
+                  }
                   helperText={formik.touched.lastName && formik.errors.lastName}
                 />
               </Grid>
@@ -107,7 +115,9 @@ const CheckoutForm = ({ cartItems, total }) => {
                   name="address"
                   value={formik.values.address}
                   onChange={formik.handleChange}
-                  error={formik.touched.address && Boolean(formik.errors.address)}
+                  error={
+                    formik.touched.address && Boolean(formik.errors.address)
+                  }
                   helperText={formik.touched.address && formik.errors.address}
                 />
               </Grid>
@@ -129,23 +139,30 @@ const CheckoutForm = ({ cartItems, total }) => {
                   name="country"
                   value={formik.values.country}
                   onChange={formik.handleChange}
-                  error={formik.touched.country && Boolean(formik.errors.country)}
+                  error={
+                    formik.touched.country && Boolean(formik.errors.country)
+                  }
                   helperText={formik.touched.country && formik.errors.country}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox checked={formik.values.saveInfo} onChange={formik.handleChange} name="saveInfo" />}
+                  control={
+                    <Checkbox
+                      checked={formik.values.saveInfo}
+                      onChange={formik.handleChange}
+                      name="saveInfo"
+                    />
+                  }
                   label="Save shipping information for next time"
                 />
               </Grid>
             </Grid>
           </Box>
 
-          {/* Payment Information */}
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h5" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <CreditCard sx={{ mr: 1 }} /> Payment Details
+          <Box className="sectionBox">
+            <Typography variant="h5" className="sectionHeading">
+              <CreditCard className="sectionIcon" /> Payment Details
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -156,8 +173,13 @@ const CheckoutForm = ({ cartItems, total }) => {
                   placeholder="4242 4242 4242 4242"
                   value={formik.values.cardNumber}
                   onChange={formik.handleChange}
-                  error={formik.touched.cardNumber && Boolean(formik.errors.cardNumber)}
-                  helperText={formik.touched.cardNumber && formik.errors.cardNumber}
+                  error={
+                    formik.touched.cardNumber &&
+                    Boolean(formik.errors.cardNumber)
+                  }
+                  helperText={
+                    formik.touched.cardNumber && formik.errors.cardNumber
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -168,7 +190,9 @@ const CheckoutForm = ({ cartItems, total }) => {
                   placeholder="12/24"
                   value={formik.values.expDate}
                   onChange={formik.handleChange}
-                  error={formik.touched.expDate && Boolean(formik.errors.expDate)}
+                  error={
+                    formik.touched.expDate && Boolean(formik.errors.expDate)
+                  }
                   helperText={formik.touched.expDate && formik.errors.expDate}
                 />
               </Grid>
@@ -188,41 +212,42 @@ const CheckoutForm = ({ cartItems, total }) => {
           </Box>
         </Grid>
 
-        {/* Order Summary */}
         <Grid item xs={12} md={5}>
-          <Card variant="outlined">
+          <Card className="orderSummaryCard">
             <CardContent>
-              <Typography variant="h5" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-                <Person sx={{ mr: 1 }} /> Order Summary
+              <Typography variant="h5" className="sectionHeading">
+                <Person className="sectionIcon" /> Order Summary
               </Typography>
               <Divider sx={{ my: 2 }} />
 
               {cartItems.map((item) => (
-                <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                <Box key={item.id} className="summaryItem">
                   <Typography variant="body1">
                     {item.title} x{item.quantity}
                   </Typography>
-                  <Typography variant="body1">£{(item.price * item.quantity).toFixed(2)}</Typography>
+                  <Typography variant="body1">
+                    £{(item.price * item.quantity).toFixed(2)}
+                  </Typography>
                 </Box>
               ))}
 
               <Divider sx={{ my: 2 }} />
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+              <Box className="summaryItem">
                 <Typography variant="body1">Subtotal</Typography>
                 <Typography variant="body1">£{total.toFixed(2)}</Typography>
               </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+              <Box className="summaryItem">
                 <Typography variant="body1">Shipping</Typography>
                 <Typography variant="body1">£0.00</Typography>
               </Box>
 
               <Divider sx={{ my: 2 }} />
 
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Box className="summaryItem">
                 <Typography variant="h6">Total</Typography>
                 <Typography variant="h6" color="primary">
-                  £{(total).toFixed(2)}
+                  £{total.toFixed(2)}
                 </Typography>
               </Box>
 
@@ -231,7 +256,7 @@ const CheckoutForm = ({ cartItems, total }) => {
                 variant="contained"
                 size="large"
                 type="submit"
-                sx={{ mt: 3, py: 1.5 }}
+                className="placeOrderBtn"
               >
                 Place Order
               </Button>

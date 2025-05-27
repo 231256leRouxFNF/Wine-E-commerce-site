@@ -1,0 +1,69 @@
+.loginContainer {
+    min-height: 80vh;
+    padding: 64px 0;
+}
+
+.loginBox {
+    padding: 32px;
+    border-radius: 16px;
+    background-color: #FFFEFC;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.loginTitle {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #1c1c1c;
+    text-align: center;
+}
+
+.loginField .MuiInputBase-input,
+.loginField .MuiInputLabel-root {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.loginButton {
+    margin-top: 24px;
+    padding: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: none;
+    background-color: #900639;
+    border-radius: 999px;
+}
+
+.loginButton:hover {
+    background-color: #6d002e;
+}
+
+.forgotBox,
+.createBox {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.forgotLink {
+    color: #777;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+.forgotLink:hover {
+    color: #900639;
+}
+
+.createText {
+    color: #1c1c1c;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.createLink {
+    font-weight: 600;
+    color: #900639;
+    text-decoration: none;
+}
+
+.createLink:hover {
+    text-decoration: underline;
+}
