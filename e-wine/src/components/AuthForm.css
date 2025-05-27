@@ -1,0 +1,100 @@
+/* AuthForm.css */
+
+.authForm {
+    padding: 2rem;
+    margin-top: 3rem;
+    background-color: #FFFEFC;
+    border-radius: 24px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.authHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.authIcon {
+    font-size: 40px;
+    color: #900639;
+}
+
+.authTitle {
+    margin-top: 0.5rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+.authInput {
+    margin-bottom: 1.5rem;
+}
+
+.authInput label,
+.authInput input {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.authSubheading {
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #900639;
+    text-align: center;
+}
+
+.authGrid {
+    margin-bottom: 1.5rem;
+}
+
+.authLabelBtn {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    transition: border 0.2s ease-in-out;
+}
+
+.authLabelBtn.active {
+    border: 2px solid #900639;
+    opacity: 0.5;
+}
+
+.authLabelImg {
+    width: 100%;
+    height: 100px;
+}
+
+.clearBtn {
+    margin-bottom: 1.25rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #900639;
+    border-color: #900639;
+}
+
+.clearBtn:hover {
+    background-color: #90063910;
+    border-color: #900639;
+}
+
+.submitBtn {
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: none;
+    background-color: #900639;
+}
+
+.submitBtn:hover {
+    background-color: #6d002e;
+}
+
+.authFooter {
+    font-family: 'Montserrat', sans-serif;
+    color: #1c1c1c;
+    margin-top: 1rem;
+}
+
+.errorMsg {
+    margin-bottom: 1rem;
+}
