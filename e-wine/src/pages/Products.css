@@ -1,0 +1,42 @@
+.grid-wrapper {
+    max-width: 100%;
+    padding: 2rem 60px;
+    box-sizing: border-box;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Ensure each card takes up just under 25% of the row with gap compensation */
+.product-card {
+    flex: 1 1 calc((100% - 45px) / 4);
+    /* 3 x 15px gaps = 45px */
+    max-width: calc((100% - 45px) / 4);
+}
+
+/* ✅ Responsive Breakpoints */
+
+@media (max-width: 1400px) {
+    .product-card {
+        flex: 1 1 calc((100% - 30px) / 3);
+        max-width: calc((100% - 30px) / 3);
+    }
+}
+
+@media (max-width: 1000px) {
+    .product-card {
+        flex: 1 1 calc((100% - 15px) / 2);
+        max-width: calc((100% - 15px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    .product-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}

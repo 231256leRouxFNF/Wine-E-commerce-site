@@ -9,7 +9,6 @@
   color: #1c1c1c;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease-in-out;
-  padding: 0;
   overflow: hidden;
 }
 
@@ -114,7 +113,6 @@
   font-weight: 500;
   font-size: 13px;
   color: #900639;
-  /* margin-top: 0.8rem; */
   margin-bottom: 0.8rem;
 }
 
@@ -191,4 +189,18 @@
 
 .product-link:hover {
   text-decoration: underline;
+}
+
+.grid-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
 }
