@@ -21,7 +21,6 @@ router.post("/register", async (req, res) => {
 
     // Save the new user
     const newUser = new User({
-      name,
       email,
       password: hashedPassword,
       cardSequence
@@ -43,18 +42,18 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
-      return res.status(401).json({ message: "Invalid credentials" });
+    //const isPasswordValid = await bcrypt.compare(password, user.password);
+    //if (!isPasswordValid)
+      //return res.status(401).json({ message: "Invalid credentials" });
 
-    const isCardMatch =
-      Array.isArray(cardSequence) &&
-      Array.isArray(user.cardSequence) &&
-      cardSequence.length === user.cardSequence.length &&
-      cardSequence.every((card, i) => card === user.cardSequence[i]);
+    //const isCardMatch =
+      //Array.isArray(cardSequence) &&
+      //Array.isArray(user.cardSequence) &&
+      //cardSequence.length === user.cardSequence.length &&
+      //cardSequence.every((card, i) => card === user.cardSequence[i]);
 
-    if (!isCardMatch)
-      return res.status(401).json({ message: "Invalid card sequence" });
+    //if (!isCardMatch)
+      //eturn res.status(401).json({ message: "Invalid card sequence" });
 
     res.status(200).json({ message: "Login successful" });
   } catch (err) {
