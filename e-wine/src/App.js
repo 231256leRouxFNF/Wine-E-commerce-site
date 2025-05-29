@@ -12,7 +12,8 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import AddProduct from "./pages/AddProduct";
-import About from "./pages/About"; // ✅ Confirmed import
+import About from "./pages/About";
+import Offerings from "./components/Offerings";
 
 import theme from "./theme";
 
@@ -25,11 +26,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/about" element={<About />} />{" "}
+          <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/offerings" element={<Offerings />} />
         </Routes>
       </Router>
     </ThemeProvider>

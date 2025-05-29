@@ -1,5 +1,6 @@
 import React from "react";
 import AboutHero from "../components/AboutHero";
+import Offerings from "../components/Offerings";
 import "./About.css";
 
 const About = () => {
@@ -33,6 +34,8 @@ const About = () => {
           </p>
         </div>
       </section>
+
+      <Offerings />
     </div>
   );
 };
