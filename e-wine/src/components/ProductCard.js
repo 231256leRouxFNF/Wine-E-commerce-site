@@ -1,122 +1,67 @@
-import React from "react";
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  Chip,
-  Box,
-} from "@mui/material";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
+  const [liked, setLiked] = useState(false);
+
+  const validTags = Array.isArray(product.tag)
+    ? product.tag.filter((tag) => tag && tag.trim() !== "")
+    : [];
+
   return (
-    <Card
-      sx={{
-        maxWidth: 320,
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        borderRadius: "16px",
-        backgroundColor: "#FFFEFC",
-        color: "#1c1c1c",
-        boxShadow: "0 6px 20px rgba(0,0,0,0.05)",
-        transition: "transform 0.3s ease-in-out",
-        "&:hover": {
-          transform: "translateY(-6px)",
-        },
-      }}
-    >
-      <CardMedia
-        component="img"
-        height="200"
-        image={product.image}
-        alt={product.title}
-        sx={{
-          objectFit: "cover",
-          borderTopLeftRadius: "16px",
-          borderTopRightRadius: "16px",
-        }}
-      />
-
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "Playfair Display, serif",
-            fontWeight: 700,
-            fontSize: "20px",
-            mb: 1,
-          }}
+    <div className="product-card">
+      <div className="product-image-container">
+        <img src={product.image} alt={product.title} className="product-img" />
+        <button
+          className="wishlist-button-top"
+          aria-label="Add to Wishlist"
+          onClick={() => setLiked(!liked)}
         >
-          {product.title}
-        </Typography>
+          {liked ? <AiFillHeart /> : <AiOutlineHeart />}
+        </button>
+        {validTags.length > 0 && (
+          <div className="product-badges">
+            {validTags.slice(0, 2).map((tag, index) => (
+              <span key={index} className="product-badge">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
 
-        <Typography
-          variant="body2"
-          sx={{
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: "14px",
-            color: "#555",
-            mb: 2,
-          }}
-        >
+      <div className="product-content">
+        <h3 className="product-title">{product.title}</h3>
+        <div className="product-price">R{product.price?.toFixed(2)}</div>
+        <div className="product-type">{product.type}</div>
+        <p className="product-description">
           {product.description?.substring(0, 100)}...
-        </Typography>
+        </p>
+        <p className="product-meta">
+          <strong>Varietal:</strong> {product.variety}
+        </p>
+        <p className="product-meta">
+          <strong>Region:</strong> {product.region}
+        </p>
+        {product.style?.length > 0 && (
+          <p className="product-meta">
+            <strong>Style:</strong> {product.style.join(", ")}
+          </p>
+        )}
+      </div>
 
-        <Chip
-          label={`R${product.price.toFixed(2)}`}
-          variant="outlined"
-          sx={{
-            fontWeight: 600,
-            fontSize: "0.85rem",
-            fontFamily: "Montserrat, sans-serif",
-            px: 1.5,
-            py: 0.5,
-            color: "#900639",
-            borderColor: "#900639",
-            backgroundColor: "#ffffff",
-          }}
-        />
-      </CardContent>
-
-      <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
-        <Button
-          size="small"
-          component={Link}
-          to={`/products/${product.id}`}
-          sx={{
-            color: "#900639",
-            fontWeight: 500,
-            fontFamily: "Montserrat, sans-serif",
-            textTransform: "none",
-          }}
+      <div className="product-actions">
+        <Link
+          to={`/products/${product.id || product._id}`}
+          className="product-link"
         >
           View Details
-        </Button>
-
-        <Button
-          size="small"
-          variant="contained"
-          sx={{
-            backgroundColor: "#900639",
-            fontFamily: "Montserrat, sans-serif",
-            fontWeight: 600,
-            textTransform: "none",
-            borderRadius: "999px",
-            px: 3,
-            "&:hover": {
-              backgroundColor: "#600022",
-            },
-          }}
-        >
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+        </Link>
+        <button className="product-button">Add to Cart</button>
+      </div>
+    </div>
   );
 };
 
