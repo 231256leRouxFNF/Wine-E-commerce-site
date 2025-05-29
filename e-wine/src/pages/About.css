@@ -1,0 +1,30 @@
+.aboutContent {
+    padding: 80px 60px;
+    background-color: #fffefc;
+    font-family: 'Montserrat', sans-serif;
+    color: #1c1c1c;
+}
+
+.aboutTextWrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.aboutTextWrapper h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #900639;
+    margin-bottom: 10px;
+}
+
+.aboutTextWrapper p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #1c1c1c;
+    margin: 0;
+}
