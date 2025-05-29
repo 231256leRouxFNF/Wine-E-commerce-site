@@ -1,4 +1,3 @@
-// Filters.js
 import React, { useState } from "react";
 import "./Filters.css";
 
@@ -80,13 +79,21 @@ const Filters = ({ onFilterChange }) => {
     });
   };
 
+  const handleReset = () => {
+    setSelectedType("");
+    setSelectedColor("");
+    setSelectedRegion("");
+    onFilterChange({ type: "", color: "", region: "" });
+  };
+
   return (
     <div className="filters-bar">
       <div className="filters-row">
         <div className="filter-group">
-          <label htmlFor="type">Type</label>
-          <select id="type" value={selectedType} onChange={handleTypeChange}>
-            <option value="">All</option>
+          <select value={selectedType} onChange={handleTypeChange}>
+            <option value="" disabled hidden>
+              Type
+            </option>
             {wineTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
@@ -96,9 +103,10 @@ const Filters = ({ onFilterChange }) => {
         </div>
 
         <div className="filter-group">
-          <label htmlFor="color">Color</label>
-          <select id="color" value={selectedColor} onChange={handleColorChange}>
-            <option value="">All</option>
+          <select value={selectedColor} onChange={handleColorChange}>
+            <option value="" disabled hidden>
+              Color
+            </option>
             {wineColors.map((color) => (
               <option key={color} value={color}>
                 {color}
@@ -108,13 +116,10 @@ const Filters = ({ onFilterChange }) => {
         </div>
 
         <div className="filter-group">
-          <label htmlFor="region">Region</label>
-          <select
-            id="region"
-            value={selectedRegion}
-            onChange={handleRegionChange}
-          >
-            <option value="">All</option>
+          <select value={selectedRegion} onChange={handleRegionChange}>
+            <option value="" disabled hidden>
+              Region
+            </option>
             {wineRegions.map((region) => (
               <option key={region} value={region}>
                 {region}
@@ -122,6 +127,10 @@ const Filters = ({ onFilterChange }) => {
             ))}
           </select>
         </div>
+
+        <button className="reset-button" onClick={handleReset}>
+          Reset
+        </button>
       </div>
     </div>
   );

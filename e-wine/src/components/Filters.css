@@ -1,8 +1,9 @@
 .filters-bar {
   padding: 0 60px;
-  margin-bottom: 2rem;
   box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .filters-row {
@@ -26,27 +27,45 @@
   margin-bottom: 6px;
 }
 
-/* Dropdown Styling */
+/* Match unified dropdown styling */
 .filter-group select {
   height: 40px;
   padding: 0 12px;
-  border: 2px solid #ff4c4c;
-  border-radius: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
   background-color: #fff;
   font-size: 14px;
-  font-family: 'Quicksand', sans-serif;
-  color: #1b1c3e;
+  font-family: "Montserrat", sans-serif;
+  color: #1c1c1c;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg fill='%23ff4c4c' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23900639' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 14px;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Focus and hover */
 .filter-group select:focus {
+  border-color: #900639;
   outline: none;
-  border-color: #ff4c4c;
-  box-shadow: 0 0 0 3px rgba(255, 76, 76, 0.25);
+  box-shadow: 0 0 0 3px rgba(144, 6, 57, 0.1);
+}
+
+.reset-button {
+  background-color: #900639;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 6px;
+  height: 40px;
+}
+
+.reset-button:hover {
+  background-color: #600022;
 }
