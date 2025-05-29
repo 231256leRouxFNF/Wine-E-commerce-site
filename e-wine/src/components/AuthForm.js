@@ -85,38 +85,45 @@ const AuthForm = ({ mode = "login" }) => {
 
     const hash = await hashSequence(email.toLowerCase(), selectedSequence);
 
-    if (mode === "register") {
-      try {
-        await axios.post("/api/register", {
-          name,
-          email,
-          password,
-        });
-        console.log("✅ Registered successfully");
-      } catch (err) {
-        console.error(
-          "❌ Registration failed:",
-          err.response?.data?.message || err.message
-        );
-      }
-
+  if (mode === "register") {
+    try {
+      await axios.post("/api/register", {
+        name,
+        surname,
+        email,
+        password,
+        labelSequence: selectedSequence,
+      });
+      console.log("✅ Registered successfully");
       setLoading(false);
       window.location.href = "/login";
-    } else {
-      const stored = JSON.parse(localStorage.getItem("labelAuth"));
-      if (
-        !stored ||
-        stored.email !== email.toLowerCase() ||
-        stored.hash !== hash
-      ) {
-        setError("Invalid email or label sequence");
-        setLoading(false);
-        return;
-      }
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
       setLoading(false);
-      window.location.href = "/";
     }
-  };
+} else {
+  try {
+    const res = await axios.post("/api/login", {
+      email
+    });
+    console.log("✅ Login successful:", res.data);
+    setLoading(false);
+
+    // ✅ Move this inside the try block
+    window.location.href = "/";
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+        "Login failed. Please check your credentials."
+    );
+    setLoading(false);
+  }
+}
+  
+};
 
   const validateEmail = (email) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
