@@ -1,10 +1,52 @@
+.filters-bar {
+  padding: 0 60px;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
 .filters-row {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
   align-items: flex-end;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
+  min-width: 180px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1b1c3e;
+  margin-bottom: 6px;
+}
+
+/* Dropdown Styling */
+.filter-group select {
+  height: 40px;
+  padding: 0 12px;
+  border: 2px solid #ff4c4c;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: 'Quicksand', sans-serif;
+  color: #1b1c3e;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23ff4c4c' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus and hover */
+.filter-group select:focus {
+  outline: none;
+  border-color: #ff4c4c;
+  box-shadow: 0 0 0 3px rgba(255, 76, 76, 0.25);
 }
