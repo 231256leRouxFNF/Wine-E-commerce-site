@@ -1,13 +1,13 @@
 import React from "react";
 import AboutHero from "../components/AboutHero";
 import Offerings from "../components/Offerings";
+import Testimonials from "../components/Testimonials"; // ✅ Import the component
 import "./About.css";
 
 const About = () => {
   return (
     <div>
       <AboutHero />
-
       <section className="ourStorySection">
         <div className="aboutTextWrapper">
           <h2>How Pour Decisions Was Uncorked</h2>
@@ -34,8 +34,8 @@ const About = () => {
           </p>
         </div>
       </section>
-
       <Offerings />
+      <Testimonials /> {/* ✅ Added Testimonials at the bottom */}
     </div>
   );
 };

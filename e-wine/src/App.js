@@ -14,6 +14,7 @@ import Cart from "./pages/Cart";
 import AddProduct from "./pages/AddProduct";
 import About from "./pages/About";
 import Offerings from "./components/Offerings";
+import Testimonials from "./components/Testimonials";
 
 import theme from "./theme";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/offerings" element={<Offerings />} />
+          <Route path="/testimonials" element={<Testimonials />} />{" "}
         </Routes>
       </Router>
     </ThemeProvider>

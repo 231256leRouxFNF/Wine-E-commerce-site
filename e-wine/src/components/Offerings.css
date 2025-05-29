@@ -29,21 +29,17 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     padding: 40px 30px;
     width: 300px;
-    transition: all 0.35s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: fadeInUp 1.0s ease forwards;
-    opacity: 0;
-    cursor: pointer;
-    -webkit-animation: fadeInUp 1.0s ease forwards;
-}
-
-.offeringCard {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.5s ease,
+        opacity 0.6s ease;
     transition-delay: var(--delay, 0s);
+    will-change: transform, box-shadow, opacity;
+    cursor: pointer;
 }
 
 .offeringCard.fadeIn {
@@ -53,11 +49,7 @@
 
 .offeringCard:hover {
     transform: scale(1.08);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
-    -webkit-transform: scale(1.08);
-    -moz-transform: scale(1.08);
-    -ms-transform: scale(1.08);
-    -o-transform: scale(1.08);
+    box-shadow: 0 20px 32px rgba(0, 0, 0, 0.15);
 }
 
 
