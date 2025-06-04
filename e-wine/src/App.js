@@ -17,6 +17,7 @@ import About from "./pages/About";
 import Offerings from "./components/Offerings";
 import Testimonials from "./components/Testimonials";
 import Favourites from "./pages/Favourites"; 
+import Contact from "./pages/Contact";
 
 import theme from "./theme";
 
@@ -38,7 +39,7 @@ function App() {
           <Route path="/offerings" element={<Offerings />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/favourites" element={<Favourites />} />{" "}
-          {/* ✅ New route */}
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </ThemeProvider>

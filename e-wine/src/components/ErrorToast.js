@@ -1,20 +1,16 @@
-// src/components/ErrorToast.js
 import React from "react";
 import "./ErrorToast.css";
 
 const ErrorToast = ({ message, onClose }) => {
   return (
-    <div className="error-toast">
-      <div className="toast-header">
-        <div>
-          <h4 className="toast-title">Whoops O'Clock</h4>
-          <p className="toast-subtitle">Pour decisions were made...</p>
-        </div>
+    <div className="toast-overlay">
+      <div className="error-toast">
+        <button className="close-toast" onClick={onClose}>
+          &times;
+        </button>
+        <h3>Oops, Pour Decisions were made...</h3>
+        <span>{message}</span>
       </div>
-      <p className="toast-message">{message || "Something went wrong."}</p>
-      <button onClick={onClose} className="toast-close">
-        Okay
-      </button>
     </div>
   );
 };
