@@ -13,10 +13,14 @@ import {
   Button,
 } from "@mui/material";
 import { ShoppingCart, Menu, Add as AddIcon } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import Favourites from "./../pages/Favourites"; // ✅ Import Favourites page
 
 const Navbar = ({ cartItems }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const navigate = useNavigate(); // ✅ Add this line
 
   const navLinks = [
     { title: "Home", path: "/" },
@@ -143,9 +147,36 @@ const Navbar = ({ cartItems }) => {
           <IconButton
             component={Link}
             to="/add-product"
-            sx={{ color: "#900639" }}
+            sx={{
+              color: "#900639",
+              transition: "transform 0.2s ease",
+              "&:hover": {
+                transform: "scale(1.2)",
+              },
+            }}
           >
             <AddIcon />
+          </IconButton>
+
+          {/* Heart Icon */}
+          <IconButton
+            onClick={() => {
+              setLiked(!liked);
+              navigate("/favourites");
+            }}
+            sx={{
+              color: liked ? "#900639" : "#900639",
+              fontSize: "22px",
+              padding: "4px",
+              transition: "transform 0.2s ease",
+              "&:hover": {
+                transform: "scale(1.2)",
+                color: "#600022",
+              },
+            }}
+            aria-label="wishlist"
+          >
+            {liked ? <AiFillHeart /> : <AiOutlineHeart />}
           </IconButton>
 
           {/* Cart Icon */}

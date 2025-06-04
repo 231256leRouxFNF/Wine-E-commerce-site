@@ -18,7 +18,7 @@
 
 .overlapWrapper {
     background-color: #ffffff;
-    width: 1434px;
+    width: 1600px;
     height: 3224px;
     overflow: hidden;
 }
@@ -39,17 +39,18 @@
     overflow: hidden;
 }
 
+/* heading "pour decisions" */
 .topPick {
     font-family: "Playfair Display", serif;
     font-weight: 700;
-    font-size: 148px;
+    font-size: 158px;
     color: #8f0539;
     line-height: 90px;
     padding-left: 200px;
     padding-top: 70px;
     padding-bottom: 40px;
     overflow: hidden;
-    text-align: left;
+    text-align: center;
 }
 
 .beginHere {
@@ -116,14 +117,14 @@
 
 .description {
     position: absolute;
-    width: 481px;
+    width: 500px;
     top: 223px;
     left: 6px;
-    font-family: "Didact Gothic", sans-serif;
-    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
     font-size: 18px;
     line-height: 28px;
-    color: #000000;
+    color: #1b1c3e;
     overflow: hidden;
 }
 
@@ -184,7 +185,7 @@
     width: 53px;
     top: 139px;
     left: 2px;
-    font-family: "Didact Gothic", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 33.9px;
     color: #000000;

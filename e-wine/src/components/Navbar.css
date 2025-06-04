@@ -105,3 +105,16 @@
         right: 20px;
     }
 }
+
+.heartIcon {
+    color: #900639;
+    font-size: 22px;
+    padding: 4px;
+    border-radius: 50%;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.heartIcon:hover {
+    transform: scale(1.2);
+    color: #600022;
+}

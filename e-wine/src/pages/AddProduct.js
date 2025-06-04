@@ -1,3 +1,4 @@
+// AddProduct.js
 import React, { useState } from "react";
 import axios from "axios";
 import ErrorToast from "../components/ErrorToast";
@@ -128,6 +129,7 @@ const AddProduct = () => {
 
         <label>Type:</label>
         <select
+          className="universal-select"
           name="type"
           value={product.type}
           onChange={handleChange}
@@ -151,6 +153,7 @@ const AddProduct = () => {
 
         <label>Varietal:</label>
         <select
+          className="universal-select"
           name="variety"
           value={product.variety}
           onChange={handleChange}
@@ -166,6 +169,7 @@ const AddProduct = () => {
 
         <label>Region:</label>
         <select
+          className="universal-select"
           name="region"
           value={product.region}
           onChange={handleChange}

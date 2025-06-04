@@ -15,13 +15,9 @@ const Hero = () => {
       <div className="heroContent">
         <h3 className="subtitle">Compare, Sip & Discover</h3>
         <h1 className="title">The Perfect Wine</h1>
-        <p className="description">
-          It’s time to explore top-rated wines,
-          compare flavors, and track price trends—all in one place.
-        </p>
 
         <Link to="/compare" className="button">
-          Start Comparing
+          View Selection
         </Link>
       </div>
     </section>
