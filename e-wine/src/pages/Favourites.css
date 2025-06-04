@@ -1,0 +1,24 @@
+.favouritesContainer {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #fffcf8;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.favouritesHeading {
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #900639;
+    margin-bottom: 20px;
+}
+
+.favouritesText {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: #333;
+}
