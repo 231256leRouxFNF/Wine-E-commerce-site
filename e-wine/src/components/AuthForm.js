@@ -112,9 +112,13 @@ const AuthForm = ({ mode = "login" }) => {
           labelSequence: selectedSequence,
         });
         console.log("✅ Login successful:", res.data);
-        setLoading(false);
 
-        // ✅ Move this inside the try block
+        // Save to localStorage
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        // Redirect
+        setLoading(false);
         window.location.href = "/";
       } catch (err) {
         setError(

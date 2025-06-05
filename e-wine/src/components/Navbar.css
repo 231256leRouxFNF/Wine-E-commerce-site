@@ -1,120 +1,141 @@
-.navbar {
-    width: 100%;
-    height: 80px;
-    background-color: #FFFEFC;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 120px;
-    position: relative;
-    z-index: 100;
-    color: #900639;
+/* AppBar */
+.navbar-appbar {
+  background-color: #FFFEFC !important;
+  color: #1c1c1c !important;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
-.logo {
-    width: 113px;
-    height: auto;
-    object-fit: contain;
+/* Toolbar */
+.navbar-toolbar {
+  width: 100%;
+  justify-content: space-between;
 }
 
-.navLinks {
-    display: flex;
-    gap: 24px;
+/* Logo */
+.navbar-logo {
+  font-family: 'Playfair Display';
+  font-weight: 700;
+  text-decoration: none;
+  color: #1c1c1c;
+  padding-left: 24px;
+  font-size: 1.25rem;
 }
 
-.navItem {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    text-decoration: none;
-    color: #900639;
-    transition: color 0.3s;
+/* Nav Links */
+.navbar-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-grow: 1;
 }
 
-.navItem:hover {
-    color: #000000;
+.navbar-link-button {
+  font-family: Montserrat;
+  color: #900639;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: none;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: 2px 10px;
+  height: 36px;
+  min-width: auto;
 }
 
-.hamburger {
+.navbar-link-button:hover {
+  border: 2px solid #900639;
+  background-color: #ffffff;
+}
+
+/* Icons */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 24px;
+}
+
+.navbar-icon-button {
+  color: #900639;
+  transition: transform 0.2s ease;
+}
+
+.navbar-icon-button:hover {
+  transform: scale(1.2);
+}
+
+/* Badge */
+.navbar-cart-badge .MuiBadge-badge {
+  background-color: #900639;
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+/* Login Button */
+.navbar-login-button {
+  font-family: Montserrat;
+  font-weight: 600;
+  text-transform: none;
+  background-color: #900639;
+  border-radius: 999px;
+  padding: 2px 10px;
+  height: 36px;
+  font-size: 0.875rem;
+  color: white;
+}
+
+.navbar-login-button:hover {
+  background-color: #6d002e;
+}
+
+/* Drawer */
+.navbar-drawer {
+  width: 250px;
+  background-color: #FFFEFC;
+  height: 100%;
+}
+
+.navbar-drawer-link {
+  font-family: Montserrat;
+  color: #1c1c1c;
+}
+
+.navbar-drawer-link:hover {
+  color: #900639;
+}
+
+.navbar-drawer-login {
+  font-family: Montserrat;
+  color: #900639;
+  font-weight: 600;
+  border: 2px solid #900639;
+  border-radius: 999px;
+  margin: 16px 16px 0 16px;
+  justify-content: center;
+  height: 36px;
+}
+
+.navbar-drawer-login:hover {
+  background-color: #90063910;
+}
+
+/* Menu Button */
+.navbar-menu-button {
+  display: none;
+  color: #1c1c1c;
+  margin-left: 16px;
+}
+
+@media (max-width: 600px) {
+  .navbar-links {
     display: none;
-    flex-direction: column;
-    cursor: pointer;
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 102;
-}
+  }
 
-.hamburger span {
-    width: 30px;
-    height: 3px;
-    background-color: #900639;
-    margin: 5px 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-@media (max-width: 1024px) {
-    .navbar {
-        padding: 10px 40px;
-    }
-
-    .navLinks {
-        position: absolute;
-        top: 80px;
-        right: 0;
-        background-color: #FFFEFC;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        padding: 20px 0;
-        transform: translateY(-100%);
-        transition: transform 0.3s ease-in-out;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .show {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .navItem {
-        font-size: 20px;
-        padding: 10px 0;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        padding: 10px 20px;
-    }
-
-    .navItem {
-        font-size: 18px;
-    }
-
-    .hamburger {
-        right: 20px;
-    }
-}
-
-.heartIcon {
-    color: #900639;
-    font-size: 22px;
-    padding: 4px;
-    border-radius: 50%;
-    transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.heartIcon:hover {
-    transform: scale(1.2);
-    color: #600022;
+  .navbar-menu-button {
+    display: block;
+  }
 }
