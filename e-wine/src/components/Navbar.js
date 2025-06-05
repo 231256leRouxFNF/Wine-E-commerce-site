@@ -17,6 +17,19 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
+let user = null;
+let isAdmin = false;
+
+try {
+  const stored = localStorage.getItem("user");
+  if (stored) {
+    user = JSON.parse(stored);
+    isAdmin = user.role === "admin";
+  }
+} catch (error) {
+  console.error("Failed to parse user from localStorage:", error);
+}
+
 const Navbar = ({ cartItems }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [liked, setLiked] = useState(false);
@@ -77,9 +90,11 @@ const Navbar = ({ cartItems }) => {
         </Box>
 
         <Box className="navbar-actions">
+          {isAdmin && (
           <IconButton component={Link} to="/add-product" className="navbar-icon-button">
             <AddIcon />
           </IconButton>
+          )}
 
           <IconButton onClick={() => { setLiked(!liked); navigate("/favourites"); }} className="navbar-icon-button">
             {liked ? <AiFillHeart /> : <AiOutlineHeart />}

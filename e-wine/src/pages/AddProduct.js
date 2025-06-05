@@ -1,5 +1,7 @@
 // AddProduct.js
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorToast from "../components/ErrorToast";
 import "./AddProduct.css";
@@ -45,6 +47,16 @@ const varietyOptions = [
 ];
 
 const AddProduct = () => {
+
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || user.role !== "admin") {
+      navigate("/"); // Redirect non-admins to home
+    }
+  }, []);
+
   const [product, setProduct] = useState({
     title: "",
     type: "",

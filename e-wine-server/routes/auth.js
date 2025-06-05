@@ -55,7 +55,15 @@ router.post("/login", async (req, res) => {
     if (!isCardMatch)
       return res.status(401).json({ message: "Invalid card sequence" });
 
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({
+      message: "Login successful",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (err) {
     console.error("❌ Login error:", err);
     res.status(500).json({ message: "Login failed" });

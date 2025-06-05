@@ -114,7 +114,7 @@ const AuthForm = ({ mode = "login" }) => {
           password,
           labelSequence: selectedSequence,
         });
-        console.log("✅ Login successful:", res.data);
+        console.log( res.data);
 
         // Save to localStorage
         localStorage.setItem("token", res.data.token);
