@@ -85,45 +85,46 @@ const AuthForm = ({ mode = "login" }) => {
 
     const hash = await hashSequence(email.toLowerCase(), selectedSequence);
 
-  if (mode === "register") {
-    try {
-      await axios.post("/api/register", {
-        name,
-        surname,
-        email,
-        password,
-        labelSequence: selectedSequence,
-      });
-      console.log("✅ Registered successfully");
-      setLoading(false);
-      window.location.href = "/login";
-    } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          "Registration failed. Please try again."
-      );
-      setLoading(false);
-    }
-} else {
-  try {
-    const res = await axios.post("/api/login", {
-      email
-    });
-    console.log("✅ Login successful:", res.data);
-    setLoading(false);
+    if (mode === "register") {
+      try {
+        await axios.post("/api/register", {
+          name,
+          surname,
+          email,
+          password,
+          labelSequence: selectedSequence,
+        });
+        console.log("✅ Registered successfully");
+        setLoading(false);
+        window.location.href = "/login";
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Registration failed. Please try again."
+        );
+        setLoading(false);
+      }
+    } else {
+      try {
+        const res = await axios.post("/api/login", {
+          email,
+          password,
+          labelSequence: selectedSequence,
+        });
+        console.log("✅ Login successful:", res.data);
+        setLoading(false);
 
-    // ✅ Move this inside the try block
-    window.location.href = "/";
-  } catch (err) {
-    setError(
-      err.response?.data?.message ||
-        "Login failed. Please check your credentials."
-    );
-    setLoading(false);
-  }
-}
-  
-};
+        // ✅ Move this inside the try block
+        window.location.href = "/";
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Login failed. Please check your credentials."
+        );
+        setLoading(false);
+      }
+    }
+  };
 
   const validateEmail = (email) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
