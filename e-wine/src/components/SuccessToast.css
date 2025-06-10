@@ -1,0 +1,88 @@
+.toast-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main Toast */
+.success-toast {
+    position: relative;
+    width: 440px;
+    background-color: #ffeef2;
+    border: 2px solid #900639;
+    border-radius: 16px;
+    padding: 32px 36px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    color: #900639;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    animation: fadeScaleIn 0.4s ease-in-out;
+    z-index: 9999;
+}
+
+/* Heading Style */
+.success-toast h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #900639;
+    font-family: "Playfair Display", serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Paragraph Text */
+.success-toast p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Close Button */
+.success-toast button {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    font-weight: bold;
+    color: #900639;
+    cursor: pointer;
+    padding: 6px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.success-toast button:hover {
+    transform: scale(1.15);
+    color: #600022;
+}
+
+/* Error variant */
+.error-toast {
+    background-color: #900639;
+    color: white;
+    border: none;
+}
+
+/* Animation */
+@keyframes fadeScaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
