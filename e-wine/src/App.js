@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import AgeGate from "./components/AgeGate";
 
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -22,6 +23,12 @@ import Contact from "./pages/Contact";
 import theme from "./theme";
 
 function App() {
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
+
+  if (!ageConfirmed) {
+    return <AgeGate onConfirm={() => setAgeConfirmed(true)} />;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

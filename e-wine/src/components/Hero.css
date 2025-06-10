@@ -135,3 +135,12 @@
         padding: 8px 24px;
     }
 }
+
+.heroSection {
+    transition: opacity 0.4s ease-in-out;
+    opacity: 1;
+}
+
+.heroSection.fadeOut {
+    opacity: 0;
+}
