@@ -1,5 +1,5 @@
 // AddProduct.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ErrorToast from "../components/ErrorToast";
 import "./AddProduct.css";
@@ -59,6 +59,26 @@ const AddProduct = () => {
 
   const [error, setError] = useState(null);
 
+  // State for listing wines and showing loading state
+  const [wines, setWines] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch all wines on mount
+  useEffect(() => {
+    fetchWines();
+  }, []);
+
+  const fetchWines = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("/api/products");
+      setWines(res.data);
+    } catch (err) {
+      setError("Could not fetch wines.");
+    }
+    setLoading(false);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prev) => ({
@@ -105,12 +125,23 @@ const AddProduct = () => {
         image: "",
       });
       setError(null);
+      fetchWines(); // Refresh list after adding
     } catch (err) {
       console.error(
         "❌ Error adding product:",
         err.response?.data || err.message
       );
       setError("Could not add wine.");
+    }
+  };
+
+  const handleDelete = async (wineId) => {
+    if (!window.confirm("Are you sure you want to delete this wine?")) return;
+    try {
+      await axios.delete(`/api/products/${wineId}`);
+      setWines((prev) => prev.filter((w) => w._id !== wineId));
+    } catch (err) {
+      setError("Could not delete wine.");
     }
   };
 
@@ -220,6 +251,38 @@ const AddProduct = () => {
       </form>
 
       {error && <ErrorToast message={error} onClose={() => setError(null)} />}
+
+      <h2 style={{ marginTop: "2rem" }}>All Wines</h2>
+      {loading ? (
+        <p>Loading wines...</p>
+      ) : (
+        <ul className="wine-list-admin">
+          {wines.map((wine) => (
+            <li key={wine._id} className="wine-list-item-admin">
+              <div>
+                <strong>{wine.title}</strong> - R{wine.price}
+                {wine.type && <span> | {wine.type}</span>}
+                {wine.region && <span> | {wine.region}</span>}
+              </div>
+              <button
+                onClick={() => handleDelete(wine._id)}
+                className="delete-wine-btn"
+                style={{
+                  marginLeft: "1em",
+                  color: "#fff",
+                  background: "#900639",
+                  border: "none",
+                  padding: "6px 14px",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

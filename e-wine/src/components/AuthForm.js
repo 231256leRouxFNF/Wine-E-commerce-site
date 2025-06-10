@@ -12,9 +12,11 @@ import {
   Grid,
   IconButton,
   Box,
+  InputAdornment,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import LockResetIcon from "@mui/icons-material/LockReset";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 // Wine bottle SVG illustrations
 import Wine1 from "../assets/WineBottleAuth1.svg";
@@ -51,6 +53,7 @@ const AuthForm = ({ mode = "login" }) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [selectedSequence, setSelectedSequence] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -85,45 +88,44 @@ const AuthForm = ({ mode = "login" }) => {
 
     const hash = await hashSequence(email.toLowerCase(), selectedSequence);
 
-  if (mode === "register") {
-    try {
-      await axios.post("/api/register", {
-        name,
-        surname,
-        email,
-        password,
-        labelSequence: selectedSequence,
-      });
-      console.log("✅ Registered successfully");
-      setLoading(false);
-      window.location.href = "/login";
-    } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          "Registration failed. Please try again."
-      );
-      setLoading(false);
+    if (mode === "register") {
+      try {
+        await axios.post("/api/register", {
+          name,
+          surname,
+          email,
+          password,
+          labelSequence: selectedSequence,
+        });
+        console.log("✅ Registered successfully");
+        setLoading(false);
+        window.location.href = "/login";
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Registration failed. Please try again."
+        );
+        setLoading(false);
+      }
+    } else {
+      try {
+        const res = await axios.post("/api/login", {
+          email,
+          password,
+          labelSequence: selectedSequence,
+        });
+        console.log("✅ Login successful:", res.data);
+        setLoading(false);
+        window.location.href = "/";
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Login failed. Please check your credentials."
+        );
+        setLoading(false);
+      }
     }
-} else {
-  try {
-    const res = await axios.post("/api/login", {
-      email
-    });
-    console.log("✅ Login successful:", res.data);
-    setLoading(false);
-
-    // ✅ Move this inside the try block
-    window.location.href = "/";
-  } catch (err) {
-    setError(
-      err.response?.data?.message ||
-        "Login failed. Please check your credentials."
-    );
-    setLoading(false);
-  }
-}
-  
-};
+  };
 
   const validateEmail = (email) => {
     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -176,21 +178,37 @@ const AuthForm = ({ mode = "login" }) => {
                 onChange={(e) => setSurname(e.target.value)}
                 sx={{ mb: 2 }}
               />
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                sx={{ mb: 3 }}
-              />
             </>
+          )}
+
+          {(mode === "register" || mode === "login") && (
+            <TextField
+              fullWidth
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{ mb: 3 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                      aria-label="toggle password visibility"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
           )}
 
           <Typography variant="h6" sx={{ mb: 2 }}>
             {mode === "register"
-              ? "Create your label sequence (3-5 labels)"
+              ? "Create your label sequence (3–5 labels)"
               : "Select your label sequence"}
           </Typography>
 
@@ -265,8 +283,8 @@ const AuthForm = ({ mode = "login" }) => {
             {loading
               ? "Please wait..."
               : mode === "register"
-                ? "Create Account"
-                : "Sign In"}
+              ? "Create Account"
+              : "Sign In"}
           </Button>
 
           <Typography variant="body2" align="center">
