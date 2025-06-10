@@ -73,14 +73,13 @@ const LoginForm = () => {
               label="Password"
               type={showPassword ? "text" : "password"}
               variant="outlined"
-              margin="normal"
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
               error={!!errors.password}
               helperText={errors.password}
-              className="loginField"
+              sx={{ mb: 3 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
