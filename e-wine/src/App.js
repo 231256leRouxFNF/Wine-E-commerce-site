@@ -1,10 +1,10 @@
-// App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -16,7 +16,7 @@ import AddProduct from "./pages/AddProduct";
 import About from "./pages/About";
 import Offerings from "./components/Offerings";
 import Testimonials from "./components/Testimonials";
-import Favourites from "./pages/Favourites"; 
+import Favourites from "./pages/Favourites";
 import Contact from "./pages/Contact";
 
 import theme from "./theme";
@@ -38,9 +38,10 @@ function App() {
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/offerings" element={<Offerings />} />
           <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/favourites" element={<Favourites />} />{" "}
+          <Route path="/favourites" element={<Favourites />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );
