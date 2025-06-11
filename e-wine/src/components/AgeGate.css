@@ -1,0 +1,75 @@
+.age-gate-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.age-gate-box {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.4s ease;
+}
+
+.age-gate-logo {
+    width: 160px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.age-gate-box h2 {
+    font-family: "Playfair Display", serif;
+    color: #900639;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.age-gate-box p {
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 28px;
+}
+
+.age-gate-box button:hover {
+    background-color: #600022;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.age-gate-box button {
+    font-family: "Montserrat", sans-serif;
+    background-color: #900639;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.age-gate-box button:hover {
+    background-color: #600022;
+    transform: scale(1.05);
+}

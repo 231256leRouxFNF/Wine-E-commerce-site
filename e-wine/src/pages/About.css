@@ -1,4 +1,5 @@
-.aboutContent {
+/* === About Story Section === */
+.ourStorySection {
     padding: 80px 60px;
     background-color: #fffefc;
     font-family: 'Montserrat', sans-serif;
@@ -13,18 +14,190 @@
     gap: 40px;
 }
 
-.aboutTextWrapper h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 36px;
+.aboutHeader {
+    text-align: center;
+}
+
+.aboutHeader h4 {
+    font-size: 14px;
+    text-transform: uppercase;
     color: #900639;
-    margin-bottom: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.aboutHeader h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #1c1c1c;
+    margin-bottom: 16px;
 }
 
 .aboutTextWrapper p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.7;
     color: #1c1c1c;
     margin: 0;
+}
+
+/* === Featured Wines Section === */
+.featuredWinesSection {
+    padding: 60px 0;
+    background-color: #fffefc;
+    font-family: "Montserrat", sans-serif;
+    color: #1c1c1c;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.featuredHeader {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.featuredHeader h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #900639;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.featuredHeader h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #1c1c1c;
+    margin-bottom: 24px;
+}
+
+/* === Why Choose Us Section === */
+.whyChooseSection {
+    background-color: #fffefc;
+    font-family: "Montserrat", sans-serif;
+    color: #4D0026;
+}
+
+.whyChooseGrid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.whyChooseImage {
+    flex: 1;
+    min-height: 680px;
+    background-image: url("../assets/Illustration2.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.whyChooseContent {
+    flex: 1;
+    padding: 60px -20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #EAC6CE;
+}
+
+.whyChooseContent .aboutHeader {
+    text-align: left;
+    margin-bottom: 24px;
+    margin-left: 40px;
+}
+
+.whyChooseContent .aboutHeader h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #900639;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+        margin-left: 40px;
+}
+
+.whyChooseContent .aboutHeader h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #900639;
+    margin: 0;
+}
+
+.whyChooseDescription {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #900639;
+    margin: 24px 0 40px 0;
+    max-width: 600px;
+        margin-left: 40px;
+}
+
+.whyChooseButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+        margin-left: 40px;
+}
+
+.whyChoosePrimary,
+.whyChooseSecondary {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.whyChoosePrimary {
+    background-color: #900639;
+    color: #fff;
+}
+
+.whyChoosePrimary:hover {
+    background-color: #600022;
+}
+
+.whyChooseSecondary {
+    background-color: transparent;
+    color: #900639;
+    border: 2px solid #900639;
+}
+
+.whyChooseSecondary:hover {
+    background-color: #900639;
+    color: #fff;
+}
+
+.offeringsSection {
+    background-color: #fffefc;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    color: #1c1c1c;
+}
+
+.featuredCardGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* Exactly 4 columns */
+    gap: 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 0;
+    justify-items: center;
 }

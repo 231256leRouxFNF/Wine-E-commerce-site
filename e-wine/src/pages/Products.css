@@ -40,3 +40,39 @@
         max-width: 100%;
     }
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #900639;
+    background-color: transparent;
+    color: #900639;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #900639;
+    color: #fff;
+}
+
+.pagination button.active {
+    background-color: #900639;
+    color: #fff;
+    border: 2px solid #900639;
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}

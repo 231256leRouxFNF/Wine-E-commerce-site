@@ -1,63 +1,66 @@
-.heroSection {
+/* src/components/Hero.css */
+.homeHeroSection {
     width: 100%;
-    min-height: 641px;
+    height: 100vh;
+    background-color: #61002f;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 5%;
     overflow: hidden;
-    text-align: center;
-    padding: 0;
-    margin-top: -2px;
-    box-sizing: border-box;
+    transition: opacity 0.4s ease-in-out;
 }
 
-.heroBackground {
+.homeHeroSection.fadeOut {
+    opacity: 0;
+}
+
+.heroBannerBackground {
     position: absolute;
     top: 0;
-    left: 0;
+    right: -40px;
     width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    transform: scale(1.05);
-    transition: all 0.3s ease-in-out;
+    height: 120%;
+    object-fit: cover;
+    object-position: right center;
+    z-index: 0;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Content */
-.heroContent {
-    position: relative;
-    max-width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+.heroOverlay {
+    z-index: 2;
+    max-width: 1000px;
     color: #ffffff;
-    text-align: center;
 }
 
-/* Subtitle */
-.subtitle {
+.HeroTitle1 {
     font-family: "Playfair Display", serif;
-    font-size: 32px;
+    font-size: 96px;
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: -15px;
-}
-
-/* Title */
-.title {
-    font-family: "Playfair Display", serif;
-    font-size: 95px;
-    font-weight: 700;
-    line-height: 120px;
-    color: #ffffff;
     white-space: nowrap;
+    margin-top: -30px;
 }
 
-/* CTA Button */
+.HeroTitle2 {
+    font-family: "Playfair Display", serif;
+    font-size: 120px;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-top: -10px;
+    margin-bottom: 60px;
+}
+
+.HeroSubtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
 .button {
     display: inline-block;
     padding: 12px 32px;
@@ -69,7 +72,6 @@
     color: #900639;
     text-decoration: none;
     border: none;
-    margin-top: 15px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -77,61 +79,4 @@
 .button:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Responsiveness */
-@media (max-width: 1024px) {
-    .heroSection {
-        min-height: 720px;
-    }
-
-    .title {
-        font-size: 48px;
-        line-height: 58px;
-    }
-
-    .subtitle {
-        font-size: 26px;
-    }
-}
-
-@media (max-width: 768px) {
-    .heroSection {
-        min-height: 800px;
-    }
-
-    .title {
-        font-size: 40px;
-        line-height: 50px;
-    }
-
-    .subtitle {
-        font-size: 22px;
-    }
-
-    .button {
-        font-size: 14px;
-        padding: 10px 28px;
-    }
-}
-
-@media (max-width: 480px) {
-    .heroSection {
-        min-height: 880px;
-    }
-
-    .title {
-        font-size: 32px;
-        line-height: 42px;
-        white-space: normal;
-    }
-
-    .subtitle {
-        font-size: 20px;
-    }
-
-    .button {
-        font-size: 13px;
-        padding: 8px 24px;
-    }
 }

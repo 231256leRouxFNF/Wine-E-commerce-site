@@ -15,8 +15,8 @@ const Offerings = () => {
     },
     {
       icon: <ShoppingCartIcon className="muiIcon" />,
-      title: "Smart Comparison",
-      text: "Easily compare by type, price, rating, and region.",
+      title: "Buy Today",
+      text: "No need to wait, purhase your favourites and enjoy overnight delivery.",
     },
     {
       icon: <FavoriteIcon className="muiIcon" />,
@@ -27,7 +27,10 @@ const Offerings = () => {
 
   return (
     <section className="offeringsSection">
-      <h2 className="offeringsTitle">A Cellar Full of Possibilities</h2>
+      <div className="offeringsHeader">
+        <h4>FEATURES</h4>
+        <h2>A Cellar Full of Possibilities</h2>
+      </div>
       <div className="cardContainer">
         {offerings.map((item, index) => (
           <OfferingCard

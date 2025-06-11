@@ -1,10 +1,11 @@
-// App.js
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AgeGate from "./components/AgeGate";
 
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -16,12 +17,20 @@ import AddProduct from "./pages/AddProduct";
 import About from "./pages/About";
 import Offerings from "./components/Offerings";
 import Testimonials from "./components/Testimonials";
-import Favourites from "./pages/Favourites"; 
+import Favourites from "./pages/Favourites";
 import Contact from "./pages/Contact";
+import CheckoutPage from "./pages/CheckoutPage";
+
 
 import theme from "./theme";
 
 function App() {
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
+
+  if (!ageConfirmed) {
+    return <AgeGate onConfirm={() => setAgeConfirmed(true)} />;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -38,9 +47,11 @@ function App() {
           <Route path="/add-product" element={<AddProduct />} />
           <Route path="/offerings" element={<Offerings />} />
           <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/favourites" element={<Favourites />} />{" "}
+          <Route path="/favourites" element={<Favourites />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
+        <Footer />
       </Router>
     </ThemeProvider>
   );
