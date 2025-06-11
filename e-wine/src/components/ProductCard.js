@@ -4,28 +4,48 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
-  const [liked, setLiked] = useState(false);
+  // Use _id or id as unique ID
+  const productId = product._id || product.id;
+
+  // Setup state for liked and added status
+  const [liked, setLiked] = useState(() => {
+    const favs = JSON.parse(localStorage.getItem("favourites")) || [];
+    return favs.some((item) => (item._id || item.id) === productId);
+  });
   const [added, setAdded] = useState(false);
 
-  // Helper to add to cart in localStorage. Replace with your context/Redux if necessary.
-  const addToCart = (product) => {
+  // Add to cart handler
+  const handleAddToCart = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existing = cart.find(
-      (item) => item._id === product._id || item.id === product.id
-    );
+    const existing = cart.find((item) => (item._id || item.id) === productId);
     if (existing) {
       existing.quantity = (existing.quantity || 1) + 1;
     } else {
       cart.push({ ...product, quantity: 1 });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
   };
 
-  const handleAddToCart = () => {
-    addToCart(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500); // Hide confirmation after 1.5s
+  // Favourites handler
+  const handleToggleFavourite = () => {
+    const favs = JSON.parse(localStorage.getItem("favourites")) || [];
+    const exists = favs.find((item) => (item._id || item.id) === productId);
+    let newFavs;
+    if (exists) {
+      newFavs = favs.filter((item) => (item._id || item.id) !== productId);
+      setLiked(false);
+    } else {
+      newFavs = [...favs, product];
+      setLiked(true);
+    }
+    localStorage.setItem("favourites", JSON.stringify(newFavs));
   };
+
+  // Debug: Log cart and favourites on each render
+  // console.log("Cart:", JSON.parse(localStorage.getItem("cart")));
+  // console.log("Favourites:", JSON.parse(localStorage.getItem("favourites")));
 
   const validTags = Array.isArray(product.tag)
     ? product.tag.filter((tag) => tag && tag.trim() !== "")
@@ -37,8 +57,8 @@ const ProductCard = ({ product }) => {
         <img src={product.image} alt={product.title} className="product-img" />
         <button
           className="wishlist-button-top"
-          aria-label="Add to Wishlist"
-          onClick={() => setLiked(!liked)}
+          aria-label="Toggle Favourite"
+          onClick={handleToggleFavourite}
         >
           {liked ? <AiFillHeart /> : <AiOutlineHeart />}
         </button>
@@ -75,7 +95,7 @@ const ProductCard = ({ product }) => {
 
       <div className="product-actions">
         <Link
-          to={`/products/${product.id || product._id}`}
+          to={`/products/${productId}`}
           className="product-link"
         >
           View Details
@@ -85,7 +105,17 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
       {added && (
-        <div className="cart-confirmation" style={{color: '#fff', background: '#900639', padding: '8px', borderRadius: 8, marginTop: 8, textAlign: 'center'}}>
+        <div
+          style={{
+            marginTop: 10,
+            background: "#900639",
+            color: "#fff",
+            borderRadius: 6,
+            padding: 6,
+            textAlign: "center",
+            fontWeight: 600,
+          }}
+        >
           Added to cart!
         </div>
       )}
