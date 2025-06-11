@@ -1,6 +1,6 @@
 import React from "react";
 import "./AboutHero.css";
-import AboutHeroImage from "../assets/AboutHeroImage.jpeg";
+import AboutHeroImage from "../assets/Illustration1.svg";
 
 const AboutHero = () => {
   return (
@@ -10,10 +10,10 @@ const AboutHero = () => {
     >
       <div className="aboutHeroOverlay">
         <h1 className="aboutHeroTitle">About Pour Decisions</h1>
-        <p className="aboutHeroTagline">
+        {/* <p className="aboutHeroTagline">
           Explore wines from across the globe — and add your favourites to our
           collection.
-        </p>
+        </p> */}
       </div>
     </section>
   );

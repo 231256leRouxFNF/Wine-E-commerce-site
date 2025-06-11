@@ -1,0 +1,42 @@
+.database-wines-container {
+    margin-top: 2rem;
+    padding: 16px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.wine-list-admin {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 16px;
+}
+
+.wine-list-item-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fffefc;
+    border: 1px solid #ddd;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    font-size: 15px;
+    color: #1c1c1c;
+}
+
+.delete-wine-btn {
+    background-color: #900639;
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-wine-btn:hover {
+    background-color: #600022;
+}

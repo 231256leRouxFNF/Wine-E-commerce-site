@@ -1,7 +1,7 @@
-// AddProduct.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ErrorToast from "../components/ErrorToast";
+import DatabaseWines from "../components/DatabaseWines";
 import "./AddProduct.css";
 
 const typeOptions = [
@@ -58,26 +58,8 @@ const AddProduct = () => {
   });
 
   const [error, setError] = useState(null);
-
-  // State for listing wines and showing loading state
-  const [wines, setWines] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  // Fetch all wines on mount
-  useEffect(() => {
-    fetchWines();
-  }, []);
-
-  const fetchWines = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get("/api/products");
-      setWines(res.data);
-    } catch (err) {
-      setError("Could not fetch wines.");
-    }
-    setLoading(false);
-  };
+  const [refreshWines, setRefreshWines] = useState(false);
+  const [showWines, setShowWines] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -125,7 +107,7 @@ const AddProduct = () => {
         image: "",
       });
       setError(null);
-      fetchWines(); // Refresh list after adding
+      setRefreshWines((prev) => !prev); // trigger refresh in child
     } catch (err) {
       console.error(
         "❌ Error adding product:",
@@ -135,15 +117,7 @@ const AddProduct = () => {
     }
   };
 
-  const handleDelete = async (wineId) => {
-    if (!window.confirm("Are you sure you want to delete this wine?")) return;
-    try {
-      await axios.delete(`/api/products/${wineId}`);
-      setWines((prev) => prev.filter((w) => w._id !== wineId));
-    } catch (err) {
-      setError("Could not delete wine.");
-    }
-  };
+  const toggleWines = () => setShowWines((prev) => !prev);
 
   return (
     <div className="add-product-container">
@@ -252,37 +226,11 @@ const AddProduct = () => {
 
       {error && <ErrorToast message={error} onClose={() => setError(null)} />}
 
-      <h2 style={{ marginTop: "2rem" }}>All Wines</h2>
-      {loading ? (
-        <p>Loading wines...</p>
-      ) : (
-        <ul className="wine-list-admin">
-          {wines.map((wine) => (
-            <li key={wine._id} className="wine-list-item-admin">
-              <div>
-                <strong>{wine.title}</strong> - R{wine.price}
-                {wine.type && <span> | {wine.type}</span>}
-                {wine.region && <span> | {wine.region}</span>}
-              </div>
-              <button
-                onClick={() => handleDelete(wine._id)}
-                className="delete-wine-btn"
-                style={{
-                  marginLeft: "1em",
-                  color: "#fff",
-                  background: "#900639",
-                  border: "none",
-                  padding: "6px 14px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                }}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <button onClick={toggleWines} className="see-db-button">
+        {showWines ? "Hide Database Wines" : "See Database Wines"}
+      </button>
+
+      {showWines && <DatabaseWines key={refreshWines} />}
     </div>
   );
 };
