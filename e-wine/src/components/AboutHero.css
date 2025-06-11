@@ -1,10 +1,11 @@
 .aboutHeroSection {
-    background-image: url("../assets/AboutHeroImage.jpeg");
+    background-image: url("../assets/Illustration1.svg");
     background-attachment: fixed;
-    background-position: center;
+    background-position: center 28%;
+    /* Fine-tune vertical position */
     background-repeat: no-repeat;
     background-size: cover;
-    height: 70vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,21 +15,19 @@
 }
 
 .aboutHeroOverlay {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 40px;
+    padding: 20px;
     text-align: center;
-    border-radius: 12px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    max-width: 800px;
+    max-width: 90%;
 }
 
 .aboutHeroTitle {
     font-family: "Playfair Display", serif;
-    font-size: 64px;
+    font-size: 72px;
     font-weight: 700;
     color: #ffffff;
     line-height: 1.2;
-    margin-bottom: 20px;
+    margin-bottom: 280px;
+    margin-top: -150px;
 }
 
 .aboutHeroTagline {
@@ -36,4 +35,39 @@
     font-size: 20px;
     color: #ffffff;
     line-height: 1.6;
+}
+
+/* === Responsive Typography & Positioning === */
+@media (max-width: 1024px) {
+    .aboutHeroTitle {
+        font-size: 48px;
+    }
+
+    .aboutHeroTagline {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutHeroTitle {
+        font-size: 40px;
+    }
+
+    .aboutHeroTagline {
+        font-size: 16px;
+    }
+
+    .aboutHeroOverlay {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aboutHeroTitle {
+        font-size: 32px;
+    }
+
+    .aboutHeroTagline {
+        font-size: 14px;
+    }
 }

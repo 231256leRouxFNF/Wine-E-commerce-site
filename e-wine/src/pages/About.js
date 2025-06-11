@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AboutHero from "../components/AboutHero";
 import Offerings from "../components/Offerings";
 import Testimonials from "../components/Testimonials";
@@ -44,55 +45,49 @@ const About = () => {
             every pour becomes a possibility, not a mistake.
           </p>
 
-          <div className="aboutHeader">
-            <h4>MARKETPLACE</h4>
-            <h2>What We Offer</h2>
-          </div>
-          <p>
-            Whether you're a connoisseur or simply curious, our marketplace
-            makes it easy to explore wines by region, type, and taste profile.
-            From comparing prices to reading community insights, you can
-            discover new favorites or even add your own to help others find
-            theirs.
-          </p>
+          <Offerings />
 
           {randomWine && (
             <div className="featuredWine">
-              <h4 style={{ textAlign: "center", color: "#900639" }}>
-                FEATURED
-              </h4>
-              <h2
-                style={{ textAlign: "center", fontFamily: "Playfair Display" }}
-              >
-                Have You Tried These Wines?
-              </h2>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "20px",
-                }}
-              >
+              <div className="featuredHeader">
+                <h4>FEATURED</h4>
+                <h2>Have You Tried These Wines?</h2>
+              </div>
+              <div className="featuredSingleCardWrapper">
                 <ProductCard product={randomWine} />
               </div>
             </div>
           )}
-
-          <div className="aboutHeader">
-            <h4>WHY US</h4>
-            <h2>Why Choose Us</h2>
-          </div>
-          <p>
-            Pour Decisions isn’t just a platform — it’s a community. Our users
-            shape the wine database with their own favorites and price updates,
-            making this a living, breathing cellar curated by real people. With
-            elegant design, fast filtering tools, and inclusive global wines,
-            we're here to make your wine journey smart, social, and personal.
-          </p>
         </div>
       </section>
 
-      <Offerings />
+      <section className="whyChooseSection">
+        <div className="whyChooseGrid">
+          <div className="whyChooseImage" />
+          <div className="whyChooseContent">
+            <div className="aboutHeader">
+              <h2>Why Choose Us</h2>
+            </div>
+            <p className="whyChooseDescription">
+              <strong>Pour Decisions</strong> isn’t just a platform — it’s a
+              community. Our users shape the wine database with their own
+              favorites and price updates, making this a living, breathing
+              cellar curated by real people. With elegant design, fast filtering
+              tools, and inclusive global wines, we’re here to make your wine
+              journey smart, social, and personal.
+            </p>
+            <div className="whyChooseButtons">
+              <Link to="/Products" className="whyChoosePrimary">
+                Buy Now
+              </Link>
+              <Link to="/Contact" className="whyChooseSecondary">
+                Contact Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Testimonials />
     </div>
   );
