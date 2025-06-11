@@ -1,7 +1,5 @@
 .offeringsSection {
     padding: 30px 24px;
-    max-width: 1400px;
-    margin: 30px auto;
     text-align: center;
     font-family: "Montserrat", sans-serif;
 }
@@ -21,11 +19,8 @@
 .cardContainer {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
-    overflow-x: auto;
     gap: 32px;
     padding-bottom: 12px;
-    scrollbar-width: none;
 }
 
 .cardContainer::-webkit-scrollbar {
@@ -37,8 +32,8 @@
     background: #ffffff;
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    padding: 32px 24px;
-    width: 320px;
+    padding: 60px 30px;
+    width: 260px;
     text-align: center;
     transition: transform 0.3s ease;
 }
@@ -49,7 +44,6 @@
 
 .muiIcon {
     font-size: 60px !important;
-    /* <- Ensures MUI Icon scales */
     color: #900639;
     margin-bottom: 16px;
 }

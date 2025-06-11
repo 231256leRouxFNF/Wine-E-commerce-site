@@ -1,0 +1,8 @@
+/* FeaturedCarousel.css */
+
+.featuredCarouselWrapper {
+    max-width: 1400px;
+    margin: 0 -240px;
+    padding: 50px -20px;
+    height: 800px;
+}
