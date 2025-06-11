@@ -38,7 +38,7 @@
 .aboutTextWrapper p {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    line-height: 1.8;
+    line-height: 1.7;
     color: #1c1c1c;
     margin: 0;
 }
@@ -181,4 +181,23 @@
 .whyChooseSecondary:hover {
     background-color: #900639;
     color: #fff;
+}
+
+.offeringsSection {
+    background-color: #fffefc;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    color: #1c1c1c;
+}
+
+.featuredCardGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    /* Exactly 4 columns */
+    gap: 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 0;
+    justify-items: center;
 }

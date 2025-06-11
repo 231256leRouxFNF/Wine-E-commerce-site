@@ -1,22 +1,25 @@
+// src/pages/About.js
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AboutHero from "../components/AboutHero";
 import Offerings from "../components/Offerings";
 import Testimonials from "../components/Testimonials";
-import ProductCard from "../components/ProductCard";
+import AboutProductCard from "../components/AboutProductCard";
+import FeaturedCarousel from "../components/FeaturedCarousel"; 
 import axios from "axios";
 import "./About.css";
 
 const About = () => {
-  const [randomWine, setRandomWine] = useState(null);
+  const [randomWines, setRandomWines] = useState([]);
 
   useEffect(() => {
     const fetchWines = async () => {
       try {
         const res = await axios.get("/api/products");
         if (res.data.length > 0) {
-          const randomIndex = Math.floor(Math.random() * res.data.length);
-          setRandomWine(res.data[randomIndex]);
+          const shuffled = [...res.data].sort(() => 0.5 - Math.random());
+          setRandomWines(shuffled.slice(0, 6));
         }
       } catch (err) {
         console.error("Could not fetch wines for random product section.");
@@ -45,17 +48,19 @@ const About = () => {
             every pour becomes a possibility, not a mistake.
           </p>
 
-          <Offerings />
+          <section className="offeringsSection">
+            <div className="offeringsWrapper">
+              <Offerings />
+            </div>
+          </section>
 
-          {randomWine && (
+          {randomWines.length > 0 && (
             <div className="featuredWine">
               <div className="featuredHeader">
                 <h4>FEATURED</h4>
                 <h2>Have You Tried These Wines?</h2>
               </div>
-              <div className="featuredSingleCardWrapper">
-                <ProductCard product={randomWine} />
-              </div>
+              <FeaturedCarousel products={randomWines} />
             </div>
           )}
         </div>
