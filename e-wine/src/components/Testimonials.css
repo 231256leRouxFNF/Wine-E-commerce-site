@@ -1,78 +1,113 @@
 .testimonialsSection {
+    padding: 15px 24px;
     background-color: #fffefc;
-    padding: 80px 60px;
-    font-family: "Montserrat", sans-serif;
     text-align: center;
+    margin-top: 60px;
 }
 
-.testimonialsHeading {
+.testimonialsHeader h4 {
+    font-size: 14px;
+    text-transform: uppercase;
     color: #900639;
-    font-size: 36px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
     font-weight: 600;
-    margin-bottom: 50px;
 }
 
-.testimonialGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    justify-content: center;
-    align-items: stretch;
-    max-width: 1200px;
-    margin: 0 auto;
+.testimonialsHeader h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    color: #1c1c1c;
+    margin-bottom: 40px;
+    font-weight: 500;
 }
 
 .testimonialCard {
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    max-width: 300px;
+    padding: 60px 24px 24px;
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .testimonialCard:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+}
+
+.testimonialAvatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    position: absolute;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
 }
 
 .testimonialText {
-    font-size: 15px;
+    font-size: 14px;
     color: #333;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 24px;
+    line-height: 1.5;
 }
 
-.userInfo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.userImage {
-    width: 48px;
-    height: 48px;
-    border-radius: 999px;
-    object-fit: cover;
-    border: 2px solid #900639;
-}
-
-.userDetails {
+.testimonialUser {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.userName {
-    font-weight: 600;
-    font-size: 14px;
+.testimonialName {
+    font-weight: 700;
+    font-size: 16px;
     color: #1c1c1c;
+    font-family: "Montserrat", sans-serif;
 }
 
-.userHandle {
+.testimonialUsername {
     font-size: 13px;
-    color: #777;
+    color: #900639;
+    margin-top: 4px;
+}
+
+.testimonialsGrid {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 16px 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-top: 100px;
+    margin-top: -50px;
+}
+
+.testimonialCard {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    min-width: 320px;
+    max-width: 360px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    padding: 72px 25px 32px;
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.testimonialsGrid::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonialsGrid::-webkit-scrollbar-thumb {
+    background: #900639;
+    border-radius: 4px;
 }

@@ -1,7 +1,7 @@
-// AddProduct.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ErrorToast from "../components/ErrorToast";
+import DatabaseWines from "../components/DatabaseWines";
 import "./AddProduct.css";
 
 const typeOptions = [
@@ -58,6 +58,8 @@ const AddProduct = () => {
   });
 
   const [error, setError] = useState(null);
+  const [refreshWines, setRefreshWines] = useState(false);
+  const [showWines, setShowWines] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,6 +107,7 @@ const AddProduct = () => {
         image: "",
       });
       setError(null);
+      setRefreshWines((prev) => !prev); // trigger refresh in child
     } catch (err) {
       console.error(
         "❌ Error adding product:",
@@ -113,6 +116,8 @@ const AddProduct = () => {
       setError("Could not add wine.");
     }
   };
+
+  const toggleWines = () => setShowWines((prev) => !prev);
 
   return (
     <div className="add-product-container">
@@ -220,6 +225,12 @@ const AddProduct = () => {
       </form>
 
       {error && <ErrorToast message={error} onClose={() => setError(null)} />}
+
+      <button onClick={toggleWines} className="see-db-button">
+        {showWines ? "Hide Database Wines" : "See Database Wines"}
+      </button>
+
+      {showWines && <DatabaseWines key={refreshWines} />}
     </div>
   );
 };

@@ -1,42 +1,48 @@
-// Testimonials.js
 import React from "react";
 import "./Testimonials.css";
+
+import UserImage1 from "../assets/users/UserImage1.svg";
+import UserImage2 from "../assets/users/UserImage2.svg";
+import UserImage3 from "../assets/users/UserImage3.svg";
+import UserImage4 from "../assets/users/UserImage4.svg";
+import UserImage5 from "../assets/users/UserImage5.svg";
+import UserImage6 from "../assets/users/UserImage6.svg";
 
 const testimonials = [
   {
     name: "Sophie Vermeer",
     username: "@sophiev",
-    image: "/assets/users/UserImage1.svg",
+    image: UserImage1,
     text: "I discovered wines I never would have tried before! Pour Decisions made it so easy to compare and find my perfect sip.",
   },
   {
     name: "Lucas Moretti",
     username: "@lucasmoretti",
-    image: "/assets/users/UserImage2.svg",
+    image: UserImage2,
     text: "Finally, a site that lets me search by region and style. The add-your-own-wine feature is genius!",
   },
   {
     name: "Aisha Daniels",
     username: "@aishad",
-    image: "/assets/users/UserImage3.svg",
+    image: UserImage3,
     text: "The interface is clean and elegant. I've added three of my favourite local wines already.",
   },
   {
-    name: "Maxime Lefevre",
-    username: "@maxlefevre",
-    image: "/assets/users/UserImage4.svg",
+    name: "Li King",
+    username: "@LiKing_21",
+    image: UserImage4,
     text: "Love this platform! I found an amazing bottle from Argentina I’d never seen in stores.",
   },
   {
-    name: "Thandi Mokoena",
-    username: "@thandim",
-    image: "/assets/users/UserImage5.svg",
+    name: "Talje van Niekerk",
+    username: "@tals231",
+    image: UserImage5,
     text: "Easy, beautiful, and informative. Pour Decisions is now my go-to wine guide.",
   },
   {
     name: "Jonas Richter",
     username: "@jonasrich",
-    image: "/assets/users/UserImage6.svg",
+    image: UserImage6,
     text: "Being able to read and share opinions on wine makes this feel like a real community, not just a store.",
   },
 ];

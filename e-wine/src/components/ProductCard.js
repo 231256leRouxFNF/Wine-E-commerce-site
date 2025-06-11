@@ -5,6 +5,27 @@ import "./ProductCard.css";
 
 const ProductCard = ({ product }) => {
   const [liked, setLiked] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  // Helper to add to cart in localStorage. Replace with your context/Redux if necessary.
+  const addToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(
+      (item) => item._id === product._id || item.id === product.id
+    );
+    if (existing) {
+      existing.quantity = (existing.quantity || 1) + 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500); // Hide confirmation after 1.5s
+  };
 
   const validTags = Array.isArray(product.tag)
     ? product.tag.filter((tag) => tag && tag.trim() !== "")
@@ -59,8 +80,15 @@ const ProductCard = ({ product }) => {
         >
           View Details
         </Link>
-        <button className="product-button">Add to Cart</button>
+        <button className="product-button" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
       </div>
+      {added && (
+        <div className="cart-confirmation" style={{color: '#fff', background: '#900639', padding: '8px', borderRadius: 8, marginTop: 8, textAlign: 'center'}}>
+          Added to cart!
+        </div>
+      )}
     </div>
   );
 };
