@@ -19,7 +19,7 @@ import Offerings from "./components/Offerings";
 import Testimonials from "./components/Testimonials";
 import Favourites from "./pages/Favourites";
 import Contact from "./pages/Contact";
-import PaymentPage from "./pages/PaymentPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 
 import theme from "./theme";
@@ -49,7 +49,7 @@ function App() {
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
         <Footer />
       </Router>
