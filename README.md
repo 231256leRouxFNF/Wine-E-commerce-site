@@ -70,8 +70,16 @@ PORT=5000
 cd ../e-wine
 npm install
 ```
+5. Install Additional Frontend Packages
+npm install axios
+npm install react-router-dom
+npm install @mui/material @emotion/react @emotion/styled
+npm install react-slick slick-carousel
 
----
+6.	Import Slick Carousel Styles
+Make sure to import the styles in your index.js or App.js:
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ### 💻 Running the Project
 
