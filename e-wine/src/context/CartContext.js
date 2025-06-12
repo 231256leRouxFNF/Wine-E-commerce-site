@@ -6,16 +6,22 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
   const { user } = useContext(AuthContext);
 
-  // Clear cart immediately when logging out
+  // Recalculate total quantity
+  const recalculateCartCount = (items) => {
+    const total = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    setCartCount(total);
+  };
+
   useEffect(() => {
     if (!user) {
       setCartItems([]);
+      setCartCount(0);
     }
   }, [user]);
 
-  // Load cart items on mount or when user changes
   useEffect(() => {
     const load = async () => {
       if (user) {
@@ -26,6 +32,7 @@ export const CartProvider = ({ children }) => {
             quantity: it.quantity,
           }));
           setCartItems(items);
+          recalculateCartCount(items);
         } catch (err) {
           console.error("Failed to fetch cart", err);
         }
@@ -33,54 +40,63 @@ export const CartProvider = ({ children }) => {
         const stored = localStorage.getItem("cart");
         if (stored) {
           try {
-            setCartItems(JSON.parse(stored));
+            const parsed = JSON.parse(stored);
+            setCartItems(parsed);
+            recalculateCartCount(parsed);
           } catch (err) {
             console.error("Failed to parse cart from localStorage", err);
             setCartItems([]);
+            setCartCount(0);
           }
         } else {
           setCartItems([]);
+          setCartCount(0);
         }
       }
     };
     load();
   }, [user]);
 
-  // Persist cart only for guests
   useEffect(() => {
     if (!user) {
       localStorage.setItem("cart", JSON.stringify(cartItems));
     }
+    recalculateCartCount(cartItems);
   }, [cartItems, user]);
 
-  const addToCart = async (product) => {
+  const addToCart = async (product, quantity = 1) => {
     if (user) {
       try {
         const res = await axios.post(`/api/cart/${user._id}/add`, {
           productId: product._id,
+          quantity,
         });
         const items = (res.data.items || []).map((it) => ({
           ...it.productId,
           quantity: it.quantity,
         }));
         setCartItems(items);
+        recalculateCartCount(items);
         return;
       } catch (err) {
         console.error("Failed to update cart", err);
       }
     }
 
-    // Fallback to local update for guests or on error
     setCartItems((prev) => {
       const existing = prev.find((item) => item._id === product._id);
+      let updated;
       if (existing) {
-        return prev.map((item) =>
+        updated = prev.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: (item.quantity || 1) + 1 }
+            ? { ...item, quantity: (item.quantity || 1) + quantity }
             : item
         );
+      } else {
+        updated = [...prev, { ...product, quantity }];
       }
-      return [...prev, { ...product, quantity: 1 }];
+      recalculateCartCount(updated);
+      return updated;
     });
   };
 
@@ -93,16 +109,40 @@ export const CartProvider = ({ children }) => {
           quantity: it.quantity,
         }));
         setCartItems(items);
+        recalculateCartCount(items);
         return;
       } catch (err) {
         console.error("Failed to remove from cart", err);
       }
     }
-    setCartItems((prev) => prev.filter((item) => item._id !== id));
+    const updated = cartItems.filter((item) => item._id !== id);
+    setCartItems(updated);
+    recalculateCartCount(updated);
+  };
+
+  const clearCart = () => {
+    if (!user) {
+      localStorage.removeItem("cart");
+    }
+    setCartItems([]);
+    setCartCount(0);
+  };
+
+  const updateCartCount = (newCount) => {
+    setCartCount(newCount);
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        cartCount,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        updateCartCount,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
