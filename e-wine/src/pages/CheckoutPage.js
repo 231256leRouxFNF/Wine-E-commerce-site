@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CheckoutPage.css";
-import SuccessToast from "../components/SuccessToast"; // ✅ Import your toast
+import SuccessToast from "../components/SuccessToast";
+import { CartContext } from "../context/CartContext"; // ✅ Import CartContext
 
 const CheckoutPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
+  const { cartItems, clearCart, updateCartCount } = useContext(CartContext); // ✅ Access cart context
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,10 +16,19 @@ const CheckoutPage = () => {
 
     setTimeout(() => {
       setIsProcessing(false);
-      setShowToast(true); // ✅ Show toast
+      setShowToast(true);
+
+      // ✅ Clear cart and update count by total quantity, not item count
+      const totalQuantity = cartItems.reduce(
+        (acc, item) => acc + (item.quantity || 1),
+        0
+      );
+      clearCart();
+      updateCartCount(0); // ✅ Reset cart count in context (you can optionally use totalQuantity to show how many were purchased before reset)
+
       setTimeout(() => {
         setShowToast(false);
-        navigate("/"); // Redirect after toast closes
+        navigate("/");
       }, 3000);
     }, 1500);
   };

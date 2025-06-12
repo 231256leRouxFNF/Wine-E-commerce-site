@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; // ✅ Add this
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./SingleProduct.css";
+import { CartContext } from "../context/CartContext";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [liked, setLiked] = useState(false); // ✅ Add state
+  const [liked, setLiked] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,6 +34,10 @@ const SingleProduct = () => {
     ? product.tag.filter((tag) => tag && tag.trim() !== "")
     : [];
 
+  const handleAddToCart = () => {
+    addToCart({ ...product, quantity });
+  };
+
   return (
     <div className="single-product-container">
       <div className="single-product-img-section">
@@ -42,7 +48,6 @@ const SingleProduct = () => {
             className="single-product-img"
           />
 
-          {/* ✅ Heart Icon */}
           <button
             className="wishlist-button-top"
             aria-label="Add to Wishlist"
@@ -51,7 +56,6 @@ const SingleProduct = () => {
             {liked ? <AiFillHeart /> : <AiOutlineHeart />}
           </button>
 
-          {/* ✅ Tags */}
           {validTags.length > 0 && (
             <div className="product-badges">
               {validTags.slice(0, 2).map((tag, index) => (
@@ -87,7 +91,9 @@ const SingleProduct = () => {
             <span>{quantity}</span>
             <button onClick={increaseQty}>+</button>
           </div>
-          <button className="product-button">Add {quantity} to Cart</button>
+          <button className="product-button" onClick={handleAddToCart}>
+            Add {quantity} to Cart
+          </button>
         </div>
       </div>
     </div>

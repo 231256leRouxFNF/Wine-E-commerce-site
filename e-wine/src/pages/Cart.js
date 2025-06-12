@@ -14,12 +14,13 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close"; 
+import CloseIcon from "@mui/icons-material/Close";
 
 import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cartItems, removeFromCart, updateCartCount } =
+    useContext(CartContext);
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
