@@ -41,6 +41,7 @@
     line-height: 1.7;
     color: #1c1c1c;
     margin: 0;
+    margin-bottom: -40px;
 }
 
 /* === Featured Wines Section === */
@@ -189,12 +190,12 @@
     align-items: center;
     font-family: "Montserrat", sans-serif;
     color: #1c1c1c;
+    margin-top: 10px;
 }
 
 .featuredCardGrid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    /* Exactly 4 columns */
     gap: 40px;
     max-width: 1440px;
     margin: 0 auto;
