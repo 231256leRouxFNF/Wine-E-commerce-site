@@ -14,6 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import AddProduct from "./pages/AddProduct";
+import ReviewProducts from "./pages/ReviewProducts";
 import About from "./pages/About";
 import Offerings from "./components/Offerings";
 import Testimonials from "./components/Testimonials";
@@ -55,8 +56,16 @@ function App() {
           <Route
             path="/add-product"
             element={
-              <ProtectedRoute role="admin">
+              <ProtectedRoute role={["admin", "superadmin"]}>
                 <AddProduct />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/review-products"
+            element={
+              <ProtectedRoute role="superadmin">
+                <ReviewProducts />
               </ProtectedRoute>
             }
           />

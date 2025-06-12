@@ -36,6 +36,11 @@ const productSchema = new mongoose.Schema({
   image: {
     type: String, // base64-encoded or URL string
     required: true,
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'approved'],
+    default: 'pending'
   }
 }, { timestamps: true });
 

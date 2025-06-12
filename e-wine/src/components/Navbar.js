@@ -12,7 +12,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
-import { ShoppingCart, Menu, Add as AddIcon } from "@mui/icons-material";
+import { ShoppingCart, Menu, Add as AddIcon, ListAlt as ListAltIcon } from "@mui/icons-material";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Favourites from "./../pages/Favourites"; // ✅ Import Favourites page
@@ -149,7 +149,7 @@ const Navbar = () => {
         {/* Action Icons */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, pr: 3 }}>
           {/* Add Product Icon (admin only) */}
-          {user?.role === 'admin' && (
+          {(user?.role === 'admin' || user?.role === 'superadmin') && (
             <IconButton
               component={Link}
               to="/add-product"
@@ -162,6 +162,23 @@ const Navbar = () => {
               }}
             >
               <AddIcon />
+            </IconButton>
+          )}
+
+          {/* Review Products (superadmin only) */}
+          {user?.role === 'superadmin' && (
+            <IconButton
+              component={Link}
+              to="/review-products"
+              sx={{
+                color: "#900639",
+                transition: "transform 0.2s ease",
+                "&:hover": {
+                  transform: "scale(1.2)",
+                },
+              }}
+            >
+              <ListAltIcon />
             </IconButton>
           )}
 

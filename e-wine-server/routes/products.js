@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
+const { requireRole } = require('../middleware/auth');
 
 // POST /api/products → Add a product
-router.post("/", async (req, res) => {
+router.post("/", requireRole(['admin', 'superadmin']), async (req, res) => {
   try {
-    const newProduct = new Product(req.body);
+    const status = req.user.role === 'superadmin' ? 'approved' : 'pending';
+    const newProduct = new Product({ ...req.body, status });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (err) {
@@ -13,11 +15,40 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET /api/products → Get all products
+// GET /api/products → Get all approved products
 router.get("/", async (req, res) => {
   try {
-    const products = await Product.find();
+    const role = req.user?.role;
+    const filter = role === 'admin' || role === 'superadmin' ? {} : { status: 'approved' };
+    const products = await Product.find(filter);
     res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET /api/products/pending → List pending products
+router.get('/pending', requireRole('superadmin'), async (req, res) => {
+  try {
+    const products = await Product.find({ status: 'pending' });
+    res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// PUT /api/products/:id/approve → Approve a pending product
+router.put('/:id/approve', requireRole('superadmin'), async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      { status: 'approved' },
+      { new: true }
+    );
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.json(product);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -37,7 +68,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // DELETE /api/products/:id → Delete a product by ID
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireRole(['admin', 'superadmin']), async (req, res) => {
   try {
     const deleted = await Product.findByIdAndDelete(req.params.id);
     if (!deleted) {

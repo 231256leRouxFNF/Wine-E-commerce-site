@@ -30,9 +30,14 @@ const Footer = () => {
               <li>
                 <Link to="/favourites">Favourites</Link>
               </li>
-              {user?.role === 'admin' && (
+              {(user?.role === 'admin' || user?.role === 'superadmin') && (
                 <li>
                   <Link to="/add-product">Add Wine</Link>
+                </li>
+              )}
+              {user?.role === 'superadmin' && (
+                <li>
+                  <Link to="/review-products">Review Products</Link>
                 </li>
               )}
               <li>

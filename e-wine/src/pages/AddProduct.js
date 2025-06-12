@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ErrorToast from "../components/ErrorToast";
 import DatabaseWines from "../components/DatabaseWines";
 import "./AddProduct.css";
+import { AuthContext } from "../context/AuthContext";
 
 const typeOptions = [
   "Red Wine",
@@ -60,6 +61,7 @@ const AddProduct = () => {
   const [error, setError] = useState(null);
   const [refreshWines, setRefreshWines] = useState(false);
   const [showWines, setShowWines] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,16 +86,20 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/products", {
-        ...product,
-        price: parseFloat(product.price),
-        style: Array.isArray(product.style)
-          ? product.style
-          : product.style.split(",").map((s) => s.trim()),
-        tag: Array.isArray(product.tag)
-          ? product.tag
-          : product.tag.split(",").map((t) => t.trim()),
-      });
+      await axios.post(
+        "/api/products",
+        {
+          ...product,
+          price: parseFloat(product.price),
+          style: Array.isArray(product.style)
+            ? product.style
+            : product.style.split(",").map((s) => s.trim()),
+          tag: Array.isArray(product.tag)
+            ? product.tag
+            : product.tag.split(",").map((t) => t.trim()),
+        },
+        { headers: { "x-user-role": user?.role } }
+      );
       alert("✅ Product added successfully!");
       setProduct({
         title: "",

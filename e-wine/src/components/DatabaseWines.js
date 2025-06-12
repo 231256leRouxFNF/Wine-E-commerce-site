@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./DatabaseWines.css";
 import ErrorToast from "./ErrorToast";
 import ConfirmModal from "./ConfirmModal";
+import { AuthContext } from "../context/AuthContext";
 
 const DatabaseWines = () => {
   const [wines, setWines] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedWineId, setSelectedWineId] = useState(null);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     fetchWines();
@@ -17,7 +19,9 @@ const DatabaseWines = () => {
   const fetchWines = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("/api/products");
+      const res = await axios.get("/api/products", {
+        headers: { 'x-user-role': user?.role }
+      });
       setWines(res.data);
     } catch (err) {
       setError("Could not fetch wines.");
@@ -31,7 +35,9 @@ const DatabaseWines = () => {
     setSelectedWineId(null);
 
     try {
-      await axios.delete(`/api/products/${wineId}`);
+      await axios.delete(`/api/products/${wineId}`, {
+        headers: { 'x-user-role': user?.role }
+      });
       setWines((prev) => prev.filter((w) => w._id !== wineId));
     } catch (err) {
       setError("Could not delete wine.");
