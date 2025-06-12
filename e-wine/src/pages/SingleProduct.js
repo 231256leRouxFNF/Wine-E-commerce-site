@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./SingleProduct.css";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../context/CartContext"; //test
 
 const SingleProduct = () => {
   const { id } = useParams();
