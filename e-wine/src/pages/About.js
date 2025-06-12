@@ -10,6 +10,7 @@ import FeaturedCarousel from "../components/FeaturedCarousel";
 import axios from "axios";
 import "./About.css";
 
+//explain logic
 const About = () => {
   const [randomWines, setRandomWines] = useState([]);
 

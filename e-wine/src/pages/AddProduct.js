@@ -225,7 +225,7 @@ const AddProduct = () => {
         </button>
       </form>
 
-      {error && <ErrorToast message={error} onClose={() => setError(null)} />}
+      {error && <ErrorToast message={error} onClose={() => setError(null)} />} //error toast example
 
       <button onClick={toggleWines} className="see-db-button">
         {showWines ? "Hide Database Wines" : "See Database Wines"}

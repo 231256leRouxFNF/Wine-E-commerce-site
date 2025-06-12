@@ -9,11 +9,6 @@ const AboutHero = () => {
       style={{ backgroundImage: `url(${AboutHeroImage})` }}
     >
       <div className="aboutHeroOverlay">
-        <h1 className="aboutHeroTitle">About Pour Decisions</h1>
-        {/* <p className="aboutHeroTagline">
-          Explore wines from across the globe — and add your favourites to our
-          collection.
-        </p> */}
       </div>
     </section>
   );

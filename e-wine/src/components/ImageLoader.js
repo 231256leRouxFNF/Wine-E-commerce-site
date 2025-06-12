@@ -16,7 +16,7 @@ const ImageLoader = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 350); // Adjust speed as needed
+    }, 350);
 
     return () => clearInterval(interval);
   }, []);

@@ -2,14 +2,14 @@
 import React from "react";
 import Slider from "react-slick";
 import AboutProductCard from "./AboutProductCard";
-import "./FeaturedCarousel.css"; // Optional if you want to override styles
+import "./FeaturedCarousel.css";
 
 const FeaturedCarousel = ({ products }) => {
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4, // Show 4 at a time
+    slidesToShow: 4, 
     slidesToScroll: 1,
     responsive: [
       {
