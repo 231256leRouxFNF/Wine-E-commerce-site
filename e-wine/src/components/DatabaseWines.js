@@ -26,10 +26,13 @@ const DatabaseWines = () => {
   };
 
   const handleDelete = async () => {
+    const wineId = selectedWineId;
+    // Immediately close the confirmation popup
+    setSelectedWineId(null);
+
     try {
-      await axios.delete(`/api/products/${selectedWineId}`);
-      setWines((prev) => prev.filter((w) => w._id !== selectedWineId));
-      setSelectedWineId(null);
+      await axios.delete(`/api/products/${wineId}`);
+      setWines((prev) => prev.filter((w) => w._id !== wineId));
     } catch (err) {
       setError("Could not delete wine.");
     }
