@@ -60,6 +60,7 @@ const AddProduct = () => {
   const [error, setError] = useState(null);
   const [refreshWines, setRefreshWines] = useState(false);
   const [showWines, setShowWines] = useState(false);
+  const [filterType, setFilterType] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,7 +108,7 @@ const AddProduct = () => {
         image: "",
       });
       setError(null);
-      setRefreshWines((prev) => !prev); // trigger refresh in child
+      setRefreshWines((prev) => !prev);
     } catch (err) {
       console.error(
         "❌ Error adding product:",
@@ -230,7 +231,11 @@ const AddProduct = () => {
         {showWines ? "Hide Database Wines" : "See Database Wines"}
       </button>
 
-      {showWines && <DatabaseWines key={refreshWines} />}
+      {showWines && (
+        <>
+          <DatabaseWines key={refreshWines} filterType={filterType} />
+        </>
+      )}
     </div>
   );
 };
