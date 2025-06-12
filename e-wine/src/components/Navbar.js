@@ -18,12 +18,14 @@ import { Link, useNavigate } from "react-router-dom";
 import Favourites from "./../pages/Favourites"; // ✅ Import Favourites page
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
+import { FavouritesContext } from "../context/FavouritesContext";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
   const navigate = useNavigate(); // ✅ Add this line
   const { cartItems } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
+  const { favourites } = useContext(FavouritesContext);
+  const liked = favourites.length > 0;
 
   const navLinks = [
     { title: "Home", path: "/" },
@@ -166,7 +168,6 @@ const Navbar = () => {
           {/* Heart Icon */}
           <IconButton
             onClick={() => {
-              setLiked(!liked);
               navigate("/favourites");
             }}
             sx={{

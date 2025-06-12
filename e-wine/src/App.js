@@ -23,6 +23,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+import { FavouritesProvider } from "./context/FavouritesContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -40,6 +41,7 @@ function App() {
       <CssBaseline />
       <AuthProvider>
         <CartProvider>
+          <FavouritesProvider>
           <Router>
           <Navbar />
           <Routes>
@@ -66,6 +68,7 @@ function App() {
           </Routes>
           <Footer />
         </Router>
+          </FavouritesProvider>
       </CartProvider>
       </AuthProvider>
     </ThemeProvider>

@@ -1,14 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./ProductCard.css";
 import { CartContext } from "../context/CartContext";
+import { FavouritesContext } from "../context/FavouritesContext";
 
 const ProductCard = ({ product }) => {
-  const [liked, setLiked] = useState(false);
   const [added, setAdded] = useState(false);
 
   const { addToCart } = useContext(CartContext);
+  const { favourites, toggleFavourite } = useContext(FavouritesContext);
+  const liked = favourites.some((p) => p._id === product._id);
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -27,7 +29,7 @@ const ProductCard = ({ product }) => {
         <button
           className="wishlist-button-top"
           aria-label="Add to Wishlist"
-          onClick={() => setLiked(!liked)}
+          onClick={() => toggleFavourite(product)}
         >
           {liked ? <AiFillHeart /> : <AiOutlineHeart />}
         </button>

@@ -16,6 +16,8 @@ const authRoutes = require("./routes/auth");
 app.use("/api", authRoutes);
 const cartRoutes = require('./routes/cart');
 app.use('/api/cart', cartRoutes);
+const favRoutes = require('./routes/favourites');
+app.use('/api/favourites', favRoutes);
 
 // ✅ MongoDB connection (already configured correctly)
 mongoose.connect(process.env.MONGO_URI)
