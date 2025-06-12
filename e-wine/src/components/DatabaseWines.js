@@ -6,13 +6,23 @@ import ConfirmModal from "./ConfirmModal";
 
 const DatabaseWines = () => {
   const [wines, setWines] = useState([]);
+  const [filteredWines, setFilteredWines] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedWineId, setSelectedWineId] = useState(null);
+  const [filterType, setFilterType] = useState("All");
 
   useEffect(() => {
     fetchWines();
   }, []);
+
+  useEffect(() => {
+    if (filterType === "All") {
+      setFilteredWines(wines);
+    } else {
+      setFilteredWines(wines.filter((wine) => wine.type === filterType));
+    }
+  }, [filterType, wines]);
 
   const fetchWines = async () => {
     setLoading(true);
@@ -26,29 +36,50 @@ const DatabaseWines = () => {
   };
 
   const handleDelete = async () => {
+    const wineId = selectedWineId;
+    setSelectedWineId(null);
     try {
-      await axios.delete(`/api/products/${selectedWineId}`);
-      setWines((prev) => prev.filter((w) => w._id !== selectedWineId));
-      setSelectedWineId(null);
+      await axios.delete(`/api/products/${wineId}`);
+      setWines((prev) => prev.filter((w) => w._id !== wineId));
     } catch (err) {
       setError("Could not delete wine.");
     }
   };
 
+  const uniqueTypes = [
+    "All",
+    ...new Set(wines.map((wine) => wine.type).filter(Boolean)),
+  ];
+
   return (
     <div className="database-wines-container">
-      <h2>All Wines</h2>
+      {/* <h2 className="db-title">All Wines</h2> */}
+
+      <div className="filter-bar">
+        <label htmlFor="type-filter">Filter by Type:</label>
+        <select
+          id="type-filter"
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+        >
+          {uniqueTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {loading ? (
         <p>Loading wines...</p>
       ) : (
         <ul className="wine-list-admin">
-          {wines.map((wine) => (
+          {filteredWines.map((wine) => (
             <li key={wine._id} className="wine-list-item-admin">
-              <div>
-                <strong>{wine.title}</strong> - R{wine.price}
-                {wine.type && <span> | {wine.type}</span>}
-                {wine.region && <span> | {wine.region}</span>}
+              <div className="wine-title">{wine.title}</div>
+              <div className="wine-details">
+                R{wine.price} {wine.type && <>| {wine.type}</>}{" "}
+                {wine.region && <>| {wine.region}</>}
               </div>
               <button
                 onClick={() => setSelectedWineId(wine._id)}

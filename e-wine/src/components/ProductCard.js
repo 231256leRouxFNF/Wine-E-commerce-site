@@ -1,51 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./ProductCard.css";
+import { CartContext } from "../context/CartContext";
+import { FavouritesContext } from "../context/FavouritesContext";
 
 const ProductCard = ({ product }) => {
-  // Use _id or id as unique ID
-  const productId = product._id || product.id;
-
-  // Setup state for liked and added status
-  const [liked, setLiked] = useState(() => {
-    const favs = JSON.parse(localStorage.getItem("favourites")) || [];
-    return favs.some((item) => (item._id || item.id) === productId);
-  });
   const [added, setAdded] = useState(false);
 
-  // Add to cart handler
+  const { addToCart } = useContext(CartContext);
+  const { favourites, toggleFavourite } = useContext(FavouritesContext);
+  const liked = favourites.some((p) => p._id === product._id);
+
   const handleAddToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existing = cart.find((item) => (item._id || item.id) === productId);
-    if (existing) {
-      existing.quantity = (existing.quantity || 1) + 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    addToCart(product);
     setAdded(true);
-    setTimeout(() => setAdded(false), 1200);
+    setTimeout(() => setAdded(false), 1500); // Hide confirmation after 1.5s
   };
-
-  // Favourites handler
-  const handleToggleFavourite = () => {
-    const favs = JSON.parse(localStorage.getItem("favourites")) || [];
-    const exists = favs.find((item) => (item._id || item.id) === productId);
-    let newFavs;
-    if (exists) {
-      newFavs = favs.filter((item) => (item._id || item.id) !== productId);
-      setLiked(false);
-    } else {
-      newFavs = [...favs, product];
-      setLiked(true);
-    }
-    localStorage.setItem("favourites", JSON.stringify(newFavs));
-  };
-
-  // Debug: Log cart and favourites on each render
-  // console.log("Cart:", JSON.parse(localStorage.getItem("cart")));
-  // console.log("Favourites:", JSON.parse(localStorage.getItem("favourites")));
 
   const validTags = Array.isArray(product.tag)
     ? product.tag.filter((tag) => tag && tag.trim() !== "")
@@ -57,8 +28,8 @@ const ProductCard = ({ product }) => {
         <img src={product.image} alt={product.title} className="product-img" />
         <button
           className="wishlist-button-top"
-          aria-label="Toggle Favourite"
-          onClick={handleToggleFavourite}
+          aria-label="Add to Wishlist"
+          onClick={() => toggleFavourite(product)}
         >
           {liked ? <AiFillHeart /> : <AiOutlineHeart />}
         </button>
@@ -95,7 +66,7 @@ const ProductCard = ({ product }) => {
 
       <div className="product-actions">
         <Link
-          to={`/products/${productId}`}
+          to={`/products/${product._id}`}
           className="product-link"
         >
           View Details

@@ -1,49 +1,78 @@
 // pages/Favourites.js
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import "./Favourites.css";
+import { FavouritesContext } from "../context/FavouritesContext";
 
 const Favourites = () => {
-  const [likedProducts, setLikedProducts] = useState([]);
+  const { favourites } = useContext(FavouritesContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
-  useEffect(() => {
-    // Get liked product IDs from localStorage
-    const liked = JSON.parse(localStorage.getItem("likedProducts")) || [];
+  const totalPages = Math.ceil(favourites.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedFavourites = favourites.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
-    // Optional: replace with API fetch if liked product IDs are stored backend
-    const fetchAllProducts = async () => {
-      try {
-        const response = await fetch("/api/products");
-        const data = await response.json();
-        const filtered = data.filter((product) => liked.includes(product._id));
-        setLikedProducts(filtered);
-      } catch (error) {
-        console.error("Error fetching favourites:", error);
+  const goToPage = (pageNum) => {
+    if (pageNum >= 1 && pageNum <= totalPages) {
+      setCurrentPage(pageNum);
+      const gridTop = document.querySelector(".product-grid");
+      if (gridTop) {
+        gridTop.scrollIntoView({ behavior: "smooth" });
       }
-    };
-
-    fetchAllProducts();
-  }, []);
+    }
+  };
 
   return (
     <div className="grid-wrapper">
       <h1 className="favouritesHeading">Your Favourite Wines</h1>
-      <p className="favouritesText">
-        Add any wine to your favourites list by clicking the heart icon at the
-        top of the wine image.
-      </p>
+      {/* <p className="favouritesText">
+        You haven’t added any favourites yet. Click the heart icon to save your
+        favourite wines.
+      </p> */}
 
       <div className="product-grid">
-        {likedProducts.length > 0 ? (
-          likedProducts.map((product) => (
+        {favourites.length > 0 ? (
+          paginatedFavourites.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))
         ) : (
           <p className="favouritesEmpty">
-            You haven’t added any favourites yet. ❤️
+            No favourites yet. Click the heart icon to get started!
           </p>
         )}
       </div>
+
+      {favourites.length > 0 && (
+        <div className="pagination">
+          <button
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            ← Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i + 1}
+              className={currentPage === i + 1 ? "active" : ""}
+              onClick={() => goToPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next →
+          </button>
+        </div>
+      )}
     </div>
   );
 };

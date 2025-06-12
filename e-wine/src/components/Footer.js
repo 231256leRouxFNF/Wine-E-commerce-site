@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
 import WineLogoWhite from "../assets/WineLogoWhite.png";
+import { AuthContext } from "../context/AuthContext";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { user } = useContext(AuthContext);
 
   return (
     <footer className="footer-container">
@@ -28,9 +30,11 @@ const Footer = () => {
               <li>
                 <Link to="/favourites">Favourites</Link>
               </li>
-              <li>
-                <Link to="/add-product">Add Wine</Link>
-              </li>
+              {user?.role === 'admin' && (
+                <li>
+                  <Link to="/add-product">Add Wine</Link>
+                </li>
+              )}
               <li>
                 <Link to="/contact">Contact</Link>
               </li>

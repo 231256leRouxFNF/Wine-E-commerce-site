@@ -38,7 +38,7 @@ const AboutProductCard = ({ product }) => {
         </p>
 
         <Link
-          to={`/products/${product._id || product.id}`}
+          to={`/products/${product._id}`}
           className="about-product-button"
         >
           Buy Now

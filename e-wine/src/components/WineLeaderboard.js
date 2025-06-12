@@ -11,8 +11,8 @@ const WineLeaderboard = () => {
         <div className="overlap">
           {/* Headings */}
           <div className="headingWrapper">
-            <div className="topPick">Pour Decisions</div>
-            <div className="beginHere">begin here</div>
+            <div className="topPick">This Week's</div>
+            <div className="beginHere">Favourites</div>
           </div>
 
           {/* Wine 1 */}
