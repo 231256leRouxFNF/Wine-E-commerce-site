@@ -3,16 +3,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./SingleProduct.css";
-import { CartContext } from "../context/CartContext";
-import { FavouritesContext } from "../context/FavouritesContext"; // ✅ import context
+import { CartContext } from "../context/CartContext"; //test
 
 const SingleProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
+  const [liked, setLiked] = useState(false);
   const { addToCart } = useContext(CartContext);
-  const { favourites, toggleFavourite } = useContext(FavouritesContext); // ✅ use context
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,8 +38,6 @@ const SingleProduct = () => {
     addToCart({ ...product, quantity });
   };
 
-  const isLiked = favourites.some((p) => p._id === product._id); // ✅ check if in favourites
-
   return (
     <div className="single-product-container">
       <div className="single-product-img-section">
@@ -55,9 +51,9 @@ const SingleProduct = () => {
           <button
             className="wishlist-button-top"
             aria-label="Add to Wishlist"
-            onClick={() => toggleFavourite(product)} // ✅ toggle on click
+            onClick={() => setLiked(!liked)}
           >
-            {isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
+            {liked ? <AiFillHeart /> : <AiOutlineHeart />}
           </button>
 
           {validTags.length > 0 && (
