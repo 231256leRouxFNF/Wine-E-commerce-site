@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close"; // ❌ Icon
+import CloseIcon from "@mui/icons-material/Close"; 
 
 import { CartContext } from "../context/CartContext";
 

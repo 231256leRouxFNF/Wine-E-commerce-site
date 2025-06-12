@@ -1,42 +1,77 @@
-.payment-container {
-  max-width: 360px;
-  margin: 40px auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+.checkoutContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+  padding: 40px 20px;
+  background-color: #fff8f7;
 }
-.payment-form {
+
+.checkoutCard {
+  max-width: 400px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  text-align: left;
+}
+
+.checkoutTitle {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  color: #900639;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.checkoutForm {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
-.payment-form label {
-  font-weight: 600;
+
+.checkoutForm label {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
 }
-.payment-form input {
-  padding: 8px 10px;
-  border-radius: 8px;
+
+.checkoutForm input {
+  padding: 10px 12px;
+  border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 15px;
+  font-family: "Montserrat", sans-serif;
 }
-.payment-form button {
-  background: #900639;
+
+.checkoutForm button {
+  background-color: #900639;
   color: #fff;
-  padding: 12px;
+  padding: 14px;
   font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-weight: 600;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
-  margin-top: 10px;
+  transition: transform 0.3s ease;
 }
-.payment-form button:disabled {
-  background: #ccc;
+
+.checkoutForm button:hover {
+  transform: scale(1.03);
+}
+
+.checkoutForm button:disabled {
+  background-color: #ccc;
   cursor: not-allowed;
 }
-.payment-success {
-  margin-top: 24px;
+
+.checkoutSuccess {
+  margin-top: 30px;
   text-align: center;
   color: #2e7d32;
+  font-family: "Montserrat", sans-serif;
 }
