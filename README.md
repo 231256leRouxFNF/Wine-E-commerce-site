@@ -1,132 +1,109 @@
 # 🍷 E-Wine: Boutique Wine E-Commerce Platform
 
-E-Wine is a full-stack MERN (MongoDB, Express, React, Node.js) e-commerce website designed for wine enthusiasts and boutique retailers. It enables users to browse curated wine collections, register securely, and experience a creative two-factor authentication method during login.
+E-Wine is a full-stack MERN application that showcases boutique wines. Users can browse collections, maintain a cart, save favourites, and manage products if they are admins. Login uses a memorable label sequence for added security.
 
 ---
 
 ## 🎯 Purpose
 
-The goal of this project is to create a modern, secure, and visually appealing wine shopping experience that:
+This project aims to deliver a modern, secure wine-shopping experience that:
 
-- Showcases product cards dynamically pulled from a MongoDB database
-- Enables product management through an admin interface
-- Provides a unique authentication experience beyond traditional username/password login
-
----
-
-## 🔐 Creative Authentication System
-
-E-Wine uses a **two-level authentication mechanism**:
-
-1. **Standard Login Credentials**  
-   Users register with their name, email, and password.
-
-2. **Card-Based Security Grid**  
-   During registration, users choose a 3-card sequence from a 3x3 grid labeled (A1–C3).  
-   During login, users must correctly enter this sequence as their second layer of identity verification.
-
-✅ This method introduces a memorable, visual, and fun twist on 2FA without requiring external devices.
+- Dynamically displays wines stored in MongoDB
+- Allows admins to add and remove wines through a dedicated interface
+- Adds a creative layer of authentication using selectable wine labels
 
 ---
 
-## 🚀 How to Run the Project Locally
+## 🔐 Authentication System
+
+During registration, users select **3–5 labels** from six wine bottle icons. The same sequence must be provided at login along with the password. This simple image-based step acts as a lightweight form of two-factor authentication.
+
+---
+
+## 🚀 Running Locally
 
 ### 📦 Prerequisites
 
-- Node.js (v18 LTS or compatible)
-- MongoDB (Atlas or local)
+- Node.js (v18 LTS recommended)
+- MongoDB instance (Atlas or local)
 - npm
 
----
+### 🛠 Setup
 
-### 🛠 Installation Steps
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/e-wine.git
+   cd e-wine
+   ```
+2. **Install backend dependencies**
+   ```bash
+   cd e-wine-server
+   npm install
+   ```
+3. **Create `.env` inside `e-wine-server/`**
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   PORT=5050
+   ```
+4. **Install frontend dependencies**
+   ```bash
+   cd ../e-wine
+   npm install
+   ```
 
-1. **Clone the Repository**
+### 💻 Start the app
 
-```bash
-git clone https://github.com/your-username/e-wine.git
-cd e-wine
-```
-
-2. **Install Backend Dependencies**
-
-```bash
-cd e-wine-server
-npm install
-```
-
-3. **Set Up Environment Variables**
-
-Create a `.env` file in `e-wine-server/`:
-
-```env
-MONGO_URI=your_mongodb_connection_string
-PORT=5000
-```
-
-4. **Install Frontend Dependencies**
-
-```bash
-cd ../e-wine
-npm install
-```
-
----
-
-### 💻 Running the Project
-
-**Start Backend Server**
-
+Start the backend:
 ```bash
 cd ../e-wine-server
 npm run dev
 ```
 
-**Start Frontend React App**
-
+In a new terminal, start the frontend:
 ```bash
 cd ../e-wine
 npm start
 ```
-
-Access the site at:  
-[http://localhost:3000](http://localhost:3000)
+Then visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## ✨ Features
 
-- User registration with two-factor authentication (card grid)
-- Secure password storage using `bcrypt`
-- Add products via admin panel
-- Fetch/display wines dynamically from MongoDB
-- Clean, responsive UI using Material UI and custom CSS
-- Image upload support for new wines
+- Age verification overlay before accessing the site
+- Registration with password and label-sequence authentication
+- Secure password hashing via `bcrypt`
+- Add/remove wines through an admin-only page
+- Shopping cart with persistent storage for guests and logged-in users
+- Favourite wines list stored per user
+- Mock checkout page for payment demonstration
+- Responsive UI built with Material UI and Bootstrap
 
 ---
 
-## 📁 Folder Structure (Simplified)
+## 📁 Project Structure (simplified)
 
 ```
-e-wine/
-├── client/             # React frontend
-├── e-wine-server/      # Express backend
-│   ├── routes/         # API endpoints
-│   ├── models/         # Mongoose schemas
-│   └── server.js       # Entry point
+root/
+├── e-wine/          # React frontend
+│   └── src/         # Components, pages and context
+├── e-wine-server/   # Express backend
+│   ├── models/      # Mongoose schemas
+│   ├── routes/      # REST API endpoints
+│   └── server.js    # Entry point
 ```
 
 ---
 
 ## 🧠 Future Improvements
 
-- JWT-based login tokens
-- Full admin dashboard
-- Order history & cart system
-- Stripe payment integration
+- Replace mock checkout with real Stripe integration
+- JWT-based sessions
+- Order history tracking
+- Rich admin dashboard
 
 ---
 
 ## 📝 License
 
-MIT License – use freely, modify respectfully.
+MIT License – use freely and modify respectfully.
