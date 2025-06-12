@@ -1,0 +1,9 @@
+.cart-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+}
+
+.cart-page-wrapper>.MuiContainer-root {
+    flex-grow: 1;
+}
