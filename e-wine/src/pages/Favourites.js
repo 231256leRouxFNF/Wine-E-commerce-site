@@ -1,29 +1,11 @@
 // pages/Favourites.js
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import ProductCard from "../components/ProductCard";
 import "./Favourites.css";
+import { FavouritesContext } from "../context/FavouritesContext";
 
 const Favourites = () => {
-  const [likedProducts, setLikedProducts] = useState([]);
-
-  useEffect(() => {
-    // Get liked product IDs from localStorage
-    const liked = JSON.parse(localStorage.getItem("likedProducts")) || [];
-
-    // Optional: replace with API fetch if liked product IDs are stored backend
-    const fetchAllProducts = async () => {
-      try {
-        const response = await fetch("/api/products");
-        const data = await response.json();
-        const filtered = data.filter((product) => liked.includes(product._id));
-        setLikedProducts(filtered);
-      } catch (error) {
-        console.error("Error fetching favourites:", error);
-      }
-    };
-
-    fetchAllProducts();
-  }, []);
+  const { favourites } = useContext(FavouritesContext);
 
   return (
     <div className="grid-wrapper">
@@ -34,8 +16,8 @@ const Favourites = () => {
       </p>
 
       <div className="product-grid">
-        {likedProducts.length > 0 ? (
-          likedProducts.map((product) => (
+        {favourites.length > 0 ? (
+          favourites.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))
         ) : (

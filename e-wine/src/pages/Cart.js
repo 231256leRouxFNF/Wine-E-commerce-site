@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { 
   Container, Table, TableBody, TableCell, 
   TableContainer, TableHead, TableRow, Paper, 
@@ -7,7 +7,10 @@ import {
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ cartItems = [] }) => {
+import { CartContext } from '../context/CartContext';
+
+const Cart = () => {
+  const { cartItems } = useContext(CartContext);
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (
@@ -27,7 +30,7 @@ const Cart = ({ cartItems = [] }) => {
           </TableHead>
           <TableBody>
             {cartItems.map((item) => (
-              <TableRow key={item.id}>
+              <TableRow key={item._id}>
                 <TableCell>{item.title}</TableCell>
                 <TableCell align="right">£{item.price}</TableCell>
                 <TableCell align="right">{item.quantity}</TableCell>

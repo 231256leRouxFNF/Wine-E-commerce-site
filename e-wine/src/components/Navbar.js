@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -16,11 +16,16 @@ import { ShoppingCart, Menu, Add as AddIcon } from "@mui/icons-material";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Favourites from "./../pages/Favourites"; // ✅ Import Favourites page
-
-const Navbar = ({ cartItems }) => {
+import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
+import { FavouritesContext } from "../context/FavouritesContext";
+const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
   const navigate = useNavigate(); // ✅ Add this line
+  const { cartItems } = useContext(CartContext);
+  const { user, logout } = useContext(AuthContext);
+  const { favourites } = useContext(FavouritesContext);
+  const liked = favourites.length > 0;
 
   const navLinks = [
     { title: "Home", path: "/" },
@@ -143,25 +148,26 @@ const Navbar = ({ cartItems }) => {
 
         {/* Action Icons */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, pr: 3 }}>
-          {/* Add Product Icon */}
-          <IconButton
-            component={Link}
-            to="/add-product"
-            sx={{
-              color: "#900639",
-              transition: "transform 0.2s ease",
-              "&:hover": {
-                transform: "scale(1.2)",
-              },
-            }}
-          >
-            <AddIcon />
-          </IconButton>
+          {/* Add Product Icon (admin only) */}
+          {user?.role === 'admin' && (
+            <IconButton
+              component={Link}
+              to="/add-product"
+              sx={{
+                color: "#900639",
+                transition: "transform 0.2s ease",
+                "&:hover": {
+                  transform: "scale(1.2)",
+                },
+              }}
+            >
+              <AddIcon />
+            </IconButton>
+          )}
 
           {/* Heart Icon */}
           <IconButton
             onClick={() => {
-              setLiked(!liked);
               navigate("/favourites");
             }}
             sx={{
@@ -182,7 +188,7 @@ const Navbar = ({ cartItems }) => {
           {/* Cart Icon */}
           <IconButton component={Link} to="/cart" sx={{ color: "#900639" }}>
             <Badge
-              badgeContent={cartItems}
+              badgeContent={cartItems.length}
               sx={{
                 "& .MuiBadge-badge": {
                   backgroundColor: "#900639",
@@ -198,28 +204,54 @@ const Navbar = ({ cartItems }) => {
             </Badge>
           </IconButton>
 
-          {/* Login Button */}
-          <Button
-            component={Link}
-            to="/login"
-            variant="contained"
-            sx={{
-              fontFamily: "Montserrat",
-              fontWeight: 600,
-              textTransform: "none",
-              backgroundColor: "#900639",
-              borderRadius: "999px",
-              px: 2.5,
-              py: 0.25,
-              height: 36,
-              fontSize: "0.875rem",
-              "&:hover": {
-                backgroundColor: "#6d002e",
-              },
-            }}
-          >
-            Login
-          </Button>
+          {/* Login/Logout Button */}
+          {user ? (
+            <Button
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+              variant="contained"
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: 600,
+                textTransform: "none",
+                backgroundColor: "#900639",
+                borderRadius: "999px",
+                px: 2.5,
+                py: 0.25,
+                height: 36,
+                fontSize: "0.875rem",
+                "&:hover": {
+                  backgroundColor: "#6d002e",
+                },
+              }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              component={Link}
+              to="/login"
+              variant="contained"
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: 600,
+                textTransform: "none",
+                backgroundColor: "#900639",
+                borderRadius: "999px",
+                px: 2.5,
+                py: 0.25,
+                height: 36,
+                fontSize: "0.875rem",
+                "&:hover": {
+                  backgroundColor: "#6d002e",
+                },
+              }}
+            >
+              Login
+            </Button>
+          )}
         </Box>
 
         {/* Mobile Menu */}
