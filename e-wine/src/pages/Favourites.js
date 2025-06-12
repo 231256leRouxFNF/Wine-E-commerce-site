@@ -27,52 +27,52 @@ const Favourites = () => {
   };
 
   return (
-    <div className="grid-wrapper">
-      <h1 className="favouritesHeading">Your Favourite Wines</h1>
-      {/* <p className="favouritesText">
-        You haven’t added any favourites yet. Click the heart icon to save your
-        favourite wines.
-      </p> */}
+    <div className="pageWrapper">
+      <div className="mainContent">
+        <div className="grid-wrapper">
+          <h1 className="favouritesHeading">Your Favourite Wines</h1>
 
-      <div className="product-grid">
-        {favourites.length > 0 ? (
-          paginatedFavourites.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))
-        ) : (
-          <p className="favouritesEmpty">
-            No favourites yet. Click the heart icon to get started!
-          </p>
-        )}
-      </div>
+          <div className="product-grid">
+            {favourites.length > 0 ? (
+              paginatedFavourites.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))
+            ) : (
+              <p className="favouritesEmpty">
+                No favourites yet. Click the heart icon to get started!
+              </p>
+            )}
+          </div>
 
-      {favourites.length > 0 && (
-        <div className="pagination">
-          <button
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            ← Prev
-          </button>
+          {favourites.length > 0 && (
+            <div className="pagination">
+              <button
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                ← Prev
+              </button>
 
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i + 1}
-              className={currentPage === i + 1 ? "active" : ""}
-              onClick={() => goToPage(i + 1)}
-            >
-              {i + 1}
-            </button>
-          ))}
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i + 1}
+                  className={currentPage === i + 1 ? "active" : ""}
+                  onClick={() => goToPage(i + 1)}
+                >
+                  {i + 1}
+                </button>
+              ))}
 
-          <button
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next →
-          </button>
+              <button
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Next →
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

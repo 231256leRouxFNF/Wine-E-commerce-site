@@ -32,19 +32,13 @@ const wineTypes = [
 const wineColors = ["Red", "White", "Rosé", "Sparkling", "Dessert"];
 
 const wineRegions = [
-  "Bordeaux",
-  "Napa Valley",
-  "Tuscany",
-  "Rioja",
-  "Barossa Valley",
-  "Champagne",
-  "Sonoma County",
-  "Willamette Valley",
-  "Mendoza",
-  "Piedmont",
-  "Loire Valley",
-  "Alsace",
-  "Oregon",
+  "South Africa",
+  "France",
+  "USA",
+  "Italy",
+  "Spain",
+  "Norway",
+  "Mexico",
 ];
 
 const Filters = ({ onFilterChange }) => {
