@@ -1,5 +1,5 @@
 // src/components/AuthForm.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import {
   Container,
@@ -12,9 +12,11 @@ import {
   Grid,
   IconButton,
   Box,
+  InputAdornment,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import LockResetIcon from "@mui/icons-material/LockReset";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 // Wine bottle SVG illustrations
 import Wine1 from "../assets/WineBottleAuth1.svg";
@@ -23,6 +25,7 @@ import Wine3 from "../assets/WineBottleAuth3.svg";
 import Wine4 from "../assets/WineBottleAuth4.svg";
 import Wine5 from "../assets/WineBottleAuth5.svg";
 import Wine6 from "../assets/WineBottleAuth6.svg";
+import { AuthContext } from "../context/AuthContext";
 
 const wineLabels = [
   { id: 1, name: "Vintage Red", img: Wine1 },
@@ -51,9 +54,11 @@ const AuthForm = ({ mode = "login" }) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [selectedSequence, setSelectedSequence] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,32 +94,33 @@ const AuthForm = ({ mode = "login" }) => {
       try {
         await axios.post("/api/register", {
           name,
+          surname,
           email,
           password,
+          cardSequence: selectedSequence,
         });
         console.log("✅ Registered successfully");
-      } catch (err) {
-        console.error(
-          "❌ Registration failed:",
-          err.response?.data?.message || err.message
-        );
-      }
-
-      setLoading(false);
-      window.location.href = "/login";
-    } else {
-      const stored = JSON.parse(localStorage.getItem("labelAuth"));
-      if (
-        !stored ||
-        stored.email !== email.toLowerCase() ||
-        stored.hash !== hash
-      ) {
-        setError("Invalid email or label sequence");
         setLoading(false);
-        return;
+        window.location.href = "/login";
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Registration failed. Please try again."
+        );
+        setLoading(false);
       }
-      setLoading(false);
-      window.location.href = "/";
+    } else {
+      try {
+        await login(email, password, selectedSequence);
+        setLoading(false);
+        window.location.href = "/";
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Login failed. Please check your credentials."
+        );
+        setLoading(false);
+      }
     }
   };
 
@@ -169,21 +175,37 @@ const AuthForm = ({ mode = "login" }) => {
                 onChange={(e) => setSurname(e.target.value)}
                 sx={{ mb: 2 }}
               />
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                sx={{ mb: 3 }}
-              />
             </>
+          )}
+
+          {(mode === "register" || mode === "login") && (
+            <TextField
+              fullWidth
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{ mb: 3 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                      aria-label="toggle password visibility"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
           )}
 
           <Typography variant="h6" sx={{ mb: 2 }}>
             {mode === "register"
-              ? "Create your label sequence (3-5 labels)"
+              ? "Create your label sequence (3–5 labels)"
               : "Select your label sequence"}
           </Typography>
 
@@ -258,8 +280,8 @@ const AuthForm = ({ mode = "login" }) => {
             {loading
               ? "Please wait..."
               : mode === "register"
-                ? "Create Account"
-                : "Sign In"}
+              ? "Create Account"
+              : "Sign In"}
           </Button>
 
           <Typography variant="body2" align="center">

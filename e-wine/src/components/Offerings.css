@@ -1,0 +1,83 @@
+.offeringsSection {
+    padding: 30px 24px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.offeringsHeader {
+    margin-bottom: 40px;
+}
+
+.offeringsTitle {
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #1c1c1c;
+    margin-bottom: 32px;
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    padding-bottom: 12px;
+}
+
+.cardContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.offeringCard {
+    flex: 0 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    padding: 60px 30px;
+    width: 260px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.offeringCard:hover {
+    transform: translateY(-6px);
+}
+
+.muiIcon {
+    font-size: 60px !important;
+    color: #900639;
+    margin-bottom: 16px;
+}
+
+.offeringCard h3 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #900639;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.offeringText {
+    font-size: 15px;
+    color: #555;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.6;
+}
+
+.offeringsHeader h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    text-align: center;
+    color: #1c1c1c;
+    margin-bottom: 40px;
+    text-transform: none;
+}
+
+.offeringsHeader h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #900639;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}

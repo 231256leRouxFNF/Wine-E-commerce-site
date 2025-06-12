@@ -1,0 +1,114 @@
+.database-wines-container {
+    margin-top: 2rem;
+    padding: 16px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.db-title {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1c1c1c;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #900639;
+}
+
+.filter-bar select {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fffefc;
+    color: #1c1c1c;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.filter-bar select:focus {
+    border-color: #900639;
+    box-shadow: 0 0 0 2px rgba(144, 6, 57, 0.2);
+}
+
+.wine-list-admin {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 16px;
+}
+
+.wine-list-item-admin {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: #fffefc;
+    border: 1px solid #ddd;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    font-size: 15px;
+    color: #1c1c1c;
+    min-height: 140px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wine-info-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    max-width: 70%;
+    padding-right: 40px;
+}
+
+.wine-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #900639;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    word-break: break-word;
+    max-width: 250px;
+    margin-right: 15px;
+}
+
+.wine-details {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.delete-wine-btn {
+    margin-left: 22px;
+    background-color: #900639;
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    align-self: center;
+    flex-shrink: 0;
+
+}
+
+.delete-wine-btn:hover {
+    background-color: #600022;
+}

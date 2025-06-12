@@ -1,0 +1,73 @@
+.aboutHeroSection {
+    background-image: url("../assets/Illustration1.svg");
+    background-attachment: fixed;
+    background-position: center 28%;
+    /* Fine-tune vertical position */
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
+.aboutHeroOverlay {
+    padding: 20px;
+    text-align: center;
+    max-width: 90%;
+}
+
+.aboutHeroTitle {
+    font-family: "Playfair Display", serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 280px;
+    margin-top: -150px;
+}
+
+.aboutHeroTagline {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* === Responsive Typography & Positioning === */
+@media (max-width: 1024px) {
+    .aboutHeroTitle {
+        font-size: 48px;
+    }
+
+    .aboutHeroTagline {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutHeroTitle {
+        font-size: 40px;
+    }
+
+    .aboutHeroTagline {
+        font-size: 16px;
+    }
+
+    .aboutHeroOverlay {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aboutHeroTitle {
+        font-size: 32px;
+    }
+
+    .aboutHeroTagline {
+        font-size: 14px;
+    }
+}
