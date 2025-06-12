@@ -34,14 +34,18 @@ const Products = () => {
     let filtered = [...products];
 
     if (type) {
+      // The "type" select actually lists grape varietals, so match against
+      // the product's varietal field.
       filtered = filtered.filter(
-        (p) => p.type?.toLowerCase() === type.toLowerCase()
+        (p) => p.variety?.toLowerCase() === type.toLowerCase()
       );
     }
 
     if (color) {
-      filtered = filtered.filter(
-        (p) => p.color?.toLowerCase() === color.toLowerCase()
+      // Colour options correspond with the product "type" (e.g. "Red Wine").
+      // Use a partial match so "Red" will match "Red Wine" etc.
+      filtered = filtered.filter((p) =>
+        p.type?.toLowerCase().includes(color.toLowerCase())
       );
     }
 
