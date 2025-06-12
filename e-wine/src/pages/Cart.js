@@ -6,6 +6,7 @@ import {
 } from '@mui/material';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import CloseIcon from "@mui/icons-material/Close";
 
 import { CartContext } from '../context/CartContext';
 
@@ -32,9 +33,11 @@ const Cart = () => {
             {cartItems.map((item) => (
               <TableRow key={item._id}>
                 <TableCell>{item.title}</TableCell>
-                <TableCell align="right">£{item.price}</TableCell>
+                <TableCell align="right">R{item.price}</TableCell>
                 <TableCell align="right">{item.quantity}</TableCell>
-                <TableCell align="right">£{(item.price * item.quantity).toFixed(2)}</TableCell>
+                <TableCell align="right">
+                  R{(item.price * item.quantity).toFixed(2)}
+                </TableCell>
               </TableRow>
             ))}
             <TableRow>
@@ -42,16 +45,16 @@ const Cart = () => {
                 <Typography variant="h6">Total:</Typography>
               </TableCell>
               <TableCell align="right">
-                <Typography variant="h6">£{total.toFixed(2)}</Typography>
+                <Typography variant="h6">R{total.toFixed(2)}</Typography>
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ mt: 3, display: 'flex', justifyContent: 'flex-end' }}>
-        <Button 
-          variant="contained" 
-          color="primary" 
+      <Box sx={{ mt: 3, display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          color="primary"
           size="large"
           component={Link}
           to="/checkout"
