@@ -40,11 +40,11 @@ const About = () => {
             <h2>How Pour Decisions Was Uncorked</h2>
           </div>
           <p>
-            At Pour Decisions, we believe that wine is more than a drink — it’s
+            At Pour Decisions, we believe that wine is more than a drink, it’s
             a journey across vineyards, cultures, and generations. Our name is a
             playful twist on the phrase “poor decisions,” celebrating those
             unforgettable wine moments that sometimes start with a pour and end
-            with a story. We turned that wordplay into our identity — where
+            with a story. We turned that wordplay into our identity, where
             every pour becomes a possibility, not a mistake.
           </p>
 

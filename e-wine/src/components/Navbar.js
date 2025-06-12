@@ -15,7 +15,7 @@ import {
 import { ShoppingCart, Menu, Add as AddIcon, ListAlt as ListAltIcon } from "@mui/icons-material";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import Favourites from "./../pages/Favourites"; // ✅ Import Favourites page
+import Favourites from "./../pages/Favourites";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { FavouritesContext } from "../context/FavouritesContext";
