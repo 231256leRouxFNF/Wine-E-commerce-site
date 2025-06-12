@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
-import { 
-  Container, Table, TableBody, TableCell, 
-  TableContainer, TableHead, TableRow, Paper, 
-  Typography, Button 
+import {
+  Container, Table, TableBody, TableCell,
+  TableContainer, TableHead, TableRow, Paper,
+  Typography, Button, IconButton
 } from '@mui/material';
 import { Box } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
 
 import { CartContext } from '../context/CartContext';
 
 const Cart = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, removeFromCart } = useContext(CartContext);
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (
@@ -26,15 +27,21 @@ const Cart = () => {
               <TableCell align="right">Price</TableCell>
               <TableCell align="right">Quantity</TableCell>
               <TableCell align="right">Total</TableCell>
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {cartItems.map((item) => (
               <TableRow key={item._id}>
                 <TableCell>{item.title}</TableCell>
-                <TableCell align="right">£{item.price}</TableCell>
+                <TableCell align="right">R{item.price}</TableCell>
                 <TableCell align="right">{item.quantity}</TableCell>
-                <TableCell align="right">£{(item.price * item.quantity).toFixed(2)}</TableCell>
+                <TableCell align="right">R{(item.price * item.quantity).toFixed(2)}</TableCell>
+                <TableCell align="right">
+                  <IconButton onClick={() => removeFromCart(item._id)} aria-label="Remove">
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
             <TableRow>
@@ -42,7 +49,7 @@ const Cart = () => {
                 <Typography variant="h6">Total:</Typography>
               </TableCell>
               <TableCell align="right">
-                <Typography variant="h6">£{total.toFixed(2)}</Typography>
+                <Typography variant="h6">R{total.toFixed(2)}</Typography>
               </TableCell>
             </TableRow>
           </TableBody>
