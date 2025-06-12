@@ -1,5 +1,5 @@
 // src/components/AuthForm.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import {
   Container,
@@ -25,6 +25,7 @@ import Wine3 from "../assets/WineBottleAuth3.svg";
 import Wine4 from "../assets/WineBottleAuth4.svg";
 import Wine5 from "../assets/WineBottleAuth5.svg";
 import Wine6 from "../assets/WineBottleAuth6.svg";
+import { AuthContext } from "../context/AuthContext";
 
 const wineLabels = [
   { id: 1, name: "Vintage Red", img: Wine1 },
@@ -57,6 +58,7 @@ const AuthForm = ({ mode = "login" }) => {
   const [selectedSequence, setSelectedSequence] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,7 +97,7 @@ const AuthForm = ({ mode = "login" }) => {
           surname,
           email,
           password,
-          labelSequence: selectedSequence,
+          cardSequence: selectedSequence,
         });
         console.log("✅ Registered successfully");
         setLoading(false);
@@ -109,18 +111,7 @@ const AuthForm = ({ mode = "login" }) => {
       }
     } else {
       try {
-        const res = await axios.post("/api/login", {
-          email,
-          password,
-          labelSequence: selectedSequence,
-        });
-        console.log( res.data);
-
-        // Save to localStorage
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-
-        // Redirect
+        await login(email, password, selectedSequence);
         setLoading(false);
         window.location.href = "/";
       } catch (err) {

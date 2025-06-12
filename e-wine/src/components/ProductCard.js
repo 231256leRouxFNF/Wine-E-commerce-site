@@ -1,25 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./ProductCard.css";
+import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
   const [liked, setLiked] = useState(false);
   const [added, setAdded] = useState(false);
 
-  // Helper to add to cart in localStorage. Replace with your context/Redux if necessary.
-  const addToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existing = cart.find(
-      (item) => item._id === product._id || item.id === product.id
-    );
-    if (existing) {
-      existing.quantity = (existing.quantity || 1) + 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
+  const { addToCart } = useContext(CartContext);
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -75,7 +64,7 @@ const ProductCard = ({ product }) => {
 
       <div className="product-actions">
         <Link
-          to={`/products/${product.id || product._id}`}
+          to={`/products/${product._id}`}
           className="product-link"
         >
           View Details

@@ -21,6 +21,10 @@ import Favourites from "./pages/Favourites";
 import Contact from "./pages/Contact";
 import CheckoutPage from "./pages/CheckoutPage";
 
+import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 
 import theme from "./theme";
 
@@ -34,25 +38,36 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/cart" element={<Cart />} />
+      <AuthProvider>
+        <CartProvider>
+          <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<SingleProduct />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/add-product" element={<AddProduct />} />
+          <Route
+            path="/add-product"
+            element={
+              <ProtectedRoute role="admin">
+                <AddProduct />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/offerings" element={<Offerings />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-        </Routes>
-        <Footer />
-      </Router>
+          </Routes>
+          <Footer />
+        </Router>
+      </CartProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

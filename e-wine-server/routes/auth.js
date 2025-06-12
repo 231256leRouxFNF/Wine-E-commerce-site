@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const User = require("../models/user");
+const User = require("../models/User");
+const Cart = require("../models/Cart");
 
 const saltRounds = 10;
 
 // Register route
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, labelSequence  } = req.body;
+    const { name, surname, email, password, cardSequence, role } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -21,9 +22,12 @@ router.post("/register", async (req, res) => {
 
     // Save the new user
     const newUser = new User({
+      name,
+      surname,
       email,
       password: hashedPassword,
-      labelSequence,
+      cardSequence,
+      role: role || 'user'
     });
 
     await newUser.save();
@@ -37,32 +41,35 @@ router.post("/register", async (req, res) => {
 // Login route
 router.post("/login", async (req, res) => {
   try {
-    const { email, password, labelSequence  } = req.body;
+    const { email, password, cardSequence } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid)
-    return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
 
     const isCardMatch =
-      Array.isArray(labelSequence ) &&
-      Array.isArray(user.labelSequence ) &&
-      labelSequence .length === user.labelSequence .length &&
-      labelSequence .every((card, i) => card === user.labelSequence [i]);
+      Array.isArray(cardSequence) &&
+      Array.isArray(user.cardSequence) &&
+      cardSequence.length === user.cardSequence.length &&
+      cardSequence.every((card, i) => card == user.cardSequence[i]);
 
     if (!isCardMatch)
       return res.status(401).json({ message: "Invalid card sequence" });
 
+    // Ensure the user has a cart
+    let cart = await Cart.findOne({ userId: user._id });
+    if (!cart) {
+      cart = new Cart({ userId: user._id, items: [] });
+      await cart.save();
+    }
+
+    const { _id, name, surname, role } = user;
     res.status(200).json({
       message: "Login successful",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
+      user: { _id, name, surname, email: user.email, role }
     });
   } catch (err) {
     console.error("❌ Login error:", err);
