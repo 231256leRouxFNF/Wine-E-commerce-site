@@ -1,5 +1,7 @@
 # 🍷 Pour Decisions – Boutique Wine E-Commerce Platform
 
+<img width="2880" height="1620" alt="Pour Decisions Screenshot" src="https://github.com/user-attachments/assets/1ef72586-1077-4445-ab9a-dfe82329ad1b" />
+
 > A full-stack MERN wine store with a creative two-level authentication system and dynamic product management.
 
 <p align="center">
