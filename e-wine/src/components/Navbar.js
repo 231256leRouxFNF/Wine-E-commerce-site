@@ -18,7 +18,6 @@ import {
 import { ShoppingCart, Menu as MenuIcon, Add as AddIcon } from "@mui/icons-material";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import Favourites from "./../pages/Favourites";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { FavouritesContext } from "../context/FavouritesContext";

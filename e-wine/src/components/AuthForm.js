@@ -36,8 +36,8 @@ const wineLabels = [
   { id: 6, name: "Ancient Roots", img: Wine6 },
 ];
 
-// Hash function using SHA-256
-async function hashSequence(email, sequence) {
+// Hash function using SHA-256 (available for future use)
+/* async function hashSequence(email, sequence) {
   const data = email + ":" + sequence.join("-");
   const encoder = new TextEncoder();
   const hashBuffer = await window.crypto.subtle.digest(
@@ -47,7 +47,7 @@ async function hashSequence(email, sequence) {
   return Array.from(new Uint8Array(hashBuffer))
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
-}
+} */
 
 const AuthForm = ({ mode = "login" }) => {
   const [email, setEmail] = useState("");
@@ -88,7 +88,8 @@ const AuthForm = ({ mode = "login" }) => {
       return;
     }
 
-    const hash = await hashSequence(email.toLowerCase(), selectedSequence);
+    // Hash computed for future use if needed
+    // const hash = await hashSequence(email.toLowerCase(), selectedSequence);
 
     if (mode === "register") {
       try {

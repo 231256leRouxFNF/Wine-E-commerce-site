@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Rating, Avatar } from "@mui/material";
+import { Typography, Rating, Avatar } from "@mui/material";
 import "./Review.css";
 
 const Review = ({ review }) => {

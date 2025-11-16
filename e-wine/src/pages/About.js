@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import AboutHero from "../components/AboutHero";
 import Offerings from "../components/Offerings";
 import Testimonials from "../components/Testimonials";
-import AboutProductCard from "../components/AboutProductCard";
 import FeaturedCarousel from "../components/FeaturedCarousel"; 
 import axios from "axios";
 import "./About.css";

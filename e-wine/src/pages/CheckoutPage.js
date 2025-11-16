@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
-  Button,
   Card,
   CardContent,
   Divider,
@@ -57,20 +56,21 @@ const CheckoutPage = () => {
     0
   );
 
-  useEffect(() => {
-    if (user) {
-      fetchProfileData();
-    }
-  }, [user]);
-
-  const fetchProfileData = async () => {
+  const fetchProfileData = React.useCallback(async () => {
+    if (!user) return;
     try {
       const res = await axios.get(`/api/user-profile/${user._id}`);
       setProfileData(res.data);
     } catch (err) {
       console.error("Failed to fetch profile:", err);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchProfileData();
+    }
+  }, [user, fetchProfileData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

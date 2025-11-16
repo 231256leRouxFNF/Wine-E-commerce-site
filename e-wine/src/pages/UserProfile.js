@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   Container,
   Box,
@@ -54,30 +54,32 @@ const UserProfile = () => {
     cardType: "",
   });
 
-  useEffect(() => {
-    if (user) {
-      fetchProfileData();
-      fetchUserReviews();
-    }
-  }, [user]);
-
-  const fetchProfileData = async () => {
+  const fetchProfileData = React.useCallback(async () => {
+    if (!user) return;
     try {
       const res = await axios.get(`/api/user-profile/${user._id}`);
       setProfileData(res.data);
     } catch (err) {
       console.error("Failed to fetch profile:", err);
     }
-  };
+  }, [user]);
 
-  const fetchUserReviews = async () => {
+  const fetchUserReviews = React.useCallback(async () => {
+    if (!user) return;
     try {
       const res = await axios.get(`/api/reviews/user/${user._id}`);
       setReviews(res.data);
     } catch (err) {
       console.error("Failed to fetch reviews:", err);
     }
-  };
+  }, [user]);
+
+  React.useEffect(() => {
+    if (user) {
+      fetchProfileData();
+      fetchUserReviews();
+    }
+  }, [user, fetchProfileData, fetchUserReviews]);
 
   const handleAddAddress = async () => {
     try {
