@@ -1,0 +1,125 @@
+.review-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.review-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-user-name {
+  font-weight: 600;
+  color: #1c1c1c;
+  font-family: "Montserrat", sans-serif;
+}
+
+.review-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.review-heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1c1c1c;
+  margin-bottom: 8px;
+}
+
+.review-comment {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.review-photos {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.review-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.tasting-notes {
+  background-color: #fce7ec;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.tasting-notes-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #900639;
+  margin-bottom: 12px;
+}
+
+.tasting-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 8px;
+}
+
+.tasting-note-item {
+  font-size: 13px;
+  color: #333;
+}
+
+.tasting-note-item strong {
+  color: #900639;
+  font-weight: 600;
+}
+
+.review-pairings {
+  background-color: #f5f5f5;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.pairings-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #900639;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .review-card {
+    padding: 16px;
+  }
+
+  .review-photos {
+    flex-direction: column;
+  }
+
+  .review-photo {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+  }
+
+  .tasting-notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
