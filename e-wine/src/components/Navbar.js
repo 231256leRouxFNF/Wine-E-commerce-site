@@ -11,17 +11,21 @@ import {
   ListItemText,
   Box,
   Button,
+  Menu,
+  MenuItem,
+  Avatar,
 } from "@mui/material";
-import { ShoppingCart, Menu, Add as AddIcon } from "@mui/icons-material";
+import { ShoppingCart, Menu as MenuIcon, Add as AddIcon } from "@mui/icons-material";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import Favourites from "./../pages/Favourites";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { FavouritesContext } from "../context/FavouritesContext";
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ Add this line
+  const [profileMenuAnchor, setProfileMenuAnchor] = useState(null);
+  const navigate = useNavigate();
   const { cartItems } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
   const { favourites } = useContext(FavouritesContext);
@@ -33,6 +37,25 @@ const Navbar = () => {
     { title: "About", path: "/about" },
     { title: "Contact", path: "/contact" },
   ];
+
+  const handleProfileMenuOpen = (event) => {
+    setProfileMenuAnchor(event.currentTarget);
+  };
+
+  const handleProfileMenuClose = () => {
+    setProfileMenuAnchor(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleProfileMenuClose();
+    navigate("/");
+  };
+
+  const handleProfileClick = () => {
+    handleProfileMenuClose();
+    navigate("/profile");
+  };
 
   const drawer = (
     <Box sx={{ width: 250, backgroundColor: "#FFFEFC", height: "100%" }}>
@@ -204,31 +227,66 @@ const Navbar = () => {
             </Badge>
           </IconButton>
 
-          {/* Login/Logout Button */}
+          {/* Profile/Login Button */}
           {user ? (
-            <Button
-              onClick={() => {
-                logout();
-                navigate("/");
-              }}
-              variant="contained"
-              sx={{
-                fontFamily: "Montserrat",
-                fontWeight: 600,
-                textTransform: "none",
-                backgroundColor: "#900639",
-                borderRadius: "999px",
-                px: 2.5,
-                py: 0.25,
-                height: 36,
-                fontSize: "0.875rem",
-                "&:hover": {
-                  backgroundColor: "#6d002e",
-                },
-              }}
-            >
-              Logout
-            </Button>
+            <>
+              <IconButton
+                onClick={handleProfileMenuOpen}
+                sx={{
+                  transition: "transform 0.2s ease",
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                  },
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: 36,
+                    height: 36,
+                    bgcolor: "#900639",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                  }}
+                >
+                  {user.name?.charAt(0).toUpperCase()}
+                </Avatar>
+              </IconButton>
+              <Menu
+                anchorEl={profileMenuAnchor}
+                open={Boolean(profileMenuAnchor)}
+                onClose={handleProfileMenuClose}
+                sx={{
+                  "& .MuiPaper-root": {
+                    borderRadius: "12px",
+                    mt: 1,
+                  },
+                }}
+              >
+                <MenuItem
+                  onClick={handleProfileClick}
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "0.875rem",
+                    py: 1.5,
+                    px: 3,
+                  }}
+                >
+                  Profile Settings
+                </MenuItem>
+                <MenuItem
+                  onClick={handleLogout}
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "0.875rem",
+                    color: "#900639",
+                    py: 1.5,
+                    px: 3,
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
           ) : (
             <Button
               component={Link}
@@ -260,7 +318,7 @@ const Navbar = () => {
           onClick={() => setMobileOpen(!mobileOpen)}
           sx={{ display: { sm: "none" }, color: "#1c1c1c", ml: 2 }}
         >
-          <Menu />
+          <MenuIcon />
         </IconButton>
       </Toolbar>
 

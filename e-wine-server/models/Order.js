@@ -14,4 +14,5 @@ const orderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Order', orderSchema);
+// Check if model exists before compiling to avoid OverwriteModelError with nodemon
+module.exports = mongoose.models.Order || mongoose.model('Order', orderSchema);

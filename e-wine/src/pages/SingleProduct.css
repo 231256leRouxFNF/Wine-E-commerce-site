@@ -1,3 +1,8 @@
+.single-product-page {
+  background-color: #fffefc;
+  min-height: 80vh;
+}
+
 .single-product-container {
     display: flex;
     flex-wrap: wrap;
@@ -186,6 +191,35 @@
     color: #555;
 }
 
+.reviews-section {
+  padding: 0 60px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.reviews-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.reviews-summary {
+  font-family: "Montserrat", sans-serif;
+  color: #900639;
+  font-weight: 600;
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
     .single-product-container {
         flex-direction: column;
@@ -204,6 +238,16 @@
     .product-button {
         width: 100%;
         justify-content: center;
+    }
+
+    .reviews-section {
+      padding: 0 20px 40px;
+    }
+
+    .reviews-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
 }
 
