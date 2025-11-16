@@ -39,4 +39,5 @@ const productSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Product', productSchema);
+// Check if model exists before compiling to avoid OverwriteModelError with nodemon
+module.exports = mongoose.models.Product || mongoose.model('Product', productSchema);

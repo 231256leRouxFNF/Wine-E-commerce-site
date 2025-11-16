@@ -20,6 +20,7 @@ import Testimonials from "./components/Testimonials";
 import Favourites from "./pages/Favourites";
 import Contact from "./pages/Contact";
 import CheckoutPage from "./pages/CheckoutPage";
+import UserProfile from "./pages/UserProfile";
 
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -65,6 +66,7 @@ function App() {
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/profile" element={<UserProfile />} />
           </Routes>
           <Footer />
         </Router>
