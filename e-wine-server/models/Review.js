@@ -55,4 +55,5 @@ function arrayLimit(val) {
   return val.length <= 2;
 }
 
-module.exports = mongoose.model('Review', reviewSchema);
+// Check if model exists before compiling to avoid OverwriteModelError with nodemon
+module.exports = mongoose.models.Review || mongoose.model('Review', reviewSchema);

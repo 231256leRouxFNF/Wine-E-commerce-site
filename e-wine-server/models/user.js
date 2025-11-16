@@ -30,4 +30,5 @@ const userSchema = new mongoose.Schema({
   profilePhoto: { type: String }, // base64 or URL
 });
 
-module.exports = mongoose.model("User", userSchema);
+// Check if model exists before compiling to avoid OverwriteModelError with nodemon
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);

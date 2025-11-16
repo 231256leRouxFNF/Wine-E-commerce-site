@@ -20,4 +20,5 @@ const cartSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Cart', cartSchema);
+// Check if model exists before compiling to avoid OverwriteModelError with nodemon
+module.exports = mongoose.models.Cart || mongoose.model('Cart', cartSchema);
