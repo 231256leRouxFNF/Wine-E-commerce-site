@@ -179,6 +179,8 @@ This section explains how to clone and run the project locally.
 - Reusable React components for headers, footers, product cards, and forms.  
 - Frontend and backend communicate via a REST API layer built in Express.
 
+<img width="1802" height="1618" alt="Frame 14" src="https://github.com/user-attachments/assets/cdf41236-fcae-408e-a149-977ab08035e4" />
+
 ### Future improvements
 
 Potential extensions for a more complete e-commerce experience:
